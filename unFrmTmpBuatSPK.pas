@@ -176,6 +176,7 @@ type
     cxColMtp8: TcxGridColumn;
     cxColId: TcxGridColumn;
     cxColBomKode1: TcxGridColumn;
+    cxColJns: TcxGridColumn;
     procedure FormShow(Sender: TObject);
     procedure btnTambahClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -252,6 +253,9 @@ begin
     'LEFT JOIN tbl_barang b ON a.kode_brg = b.kode ' +
     'LEFT JOIN tbl_mat_saran c ON a.kode_brg = c.kode_brg and a.kode=c.kode and a.nama=c.nama_formula ' +
     'WHERE a.kode = ''%s'' and a.nama=''%s'' ',[cxtKodeBrg.Text ,zqrFormula.FieldByName('nama').AsString]);
+
+  cxTblBOM.DataController.BeginUpdate;
+  
   while not b.Eof do begin
     with cxTblBOM.DataController do begin
       i := AppendRecord;
@@ -290,24 +294,27 @@ begin
       Values[i, cxColSatuan.Index] := q.FieldByName('satuan').AsString;
       Values[i, cxColSatuan1.Index] := b.FieldByName('satuan').AsString;
       //Values[i, cxColSatuan1.Index] := Values[i, cxColSatuan.Index];
+      
       if b.FieldByName('jns').AsString = 'PERSEN' then begin
-          Values[i, cxColTotal.Index] :=
-            ((b.FieldByName('persen').AsFloat*cxsQtySPK.Value)/100)*1000;
-            end
-            else begin
+        Values[i, cxColTotal.Index] := ((b.FieldByName('persen').AsFloat*cxsQtySPK.Value)/100)*1000;
+        Values[i, cxColJns.Index] := '%';
+      end
+        else begin
 
          // if  Copy( b.FieldByName('kode_brg').Value,1,3) = 'C90' then
           //Values[i, cxColTotal.Index] := (Values[i, cxColBom.Index]* cxsQtySPK.Value) + ((Values[i, cxColBom.Index]* cxsQtySPK.Value)*5/100)
          // Values[i, cxColTotal.Index] := (Values[i, cxColBom.Index]* cxsConv.Value) + ((Values[i, cxColBom.Index]* cxsQtySPK.Value)*5/100)
           // else
            //Values[i, cxColTotal.Index] := (Values[i, cxColBom.Index]* cxsQtySPK.Value);
-           Values[i, cxColTotal.Index] := (Values[i, cxColBom.Index]* cxsConv.Value);
+        Values[i, cxColTotal.Index] := (Values[i, cxColBom.Index]* cxsConv.Value);
+        Values[i, cxColJns.Index] := '';
       end;
     end;
     b.Next;
   end;
   b.Close;
 
+  cxTblBOM.DataController.EndUpdate;
 end;
 
 procedure TfrmTmpBuatSPK.FormCreate(Sender: TObject);
@@ -458,8 +465,8 @@ var
   persen_plong,x1,x2 : Real ;
   barang : string ;
 begin
-   cxsPCS.EditValue :=mPCS ;
-   barang := mKodeBrg ;
+  cxsPCS.EditValue :=mPCS ;
+  barang := mKodeBrg ;
   q := OpenRS('SELECT * FROM tbl_barang WHERE kode =''%s''',
     [cxtKodeBrg.Text] );
   if (q.FieldByname('panjang_plong').AsFloat=0) or (q.FieldByname('lebar_plong').AsFloat=0) then
@@ -510,7 +517,7 @@ begin
   zqrFormula.Open;
 
   cxlFormula.EditValue := zqrFormula.FieldByName('id').AsString;
- btnTambahClick(nil);
+  btnTambahClick(nil);
 
 
 
@@ -574,7 +581,11 @@ begin
                 ((Values[ARecordIndex, cxColLayer6.Index] / 100) *  q.FieldByName('mtp_layer6').Value) +
                 ((Values[ARecordIndex, cxColLayer7.Index] / 100) *  q.FieldByName('mtp_layer7').Value) +
                 ((Values[ARecordIndex, cxColLayer8.Index] / 100) * q.FieldByName('mtp_layer8').Value);
-             Values[ARecordIndex, cxColBom.Index] := ((Values[ARecordIndex, cxColPersen.Index] / 100) * q.FieldByName('berat_kotor').Value);
+              Values[ARecordIndex, cxColBom.Index] := ((Values[ARecordIndex, cxColPersen.Index] / 100) * q.FieldByName('berat_kotor').Value);
+              if Values[ARecordIndex, cxColJns.Index] = '' then
+                Values[ARecordIndex, cxColTotal.Index] := (Values[ARecordIndex, cxColBom.Index]* cxsConv.Value)
+              else
+                Values[ARecordIndex, cxColTotal.Index] := ((cxColPersen.EditValue * cxsQtySPK.Value)/100)*1000;
             end;
 
             except

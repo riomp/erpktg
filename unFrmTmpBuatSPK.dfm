@@ -34,7 +34,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Left = 102
       Top = 5
       Properties.ReadOnly = True
-      TabOrder = 1
+      TabOrder = 0
       Width = 127
     end
     object cxLabel2: TcxLabel
@@ -46,7 +46,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Left = 102
       Top = 30
       Properties.ReadOnly = True
-      TabOrder = 3
+      TabOrder = 8
       Width = 127
     end
     object cxLabel3: TcxLabel
@@ -58,7 +58,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Left = 102
       Top = 55
       Properties.ReadOnly = True
-      TabOrder = 5
+      TabOrder = 14
       Width = 634
     end
     object cxdStartUp: TcxDateEdit
@@ -67,7 +67,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.Kind = ckDateTime
       Properties.OnChange = cxdStartUpPropertiesChange
       Style.Color = clYellow
-      TabOrder = 6
+      TabOrder = 58
       Width = 121
     end
     object cxLabel4: TcxLabel
@@ -86,7 +86,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.Kind = ckDateTime
       Properties.ReadOnly = False
       Style.Color = clYellow
-      TabOrder = 9
+      TabOrder = 62
       Width = 121
     end
     object cxLabel6: TcxLabel
@@ -99,7 +99,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Top = 280
       Properties.Kind = ckDateTime
       Style.Color = clYellow
-      TabOrder = 11
+      TabOrder = 65
       Width = 121
     end
     object cxsQtySPK: TcxSpinEdit
@@ -111,7 +111,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.ReadOnly = True
       Properties.SpinButtons.ShowFastButtons = True
       Properties.ValueType = vtFloat
-      TabOrder = 12
+      TabOrder = 42
       OnExit = cxsQtySPKExit
       Width = 121
     end
@@ -137,7 +137,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.MaxLength = 0
       Properties.OnEditValueChanged = cxlMesinPropertiesEditValueChanged
       Style.Color = clYellow
-      TabOrder = 14
+      TabOrder = 54
       Width = 124
     end
     object cxLabel8: TcxLabel
@@ -151,7 +151,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Width = 92
       Height = 22
       Caption = 'Proses'
-      TabOrder = 16
+      TabOrder = 74
       Visible = False
     end
     object cxLabel9: TcxLabel
@@ -162,7 +162,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
     object cxMemoKet: TcxMemo
       Left = 294
       Top = 230
-      TabOrder = 18
+      TabOrder = 59
       Height = 61
       Width = 402
     end
@@ -172,7 +172,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.DropDownListStyle = lsEditFixedList
       Properties.MaxLength = 0
       Properties.ReadOnly = True
-      TabOrder = 19
+      TabOrder = 24
       Width = 154
     end
     object cxLabel11: TcxLabel
@@ -184,7 +184,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Left = 232
       Top = 30
       Properties.ReadOnly = True
-      TabOrder = 21
+      TabOrder = 9
       Width = 127
     end
     object cxLabel12: TcxLabel
@@ -195,7 +195,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
     object cxtBahanDasar: TcxTextEdit
       Left = 102
       Top = 80
-      TabOrder = 23
+      TabOrder = 16
       Width = 154
     end
     object cxLabel13: TcxLabel
@@ -208,7 +208,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Top = 80
       Properties.ReadOnly = True
       Properties.ValueType = vtFloat
-      TabOrder = 25
+      TabOrder = 17
       Width = 121
     end
     object cxsBerat: TcxSpinEdit
@@ -220,7 +220,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.ReadOnly = True
       Properties.SpinButtons.ShowFastButtons = True
       Properties.ValueType = vtFloat
-      TabOrder = 26
+      TabOrder = 47
       Width = 121
     end
     object cxLabel14: TcxLabel
@@ -232,7 +232,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Left = 738
       Top = 17
       Properties.ReadOnly = True
-      TabOrder = 28
+      TabOrder = 6
       Visible = False
       Width = 76
     end
@@ -240,14 +240,14 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Left = 226
       Top = 180
       Properties.ReadOnly = True
-      TabOrder = 29
+      TabOrder = 48
       Width = 76
     end
     object cxtUnitID: TcxTextEdit
       Left = 304
       Top = 155
       Properties.ReadOnly = True
-      TabOrder = 30
+      TabOrder = 44
       Visible = False
       Width = 76
     end
@@ -263,7 +263,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.ListSource = dsSatuan
       Properties.MaxLength = 0
       Properties.ReadOnly = True
-      TabOrder = 31
+      TabOrder = 43
       Visible = False
       Width = 75
     end
@@ -279,7 +279,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.MaxValue = 50.000000000000000000
       Properties.ReadOnly = True
       Properties.ValueType = vtInt
-      TabOrder = 33
+      TabOrder = 32
       Width = 104
     end
     object cxLabel15: TcxLabel
@@ -302,7 +302,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.ListSource = dsFormula
       Properties.MaxLength = 0
       Style.Color = clYellow
-      TabOrder = 35
+      TabOrder = 68
       Width = 597
     end
     object btnTambah: TButton
@@ -311,7 +311,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Width = 74
       Height = 22
       Caption = 'Proses'
-      TabOrder = 36
+      TabOrder = 70
       OnClick = btnTambahClick
     end
     object nxGrdDet: TNextGrid
@@ -320,7 +320,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Width = 849
       Height = 105
       Options = [goGrid, goHeader]
-      TabOrder = 37
+      TabOrder = 73
       TabStop = True
       Visible = False
       object nxColHapus2: TNxImageColumn
@@ -658,7 +658,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Left = 232
       Top = 5
       Properties.ReadOnly = True
-      TabOrder = 38
+      TabOrder = 1
       Width = 127
     end
     object cxLabel10: TcxLabel
@@ -677,7 +677,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.EditFormat = '#,##0.00  '
       Properties.ReadOnly = True
       Properties.ValueType = vtFloat
-      TabOrder = 40
+      TabOrder = 13
       Visible = False
       Width = 121
     end
@@ -688,14 +688,14 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.EditFormat = '#,##0.00  '
       Properties.ReadOnly = True
       Properties.ValueType = vtFloat
-      TabOrder = 41
+      TabOrder = 40
       Visible = False
       Width = 121
     end
     object cxtEdit: TcxTextEdit
       Left = 818
       Top = 20
-      TabOrder = 42
+      TabOrder = 7
       Text = 'cxtEdit'
       Visible = False
       Width = 121
@@ -717,7 +717,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Top = 363
       Width = 959
       Height = 135
-      TabOrder = 45
+      TabOrder = 72
       object cxGridDBTableView1: TcxGridDBTableView
         NavigatorButtons.ConfirmDelete = False
         DataController.Summary.DefaultGroupSummaryItems = <>
@@ -1010,6 +1010,9 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
           Properties.ValueType = vtFloat
           Visible = False
         end
+        object cxColJns: TcxGridColumn
+          Visible = False
+        end
       end
       object cxGridLevel1: TcxGridLevel
         GridView = cxTblBOM
@@ -1018,7 +1021,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
     object cxtSub: TcxTextEdit
       Left = 739
       Top = 270
-      TabOrder = 46
+      TabOrder = 64
       Visible = False
       Width = 203
     end
@@ -1036,7 +1039,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.EditFormat = '#,##0.00  '
       Properties.ReadOnly = False
       Properties.ValueType = vtFloat
-      TabOrder = 48
+      TabOrder = 55
       Width = 124
     end
     object cxLabel20: TcxLabel
@@ -1058,7 +1061,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.MaxValue = 50.000000000000000000
       Properties.ReadOnly = True
       Properties.ValueType = vtFloat
-      TabOrder = 51
+      TabOrder = 25
       Width = 124
     end
     object cxsBUR: TcxSpinEdit
@@ -1070,7 +1073,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.MaxValue = 50.000000000000000000
       Properties.ReadOnly = True
       Properties.ValueType = vtFloat
-      TabOrder = 52
+      TabOrder = 33
       Width = 124
     end
     object cxLabel22: TcxLabel
@@ -1087,7 +1090,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.ReadOnly = True
       Properties.SpinButtons.ShowFastButtons = True
       Properties.ValueType = vtFloat
-      TabOrder = 54
+      TabOrder = 49
       Width = 121
     end
     object cxLabel23: TcxLabel
@@ -1107,7 +1110,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.OnChange = cxsMeterRollPropertiesChange
       Properties.OnEditValueChanged = cxsMeterRollPropertiesEditValueChanged
       Style.Color = clYellow
-      TabOrder = 56
+      TabOrder = 19
       Width = 129
     end
     object cxLabel24: TcxLabel
@@ -1124,7 +1127,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.MaxValue = 50.000000000000000000
       Properties.ReadOnly = True
       Properties.ValueType = vtFloat
-      TabOrder = 58
+      TabOrder = 27
       Width = 129
     end
     object cxLabel25: TcxLabel
@@ -1141,13 +1144,13 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.ReadOnly = True
       Properties.SpinButtons.ShowFastButtons = True
       Properties.ValueType = vtFloat
-      TabOrder = 60
+      TabOrder = 50
       Width = 121
     end
     object cxsPCS: TcxSpinEdit
       Left = 465
       Top = 5
-      TabOrder = 61
+      TabOrder = 3
       Visible = False
       Width = 121
     end
@@ -1160,14 +1163,14 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.ReadOnly = True
       Properties.SpinButtons.ShowFastButtons = True
       Properties.ValueType = vtFloat
-      TabOrder = 62
+      TabOrder = 45
       Visible = False
       Width = 121
     end
     object cxtFormula: TcxTextEdit
       Left = 739
       Top = 300
-      TabOrder = 63
+      TabOrder = 67
       Text = 'A'
       Visible = False
       Width = 302
@@ -1177,7 +1180,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Top = 5
       Caption = 'Inline Proses'
       Properties.NullStyle = nssUnchecked
-      TabOrder = 64
+      TabOrder = 2
       Width = 121
     end
     object cxLabel26: TcxLabel
@@ -1196,7 +1199,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.ValueType = vtInt
       Properties.OnEditValueChanged = cxsLinePropertiesEditValueChanged
       Style.Color = clYellow
-      TabOrder = 66
+      TabOrder = 26
       Value = 1
       Width = 129
     end
@@ -1209,7 +1212,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.EditFormat = '#,##0.00  '
       Properties.ReadOnly = False
       Properties.ValueType = vtFloat
-      TabOrder = 67
+      TabOrder = 10
       Visible = False
       Width = 124
     end
@@ -1230,7 +1233,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.OnChange = cxsTubePropertiesChange
       Properties.OnEditValueChanged = cxsTubePropertiesEditValueChanged
       Style.Color = clYellow
-      TabOrder = 69
+      TabOrder = 18
       Width = 129
     end
     object cxLabel28: TcxLabel
@@ -1252,7 +1255,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.MaxValue = 50.000000000000000000
       Properties.ReadOnly = True
       Properties.ValueType = vtFloat
-      TabOrder = 72
+      TabOrder = 34
       Width = 129
     end
     object cxsBeratMeter: TcxSpinEdit
@@ -1264,14 +1267,14 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
       Properties.MaxValue = 50.000000000000000000
       Properties.ReadOnly = True
       Properties.ValueType = vtFloat
-      TabOrder = 73
+      TabOrder = 35
       Width = 129
     end
     object cxGroupBox10: TcxGroupBox
       Left = 645
       Top = 154
       Caption = 'Treat Detail'
-      TabOrder = 74
+      TabOrder = 41
       Height = 72
       Width = 641
       object cxLabel30: TcxLabel
@@ -1298,7 +1301,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
         Left = 272
         Top = 18
         Properties.ReadOnly = True
-        TabOrder = 4
+        TabOrder = 1
         Width = 359
       end
       object cxtPolaTreatDalam: TcxTextEdit
@@ -1315,7 +1318,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
         Properties.EditFormat = '#,##0.00'
         Properties.ReadOnly = True
         Properties.ValueType = vtFloat
-        TabOrder = 6
+        TabOrder = 0
         Width = 66
       end
       object cxsTreatDalam: TcxSpinEdit
@@ -1325,7 +1328,7 @@ object frmTmpBuatSPK: TfrmTmpBuatSPK
         Properties.EditFormat = '#,##0.00'
         Properties.ReadOnly = True
         Properties.ValueType = vtFloat
-        TabOrder = 7
+        TabOrder = 4
         Width = 66
       end
     end
