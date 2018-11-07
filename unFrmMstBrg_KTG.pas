@@ -1396,7 +1396,14 @@ begin
       end;  }
 
       lst := TStringList.Create;
-      lst.CommaText := 'G01,G02,G03,G-ASIS,G-WIP';
+
+      // 07-11-2018
+      q := OpenRS('SELECT * FROM tbl_gudang');
+      while not q.Eof do begin
+        lst.Add(q.FieldByname('kode').AsString);
+      end;
+      q.Close;
+
       tbl_brg_det := OpenTbl('tbl_barang_det');
       for i := 0 to lst.Count - 1 do begin
         if not tbl_brg_det.Locate('kode_brg;kode_gdg',

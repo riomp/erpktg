@@ -187,15 +187,15 @@ begin
 
   if cxJenis.Text='INVOICE PEMBELIAN' then begin
       zqrPO.Close;
-  zqrPO.ParamByName('kode_supp').AsString := zqrSupp.FieldByName('kode').AsString;
-  zqrPO.Open;
-  // get akun supplier
-  q := OpenRS('SELECT * FROM tbl_supplier WHERE kode = ''%s''',[cxlCustomer.EditValue]);
-  if not q.IsEmpty then begin
-    cxtAkunSupp.Text := q.FieldByName('akun_hutang').AsString;
-    cxlAkunSupp.EditValue := q.FieldByName('akun_hutang').AsString;
-  end;
-  q.Close;
+    zqrPO.ParamByName('kode_supp').AsString := zqrSupp.FieldByName('kode').AsString;
+    zqrPO.Open;
+    // get akun supplier
+    q := OpenRS('SELECT * FROM tbl_supplier WHERE kode = ''%s''',[cxlCustomer.EditValue]);
+    if not q.IsEmpty then begin
+      cxtAkunSupp.Text := q.FieldByName('akun_hutang').AsString;
+      cxlAkunSupp.EditValue := q.FieldByName('akun_hutang').AsString;
+    end;
+    q.Close;
 
   end
   else begin

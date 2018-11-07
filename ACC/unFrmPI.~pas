@@ -423,7 +423,7 @@ begin
                         qjd.FieldByName('no_jurnal').AsString := sNoJ;
                         qjd.FieldByName('no_trans').AsString := sNoTrs;
                         qjd.FieldByName('akun').AsString := sAkun;
-                        qjd.FieldByName('kredit').AsFloat :=  cxTbl.DataController.Summary.FooterSummaryValues[0];
+                        qjd.FieldByName('kredit').AsFloat :=  cxTbl.DataController.Values[i, cxColSubTotal.index];
                         qjd.FieldByName('keterangan').AsString := cxmKet.Text;
                         qjd.FieldByName('kode_suppcust').AsString := cxlCustomer.EditValue;
                         qjd.FieldByName('dc').AsString := 'K';
@@ -436,7 +436,7 @@ begin
                       qjd.FieldByName('no_trans').AsString := sNoTrs;
                       qjd.FieldByName('akun').AsString := sAkun;
                       qjd.FieldByName('kode_brg').AsString := cxTbl.DataController.Values[i, cxColKodeBrg.index];
-                      qjd.FieldByName('debet').AsFloat := cxTbl.DataController.Summary.FooterSummaryValues[0];
+                      qjd.FieldByName('debet').AsFloat := cxTbl.DataController.Values[i, cxColSubTotal.index];
                       qjd.FieldByName('keterangan').AsString :=sNoTrs + '['+ cxmKet.Text + ']';
                       qjd.FieldByName('dc').AsString := 'D';
                       qjd.FieldByName('kode_suppcust').AsString := cxlCustomer.EditValue;
