@@ -187,15 +187,15 @@ begin
 
   if cxJenis.Text='INVOICE PEMBELIAN' then begin
       zqrPO.Close;
-  zqrPO.ParamByName('kode_supp').AsString := zqrSupp.FieldByName('kode').AsString;
-  zqrPO.Open;
-  // get akun supplier
-  q := OpenRS('SELECT * FROM tbl_supplier WHERE kode = ''%s''',[cxlCustomer.EditValue]);
-  if not q.IsEmpty then begin
-    cxtAkunSupp.Text := q.FieldByName('akun_hutang').AsString;
-    cxlAkunSupp.EditValue := q.FieldByName('akun_hutang').AsString;
-  end;
-  q.Close;
+    zqrPO.ParamByName('kode_supp').AsString := zqrSupp.FieldByName('kode').AsString;
+    zqrPO.Open;
+    // get akun supplier
+    q := OpenRS('SELECT * FROM tbl_supplier WHERE kode = ''%s''',[cxlCustomer.EditValue]);
+    if not q.IsEmpty then begin
+      cxtAkunSupp.Text := q.FieldByName('akun_hutang').AsString;
+      cxlAkunSupp.EditValue := q.FieldByName('akun_hutang').AsString;
+    end;
+    q.Close;
 
   end
   else begin
@@ -655,7 +655,7 @@ begin
     cxTbl.DataController.RecordCount := 0;
 
     total := 0;
-    q := OpenRS('SELECT a.*,b.pajak as ppn FROM tbl_spbb_det a left join tbl_po_det b on a.no_po=b.no_bukti WHERE a.no_bukti = ''%s''',[cxlNoPo.EditValue]);
+    q := OpenRS('SELECT a.*,(SELECT pajak FROM tbl_po_det WHERE no_bukti=a.no_po and kode_brg=a.kode_brg ) ppn FROM tbl_spbb_det a WHERE a.no_bukti= ''%s''',[cxlNoPo.EditValue]);
     if not q.IsEmpty then begin
 
       while not q.Eof do begin

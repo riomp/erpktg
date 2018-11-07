@@ -655,7 +655,7 @@ begin
     cxTbl.DataController.RecordCount := 0;
 
     total := 0;
-    q := OpenRS('SELECT a.*,b.pajak as ppn FROM tbl_spbb_det a left join tbl_po_det b on a.no_po=b.no_bukti WHERE a.no_bukti = ''%s''',[cxlNoPo.EditValue]);
+    q := OpenRS('SELECT a.*,(SELECT pajak FROM tbl_po_det WHERE no_bukti=a.no_po and kode_brg=a.kode_brg ) ppn FROM tbl_spbb_det a WHERE a.no_bukti= ''%s''',[cxlNoPo.EditValue]);
     if not q.IsEmpty then begin
 
       while not q.Eof do begin
