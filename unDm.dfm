@@ -83,7 +83,7 @@ object dm: Tdm
     Database = 'ftm'
     User = 'root'
     Protocol = 'mysql'
-    Left = 32
-    Top = 192
+    Left = 52
+    Top = 197
   end
 end
