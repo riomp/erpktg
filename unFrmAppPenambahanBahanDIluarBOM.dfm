@@ -1,0 +1,151 @@
+inherited frmAppPenamabahanDiluarBom: TfrmAppPenamabahanDiluarBom
+  Left = 486
+  Top = 243
+  VertScrollBar.Range = 0
+  Align = alClient
+  BorderStyle = bsNone
+  Caption = 'Approval Penamabahan Bahan Diluar BOM'
+  ClientHeight = 649
+  ClientWidth = 976
+  OldCreateOrder = True
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlAtas: TPanel
+    Width = 976
+    inherited lblJudul: TLabel
+      Width = 336
+      Caption = 'Approval Penambahan Bahan Diluar BOM'
+    end
+  end
+  inherited pnlTengah: TPanel
+    Width = 976
+    Height = 502
+    Align = alClient
+    object cxGrid14: TcxGrid
+      Left = 20
+      Top = 270
+      Width = 916
+      Height = 211
+      Anchors = [akLeft, akRight, akBottom]
+      TabOrder = 0
+      object cxTblBom1Det: TcxGridTableView
+        NavigatorButtons.ConfirmDelete = False
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsData.Deleting = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
+        OptionsView.GroupByBox = False
+        object cxColBomDetKode: TcxGridColumn
+          Caption = 'Kode Brg.'
+          Options.Editing = False
+          Width = 235
+        end
+        object cxColBomDetBarang: TcxGridColumn
+          Caption = 'Dekripsi'
+          Width = 431
+        end
+        object cxColBomDetSatuan: TcxGridColumn
+          Caption = 'Satuan'
+          PropertiesClassName = 'TcxComboBoxProperties'
+          Properties.Items.Strings = (
+            'GR'
+            'PCS'
+            'ROLL'
+            'M')
+        end
+        object cxColBomDetQty: TcxGridColumn
+          Caption = 'Qty. Penambahan'
+          DataBinding.ValueType = 'Float'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,#0.00'
+          Properties.EditFormat = '#,#0.00'
+          Properties.SpinButtons.Visible = False
+          Properties.ValueType = vtFloat
+          Width = 120
+        end
+      end
+      object cxGridLevel11: TcxGridLevel
+        GridView = cxTblBom1Det
+      end
+    end
+    object cxGrid1: TcxGrid
+      Left = 20
+      Top = 15
+      Width = 911
+      Height = 241
+      Anchors = [akLeft, akTop, akRight, akBottom]
+      TabOrder = 1
+      object cxTblApp: TcxGridDBTableView
+        NavigatorButtons.ConfirmDelete = False
+        OnFocusedRecordChanged = cxTblAppFocusedRecordChanged
+        DataController.DataSource = dsApp
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsView.GroupByBox = False
+        object cxTblAppno_mo: TcxGridDBColumn
+          Caption = 'No.Mo'
+          DataBinding.FieldName = 'no_mo'
+          Width = 86
+        end
+        object cxTblAppno_spk: TcxGridDBColumn
+          Caption = 'No.SPK'
+          DataBinding.FieldName = 'no_spk'
+          Width = 114
+        end
+        object cxTblAppkode_brg: TcxGridDBColumn
+          Caption = 'Kode'
+          DataBinding.FieldName = 'kode_brg'
+        end
+        object cxTblAppdeskripsi: TcxGridDBColumn
+          Caption = 'Deskripsi'
+          DataBinding.FieldName = 'deskripsi'
+          Width = 374
+        end
+        object cxTblAppuser_request: TcxGridDBColumn
+          Caption = 'Requestor'
+          DataBinding.FieldName = 'user_request'
+        end
+        object cxTblApptgl_request: TcxGridDBColumn
+          Caption = 'Tanggal'
+          DataBinding.FieldName = 'tgl_request'
+        end
+      end
+      object cxGrid1Level1: TcxGridLevel
+        GridView = cxTblApp
+      end
+    end
+  end
+  inherited pnlBawah: TPanel
+    Top = 568
+    Width = 976
+    Height = 81
+    Align = alBottom
+    inherited btnSimpan: TButton
+      Caption = '&Approve'
+    end
+  end
+  object zqrApp: TZReadOnlyQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      
+        ' SELECT DISTINCT b.no_mo,a.no_spk,b.kode_brg,c.deskripsi,a.user_' +
+        'request,DATE(a.tgl_request) as tgl_request'
+      
+        'FROM tmp_tbl_bom_det a join tbl_spk b on a.no_spk=b.no_spk join ' +
+        'tbl_barang c'
+      'on b.kode_brg=c.kode  WHERE a.f_approval=0')
+    Params = <>
+    Left = 465
+    Top = 30
+  end
+  object dsApp: TDataSource
+    DataSet = zqrApp
+    Left = 495
+    Top = 25
+  end
+end

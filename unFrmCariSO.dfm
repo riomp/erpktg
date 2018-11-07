@@ -1,0 +1,586 @@
+object frmCariSO: TfrmCariSO
+  Left = 343
+  Top = 199
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Cari SO'
+  ClientHeight = 497
+  ClientWidth = 924
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object cxGrid2: TcxGrid
+    Left = 15
+    Top = 271
+    Width = 891
+    Height = 151
+    TabOrder = 7
+    Visible = False
+    object cxGridDBTableView1: TcxGridDBTableView
+      OnDblClick = cxGridDBTableView1DblClick
+      NavigatorButtons.ConfirmDelete = False
+      DataController.DataSource = dsSODet
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      OptionsData.CancelOnExit = False
+      OptionsData.Deleting = False
+      OptionsData.DeletingConfirmation = False
+      OptionsData.Editing = False
+      OptionsData.Inserting = False
+      object cxGridDBTableView1kode_brg: TcxGridDBColumn
+        Caption = 'Kode Brg.'
+        DataBinding.FieldName = 'kode_brg'
+      end
+      object cxGridDBTableView1deskripsi: TcxGridDBColumn
+        Caption = 'Deskripsi'
+        DataBinding.FieldName = 'deskripsi'
+        Width = 363
+      end
+      object cxGridDBTableView1qty: TcxGridDBColumn
+        Caption = 'Qty'
+        DataBinding.FieldName = 'qty'
+      end
+      object cxGridDBTableView1satuan: TcxGridDBColumn
+        Caption = 'Satuan'
+        DataBinding.FieldName = 'satuan'
+        Width = 100
+      end
+      object cxGridDBTableView1f_complete: TcxGridDBColumn
+        Caption = 'Complete'
+        DataBinding.FieldName = 'f_complete'
+        PropertiesClassName = 'TcxCheckBoxProperties'
+        Properties.ValueChecked = 1
+        Properties.ValueUnchecked = 0
+      end
+      object cxGridDBTableView1notes: TcxGridDBColumn
+        Caption = 'Notes'
+        DataBinding.FieldName = 'notes'
+        Width = 207
+      end
+    end
+    object cxGridLevel1: TcxGridLevel
+      GridView = cxGridDBTableView1
+    end
+  end
+  object nxGrdSODet: TNextGrid
+    Left = 15
+    Top = 271
+    Width = 891
+    Height = 156
+    Options = [goGrid, goHeader]
+    TabOrder = 6
+    TabStop = True
+    OnAfterEdit = nxGrdSODetAfterEdit
+    object nxColCheck: TNxCheckBoxColumn
+      Alignment = taCenter
+      DefaultWidth = 33
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Pilih'
+      Options = [coCanClick, coCanInput, coCanSort, coEditing, coPublicUsing]
+      Position = 0
+      SortType = stBoolean
+      Width = 33
+    end
+    object nxColKdBrg: TNxTextColumn
+      DefaultWidth = 79
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Kode Brg.'
+      Position = 1
+      SortType = stAlphabetic
+      Width = 79
+    end
+    object NxTextColumn2: TNxTextColumn
+      DefaultWidth = 330
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Deskripsi'
+      Position = 2
+      SortType = stAlphabetic
+      Width = 330
+    end
+    object nxColDipesan: TNxNumberColumn
+      DefaultValue = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Dipesan'
+      Header.Alignment = taRightJustify
+      Position = 3
+      SortType = stNumeric
+      FormatMask = '#,##0.00'
+      Increment = 1.000000000000000000
+      Precision = 0
+    end
+    object nxColTerkirim: TNxNumberColumn
+      DefaultValue = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Terkirim'
+      Header.Alignment = taRightJustify
+      Position = 4
+      SortType = stNumeric
+      FormatMask = '#,##0.00'
+      Increment = 1.000000000000000000
+      Precision = 0
+    end
+    object nxColSisa: TNxNumberColumn
+      DefaultValue = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Sisa'
+      Header.Alignment = taRightJustify
+      Position = 5
+      SortType = stNumeric
+      Increment = 1.000000000000000000
+      Precision = 0
+    end
+    object nxColStokG02: TNxNumberColumn
+      DefaultValue = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Stok (G02)'
+      Header.Alignment = taRightJustify
+      Position = 6
+      SortType = stNumeric
+      FormatMask = '#,##0.00'
+      Increment = 1.000000000000000000
+      Precision = 0
+    end
+    object nxColSPMB: TNxNumberColumn
+      DefaultValue = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'SPMB'
+      Header.Alignment = taRightJustify
+      Position = 7
+      SortType = stNumeric
+      Increment = 1.000000000000000000
+      Precision = 0
+    end
+    object nxColSatuan: TNxTextColumn
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Satuan'
+      Position = 8
+      SortType = stAlphabetic
+    end
+  end
+  object cxdTgl1: TcxDateEdit
+    Left = 65
+    Top = 20
+    TabOrder = 1
+    Width = 121
+  end
+  object cxLabel1: TcxLabel
+    Left = 15
+    Top = 22
+    Caption = 'Tanggal'
+  end
+  object cxdTgl2: TcxDateEdit
+    Left = 218
+    Top = 20
+    TabOrder = 2
+    Width = 121
+  end
+  object cxLabel2: TcxLabel
+    Left = 190
+    Top = 22
+    Caption = 'S/D'
+  end
+  object btnProses: TButton
+    Left = 348
+    Top = 18
+    Width = 75
+    Height = 25
+    Caption = 'Proses'
+    TabOrder = 0
+    OnClick = btnProsesClick
+  end
+  object cxGrid1: TcxGrid
+    Left = 15
+    Top = 56
+    Width = 891
+    Height = 208
+    TabOrder = 5
+    object cxGrid1DBTableView1: TcxGridDBTableView
+      NavigatorButtons.ConfirmDelete = False
+      OnFocusedRecordChanged = cxGrid1DBTableView1FocusedRecordChanged
+      DataController.DataSource = dsSOHead
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      FilterRow.Visible = True
+      OptionsData.CancelOnExit = False
+      OptionsData.Deleting = False
+      OptionsData.DeletingConfirmation = False
+      OptionsData.Editing = False
+      OptionsData.Inserting = False
+      object cxGrid1DBTableView1no_bukti: TcxGridDBColumn
+        Caption = 'No. SO'
+        DataBinding.FieldName = 'no_bukti'
+        PropertiesClassName = 'TcxTextEditProperties'
+        Properties.ReadOnly = True
+        Width = 109
+      end
+      object cxGrid1DBTableView1tanggal: TcxGridDBColumn
+        Caption = 'Tanggal'
+        DataBinding.FieldName = 'tanggal'
+        Width = 89
+      end
+      object cxGrid1DBTableView1nama: TcxGridDBColumn
+        Caption = 'Customer'
+        DataBinding.FieldName = 'nama'
+        Width = 288
+      end
+      object cxGrid1DBTableView1payment: TcxGridDBColumn
+        Caption = 'Pembayaran'
+        DataBinding.FieldName = 'payment'
+        Width = 136
+      end
+      object cxGrid1DBTableView1Column1: TcxGridDBColumn
+        Caption = 'PO#'
+        DataBinding.FieldName = 'po#'
+        Width = 102
+      end
+      object cxGrid1DBTableView1f_complete: TcxGridDBColumn
+        Caption = 'Komplit'
+        DataBinding.FieldName = 'f_complete'
+        PropertiesClassName = 'TcxCheckBoxProperties'
+        Properties.ValueChecked = 1
+        Properties.ValueUnchecked = 0
+      end
+      object cxGrid1DBTableView1user: TcxGridDBColumn
+        Caption = 'User'
+        DataBinding.FieldName = 'user'
+      end
+      object cxGrid1DBTableView1user_dept: TcxGridDBColumn
+        Caption = 'Dept'
+        DataBinding.FieldName = 'user_dept'
+      end
+      object cxGrid1DBTableView1f_email: TcxGridDBColumn
+        Caption = 'Email'
+        DataBinding.FieldName = 'f_email'
+      end
+      object cxGrid1DBTableView1notes: TcxGridDBColumn
+        Caption = 'Keterangan'
+        DataBinding.FieldName = 'notes'
+        Width = 187
+      end
+    end
+    object cxGrid1Level1: TcxGridLevel
+      GridView = cxGrid1DBTableView1
+    end
+  end
+  object Button1: TButton
+    Left = 15
+    Top = 463
+    Width = 75
+    Height = 25
+    Caption = 'Pilih'
+    TabOrder = 10
+    OnClick = Button1Click
+  end
+  object btnBatal: TButton
+    Left = 95
+    Top = 463
+    Width = 75
+    Height = 25
+    Caption = '&Keluar'
+    TabOrder = 11
+    OnClick = btnBatalClick
+  end
+  object nxGrdSODetPel: TNextGrid
+    Left = 195
+    Top = 296
+    Width = 891
+    Height = 156
+    Options = [goGrid, goHeader]
+    TabOrder = 8
+    TabStop = True
+    OnAfterEdit = nxGrdSODetAfterEdit
+    object NxCheckBoxColumn1: TNxCheckBoxColumn
+      Alignment = taCenter
+      DefaultWidth = 33
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Pilih'
+      Options = [coCanClick, coCanInput, coCanSort, coEditing, coPublicUsing]
+      Position = 0
+      SortType = stBoolean
+      Width = 33
+    end
+    object NxTextColumn1: TNxTextColumn
+      DefaultWidth = 79
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Kode Brg.'
+      Position = 1
+      SortType = stAlphabetic
+      Width = 79
+    end
+    object NxTextColumn3: TNxTextColumn
+      DefaultWidth = 330
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Deskripsi'
+      Position = 2
+      SortType = stAlphabetic
+      Width = 330
+    end
+    object NxNumberColumn1: TNxNumberColumn
+      DefaultValue = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Dipesan'
+      Header.Alignment = taRightJustify
+      Position = 3
+      SortType = stNumeric
+      FormatMask = '#,##0.00'
+      Increment = 1.000000000000000000
+      Precision = 0
+    end
+    object NxNumberColumn2: TNxNumberColumn
+      DefaultValue = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Terkirim'
+      Header.Alignment = taRightJustify
+      Position = 4
+      SortType = stNumeric
+      FormatMask = '#,##0.00'
+      Increment = 1.000000000000000000
+      Precision = 0
+    end
+    object NxNumberColumn3: TNxNumberColumn
+      DefaultValue = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Sisa'
+      Header.Alignment = taRightJustify
+      Position = 5
+      SortType = stNumeric
+      Increment = 1.000000000000000000
+      Precision = 0
+    end
+    object NxNumberColumn4: TNxNumberColumn
+      DefaultValue = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Stok (G02)'
+      Header.Alignment = taRightJustify
+      Position = 6
+      SortType = stNumeric
+      FormatMask = '#,##0.00'
+      Increment = 1.000000000000000000
+      Precision = 0
+    end
+    object nxColBaik: TNxNumberColumn
+      DefaultValue = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Stok Baik'
+      Position = 7
+      SortType = stNumeric
+      FormatMask = '#,##0.00'
+      Increment = 1.000000000000000000
+      Precision = 0
+    end
+    object nxColAfkir: TNxNumberColumn
+      DefaultValue = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Stok Afkir'
+      Position = 8
+      SortType = stNumeric
+      FormatMask = '#,##0.00'
+      Increment = 1.000000000000000000
+      Precision = 0
+    end
+    object nxColRetur: TNxNumberColumn
+      DefaultValue = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Stok Retur'
+      Position = 9
+      SortType = stNumeric
+      FormatMask = '#,##0.00'
+      Increment = 1.000000000000000000
+      Precision = 0
+    end
+    object nxColSPMB2: TNxNumberColumn
+      DefaultValue = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'SPMB'
+      Header.Alignment = taRightJustify
+      Position = 10
+      SortType = stNumeric
+      Increment = 1.000000000000000000
+      Precision = 0
+    end
+    object nxColSatuan2: TNxTextColumn
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Header.Caption = 'Satuan'
+      Position = 11
+      SortType = stAlphabetic
+    end
+  end
+  object btnPilihSemua: TButton
+    Left = 15
+    Top = 432
+    Width = 75
+    Height = 25
+    Caption = 'Pilih Semua'
+    TabOrder = 9
+    OnClick = btnPilihSemuaClick
+  end
+  object zqrSOhead: TZReadOnlyQuery
+    Connection = dm.zConn
+    AfterScroll = zqrSOheadAfterScroll
+    SQL.Strings = (
+      
+        'SELECT * FROM v_so_head WHERE tanggal BETWEEN :tgl1 AND :tgl2 AN' +
+        'D f_completed = 0'
+      'AND LEFT(no_bukti,3) <> '#39'MTS'#39
+      'AND kode_customer = :kode_customer')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'tgl1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tgl2'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'kode_customer'
+        ParamType = ptUnknown
+      end>
+    Left = 80
+    Top = 104
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'tgl1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tgl2'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'kode_customer'
+        ParamType = ptUnknown
+      end>
+  end
+  object dsSOHead: TDataSource
+    DataSet = zqrSOhead
+    Left = 110
+    Top = 104
+  end
+  object zqrSODet: TZReadOnlyQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      'SELECT * FROM v_so_det '
+      'WHERE no_bukti = :no_bukti AND f_completed = 0')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'no_bukti'
+        ParamType = ptUnknown
+      end>
+    Left = 315
+    Top = 330
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'no_bukti'
+        ParamType = ptUnknown
+      end>
+  end
+  object dsSODet: TDataSource
+    DataSet = zqrSODet
+    Left = 345
+    Top = 330
+  end
+end

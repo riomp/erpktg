@@ -1,0 +1,58 @@
+unit FrmDaftarPenerimaanKas;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, unFrmTransBaru, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
+  dxSkinsDefaultPainters, cxStyles, dxSkinscxPCPainter, cxCustomData,
+  cxFilter, cxData, cxDataStorage, DB, cxDBData, cxSpinEdit, cxCheckBox,
+  ZAbstractRODataset, ZDataset, cxGridLevel, cxGridCustomTableView,
+  cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid,
+  cxTextEdit, cxMaskEdit, cxDropDownEdit, cxCalendar, cxLabel, StdCtrls,
+  ExtCtrls;
+
+type
+  TfrmDaftarTerimaKas = class(TfrmTransBaru)
+    cxLabel1: TcxLabel;
+    cxdTgl1: TcxDateEdit;
+    cxLabel2: TcxLabel;
+    cxdTgl2: TcxDateEdit;
+    btnProses: TButton;
+    cxGrid2: TcxGrid;
+    cxGridDBTableView1: TcxGridDBTableView;
+    cxGrid2DBTableView1: TcxGridDBTableView;
+    cxGrid2DBTableView1id: TcxGridDBColumn;
+    cxGrid2DBTableView1no_bukti: TcxGridDBColumn;
+    cxGrid2DBTableView1kode_brg: TcxGridDBColumn;
+    cxGrid2DBTableView1deskripsi: TcxGridDBColumn;
+    cxGrid2DBTableView1qty: TcxGridDBColumn;
+    cxGrid2DBTableView1satuan: TcxGridDBColumn;
+    cxGrid2DBTableView1keterangan: TcxGridDBColumn;
+    cxGrid2DBTableView1mata_uang: TcxGridDBColumn;
+    cxGridLevel1: TcxGridLevel;
+    cxGrid2Level1: TcxGridLevel;
+    zqrKasMasuk: TZReadOnlyQuery;
+    dsKasMasuk: TDataSource;
+    zqrKasMasukDet: TZReadOnlyQuery;
+    dsKasMasukDet: TDataSource;
+    cxGridDBTableView1no_jurnal: TcxGridDBColumn;
+    cxGridDBTableView1tanggal: TcxGridDBColumn;
+    cxGridDBTableView1keterangan: TcxGridDBColumn;
+    cxGridDBTableView1jumlah: TcxGridDBColumn;
+    cxGridDBTableView1f_posted: TcxGridDBColumn;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmDaftarTerimaKas: TfrmDaftarTerimaKas;
+
+implementation
+
+{$R *.dfm}
+
+end.

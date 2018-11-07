@@ -1,0 +1,40 @@
+unit unFrmProsesRK2;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
+  cxContainer, cxEdit, dxSkinsCore, dxSkinsDefaultPainters, cxMemo,
+  cxMaskEdit, cxSpinEdit, StdCtrls, cxTextEdit, cxLabel;
+
+type
+  TfrmProsesRK2 = class(TForm)
+    Label2: TLabel;
+    cxLabel1: TcxLabel;
+    cxeNoFRK: TcxTextEdit;
+    GroupBox2: TGroupBox;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label19: TLabel;
+    cxeNamaBrg: TcxTextEdit;
+    cxsJmlKomplain: TcxSpinEdit;
+    cxLabel9: TcxLabel;
+    cxmDeskKomplain: TcxMemo;
+    cxLabel2: TcxLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmProsesRK2: TfrmProsesRK2;
+
+implementation
+
+uses unFrmDaftarRK2;
+
+{$R *.dfm}
+
+end.

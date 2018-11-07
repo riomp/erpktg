@@ -1,0 +1,470 @@
+[Closed Files]
+File_0=SourceModule,'D:\ERP KTG\16-11-2017\KTG\unFrmDownTime.pas',0,1,1024,42,1043,1,0
+File_1=SourceModule,'D:\ERP KTG\16-11-2017\KTG\unFrmST_PB.pas',0,1,478,99,488,1,0
+File_2=SourceModule,'D:\ERP KTG\16-11-2017\unFrmSerahTerimaSPK.pas',0,1,1,1,1,0,0
+File_3=SourceModule,'C:\Program Files (x86)\Borland\Delphi7\Component\ZEOSDBO-7.1.4-stable\src\dbc\ZDbcMySqlUtils.pas',0,1,417,66,427,0,0
+File_4=SourceModule,'D:\ERP KTG\16-11-2017\ACC\unFrmDaftarPembayaranPembelian.pas',0,1,1,1,1,1,0
+File_5=SourceModule,'D:\ERP KTG\16-11-2017\ACC\unFrmPembayaranPembelian1.pas',0,1,96,11,123,0,0
+File_6=SourceModule,'D:\ERP KTG\16-11-2017\ACC\unFrmDaftarInvoicePembelian.pas',0,1,1,1,1,0,0
+File_7=SourceModule,'D:\ERP KTG\16-11-2017\ACC\unFrmDaftarJurnal.pas',0,1,1,1,1,0,0
+File_8=SourceModule,'D:\ERP KTG\16-11-2017\unFrmSalesMobile.pas',0,1,358,81,363,0,0
+File_9=SourceModule,'D:\ERP KTG\16-11-2017\unTools.pas',0,1,84,16,108,0,0
+
+[Modules]
+Module0=D:\ERP KTG\16-11-2017\unFrmUtama.pas
+Module1=D:\ERP KTG\16-11-2017\unFrmLHP.pas
+Module2=D:\ERP KTG\16-11-2017\unFrmMstBrg_KTG.pas
+Module3=D:\ERP KTG\16-11-2017\ACC\unFrmLaporanAcc.pas
+Module4=D:\ERP KTG\16-11-2017\ACC\unFrmPI.pas
+Module5=D:\ERP KTG\16-11-2017\KTG\unFrmPurchaseOrderKTG.pas
+Module6=D:\ERP KTG\16-11-2017\unFrmPilihPO.pas
+Module7=D:\ERP KTG\16-11-2017\unFrmLogin.pas
+Module8=D:\ERP KTG\16-11-2017\unDm.pas
+Module9=D:\ERP KTG\16-11-2017\unFrmPB.pas
+Module10=D:\ERP KTG\16-11-2017\ACC\unFrmInvoice.pas
+Module11=D:\ERP KTG\16-11-2017\unFrmMO.pas
+Module12=D:\ERP KTG\16-11-2017\KTG.dpr
+Count=13
+EditWindowCount=1
+
+[D:\ERP KTG\16-11-2017\unFrmUtama.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\unFrmLHP.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\unFrmMstBrg_KTG.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\ACC\unFrmLaporanAcc.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\ACC\unFrmPI.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\KTG\unFrmPurchaseOrderKTG.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\unFrmPilihPO.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\unFrmLogin.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\unDm.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\unFrmPB.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\ACC\unFrmInvoice.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\unFrmMO.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\KTG.dpr]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[C:\Program Files (x86)\Borland\Delphi7\Projects\ProjectGroup1.bpg]
+FormState=0
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\unFrmTplTrans.pas]
+FormState=0
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\unFrmTplMaster.pas]
+FormState=0
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\unFrmTransBaru.pas]
+FormState=0
+FormOnTop=0
+
+[EditWindow0]
+ViewCount=13
+CurrentView=11
+View0=0
+View1=1
+View2=2
+View3=3
+View4=4
+View5=5
+View6=6
+View7=7
+View8=8
+View9=9
+View10=10
+View11=11
+View12=12
+CodeExplorer=CodeExplorer@EditWindow0
+MessageView=MessageView@EditWindow0
+Create=1
+Visible=1
+State=0
+Left=301
+Top=122
+Width=1379
+Height=735
+MaxLeft=-8
+MaxTop=-8
+ClientWidth=1363
+ClientHeight=696
+LeftPanelSize=140
+LeftPanelClients=CodeExplorer@EditWindow0
+LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
+RightPanelSize=0
+BottomPanelSize=85
+BottomPanelClients=MessageView@EditWindow0
+BottomPanelData=00000400000000005305000000000000025500000000000000010000000000000000000000000100000000060500000000000001000000000605000000000000010000000044040000000000000100000000440400000000000001000000004404000000000000010000000044040000000000000100000000440400000000000001000000004404000000000000010000000053050000000000000100000000530500000000000001000000005305000000000000010000000053050000000000000100000000530500000B0000004D65737361676556696577FFFFFFFF
+
+[View0]
+Module=D:\ERP KTG\16-11-2017\KTG.dpr
+CursorX=5
+CursorY=337
+TopLine=31
+LeftCol=1
+
+[View1]
+Module=D:\ERP KTG\16-11-2017\unFrmMstBrg_KTG.pas
+CursorX=116
+CursorY=941
+TopLine=4063
+LeftCol=1
+
+[View2]
+Module=D:\ERP KTG\16-11-2017\unFrmLHP.pas
+CursorX=1
+CursorY=1
+TopLine=1
+LeftCol=1
+
+[View3]
+Module=D:\ERP KTG\16-11-2017\unDm.pas
+CursorX=7
+CursorY=216
+TopLine=186
+LeftCol=1
+
+[View4]
+Module=D:\ERP KTG\16-11-2017\unFrmLogin.pas
+CursorX=28
+CursorY=66
+TopLine=56
+LeftCol=1
+
+[View5]
+Module=D:\ERP KTG\16-11-2017\KTG\unFrmPurchaseOrderKTG.pas
+CursorX=81
+CursorY=1758
+TopLine=1748
+LeftCol=1
+
+[View6]
+Module=D:\ERP KTG\16-11-2017\ACC\unFrmLaporanAcc.pas
+CursorX=1
+CursorY=1
+TopLine=1
+LeftCol=1
+
+[View7]
+Module=D:\ERP KTG\16-11-2017\ACC\unFrmPI.pas
+CursorX=125
+CursorY=425
+TopLine=333
+LeftCol=1
+
+[View8]
+Module=D:\ERP KTG\16-11-2017\unFrmPB.pas
+CursorX=13
+CursorY=549
+TopLine=557
+LeftCol=1
+
+[View9]
+Module=D:\ERP KTG\16-11-2017\unFrmPilihPO.pas
+CursorX=15
+CursorY=107
+TopLine=80
+LeftCol=1
+
+[View10]
+Module=D:\ERP KTG\16-11-2017\unFrmMO.pas
+CursorX=35
+CursorY=236
+TopLine=276
+LeftCol=1
+
+[View11]
+Module=D:\ERP KTG\16-11-2017\unFrmUtama.pas
+CursorX=20
+CursorY=4250
+TopLine=4253
+LeftCol=1
+
+[View12]
+Module=D:\ERP KTG\16-11-2017\ACC\unFrmInvoice.pas
+CursorX=125
+CursorY=1
+TopLine=177
+LeftCol=1
+
+[Watches]
+Count=0
+
+[WatchWindow]
+WatchColumnWidth=100
+WatchShowColumnHeaders=1
+Create=1
+Visible=0
+State=0
+Left=109
+Top=371
+Width=426
+Height=157
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=410
+ClientHeight=118
+TBDockHeight=157
+LRDockWidth=426
+Dockable=1
+
+[Breakpoints]
+Count=0
+
+[AddressBreakpoints]
+Count=0
+
+[Main Window]
+Create=1
+Visible=1
+State=2
+Left=0
+Top=0
+Width=1920
+Height=123
+MaxLeft=-1
+MaxTop=-1
+MaxWidth=1936
+MaxHeight=123
+ClientWidth=1920
+ClientHeight=84
+
+[ProjectManager]
+Create=1
+Visible=0
+State=0
+Left=737
+Top=381
+Width=446
+Height=318
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=430
+ClientHeight=279
+TBDockHeight=318
+LRDockWidth=446
+Dockable=1
+
+[Components]
+Left=240
+Top=237
+Width=191
+Height=248
+Create=1
+Visible=0
+State=0
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=175
+ClientHeight=209
+TBDockHeight=248
+LRDockWidth=191
+Dockable=1
+
+[CPUWindow]
+Create=1
+Visible=0
+State=0
+Left=0
+Top=0
+Width=1088
+Height=565
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=1072
+ClientHeight=526
+DumpPane=79
+DisassemblyPane=187
+RegisterPane=231
+FlagPane=64
+
+[AlignmentPalette]
+Create=1
+Visible=0
+State=0
+Left=536
+Top=590
+Width=156
+Height=89
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=150
+ClientHeight=60
+
+[PropertyInspector]
+Create=1
+Visible=1
+State=0
+Left=-6
+Top=390
+Width=274
+Height=652
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=258
+ClientHeight=613
+TBDockHeight=732
+LRDockWidth=272
+Dockable=1
+SplitPos=156
+ArrangeBy=Name
+SelectedItem=Visible
+ExpandedItems=Anchors,BorderIcons,Buttons,Buttons.Append,DataBinding,DataController,Font,Font.Style,Header,NavigatorButtons.Insert,NavigatorButtons.Post,Options,OptionsData,OptionsView,Properties,Properties.ValueChecked,Properties.ValueGrayed,Properties.ValueUnchecked,RootLevelStyles,Style,Styles
+HiddenCategories=
+
+[CallStackWindow]
+Create=1
+Visible=0
+State=0
+Left=813
+Top=459
+Width=294
+Height=161
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=278
+ClientHeight=122
+TBDockHeight=161
+LRDockWidth=294
+Dockable=1
+
+[ObjectTree]
+Create=1
+Visible=1
+State=0
+Left=3
+Top=111
+Width=262
+Height=274
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=246
+ClientHeight=235
+TBDockHeight=180
+LRDockWidth=190
+Dockable=0
+
+[ToDo List]
+Create=1
+Visible=0
+State=0
+Left=725
+Top=415
+Width=470
+Height=250
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=454
+ClientHeight=211
+TBDockHeight=250
+LRDockWidth=470
+Dockable=1
+Column0Width=200
+Column1Width=30
+Column2Width=100
+Column3Width=70
+Column4Width=70
+SortOrder=4
+ShowHints=1
+ShowChecked=1
+
+[CnExploreForm]
+Create=1
+Visible=0
+State=0
+Left=440
+Top=271
+Width=263
+Height=495
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=247
+ClientHeight=456
+TBDockHeight=495
+LRDockWidth=263
+Dockable=1
+
+[CodeExplorer@EditWindow0]
+Create=1
+Visible=1
+State=0
+Left=0
+Top=12
+Width=140
+Height=596
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=140
+ClientHeight=596
+TBDockHeight=305
+LRDockWidth=140
+Dockable=1
+
+[MessageView@EditWindow0]
+Create=1
+Visible=1
+State=0
+Left=12
+Top=0
+Width=1351
+Height=85
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=1351
+ClientHeight=85
+TBDockHeight=85
+LRDockWidth=443
+Dockable=1
+
+[DockHosts]
+DockHostCount=0
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TfrxReport Version="4.0.11" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="256" ReportOptions.CreateDate="41402,543323206" ReportOptions.Description.Text="" ReportOptions.LastChange="41457,6648747917" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end." PropData="044C656674021803546F70021808446174617365747301010C3000000020446174615365743D22667278444244617461736574312220446174615365744E616D653D226664624C617053504B220000095661726961626C65730100055374796C650100">
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" Orientation="poLandscape" PaperWidth="297" PaperHeight="210" PaperSize="9" LeftMargin="10" RightMargin="0" TopMargin="10" BottomMargin="0" ColumnWidth="0" ColumnPositions.Text="" HGuides.Text="" VGuides.Text="">
+    <TfrxPageHeader Name="PageHeader1" Height="34,01577" Left="0" Top="18,89765" Width="1084,72511">
+      <TfrxMemoView Name="Memo7" Left="11,33859" Top="11,33859" Width="45,35436" Height="18,89765" DisplayFormat.DecimalSeparator="," Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="No."/>
+      <TfrxLineView Name="Line1" Left="11,33859" Top="30,23624" Width="937,32344" Height="0" Diagonal="True"/>
+      <TfrxLineView Name="Line2" Left="11,33859" Top="3,77953" Width="937,32344" Height="0" Diagonal="True"/>
+      <TfrxMemoView Name="Memo8" Left="60,47248" Top="11,33859" Width="219,21274" Height="18,89765" DisplayFormat.DecimalSeparator="," Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="Nama"/>
+      <TfrxMemoView Name="Memo9" Left="283,46475" Top="11,33859" Width="79,37013" Height="18,89765" DisplayFormat.DecimalSeparator="," Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="Tanggal"/>
+      <TfrxMemoView Name="Memo10" Left="366,61441" Top="11,33859" Width="219,21274" Height="18,89765" DisplayFormat.DecimalSeparator="," Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="Tanggal"/>
+      <TfrxMemoView Name="Memo11" Left="589,60668" Top="11,33859" Width="158,74026" Height="18,89765" DisplayFormat.DecimalSeparator="," Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="Personil ITY"/>
+      <TfrxMemoView Name="Memo12" Left="752,12647" Top="11,33859" Width="109,60637" Height="18,89765" DisplayFormat.DecimalSeparator="," Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="Status"/>
+      <TfrxMemoView Name="Memo13" Left="865,51237" Top="11,33859" Width="79,37013" Height="18,89765" DisplayFormat.DecimalSeparator="," Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="No. Urut"/>
+    </TfrxPageHeader>
+    <TfrxMasterData Name="MasterData1" Height="18,89765" Left="0" Top="113,3859" Width="1084,72511" ColumnWidth="0" ColumnGap="0" DataSet="frxDBDataset1" DataSetName="fdbLapSPK" KeepFooter="True" KeepTogether="True" RowCount="0">
+      <TfrxMemoView Name="Memo24" Left="11,33859" Top="0" Width="45,35436" Height="15,11812" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" VAlign="vaCenter" Text="[Line#]"/>
+      <TfrxMemoView Name="Memo1" Left="60,47248" Top="0" Width="219,21274" Height="15,11812" DataField="nama" DataSet="frxDBDataset1" DataSetName="fdbLapSPK" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="[fdbLapSPK.&#34;nama&#34;]"/>
+      <TfrxMemoView Name="Memo2" Left="283,46475" Top="0" Width="79,37013" Height="15,11812" DataField="tgl_request" DataSet="frxDBDataset1" DataSetName="fdbLapSPK" DisplayFormat.DecimalSeparator="," DisplayFormat.FormatStr="dd-MM-yyyy" DisplayFormat.Kind="fkDateTime" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="[fdbLapSPK.&#34;tgl_request&#34;]"/>
+      <TfrxMemoView Name="Memo3" Left="366,61441" Top="0" Width="219,21274" Height="15,11812" DataField="judul_project" DataSet="frxDBDataset1" DataSetName="fdbLapSPK" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="[fdbLapSPK.&#34;judul_project&#34;]"/>
+      <TfrxMemoView Name="Memo4" Left="589,60668" Top="0" Width="158,74026" Height="15,11812" DataField="personil_ity" DataSet="frxDBDataset1" DataSetName="fdbLapSPK" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="[fdbLapSPK.&#34;personil_ity&#34;]"/>
+      <TfrxMemoView Name="Memo5" Left="752,12647" Top="0" Width="109,60637" Height="15,11812" DataField="status" DataSet="frxDBDataset1" DataSetName="fdbLapSPK" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="[fdbLapSPK.&#34;status&#34;]"/>
+      <TfrxMemoView Name="Memo6" Left="865,51237" Top="0" Width="79,37013" Height="15,11812" DataField="no_urut" DataSet="frxDBDataset1" DataSetName="fdbLapSPK" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="[fdbLapSPK.&#34;no_urut&#34;]"/>
+    </TfrxMasterData>
+    <TfrxFooter Name="Footer1" Height="34,01577" Left="0" Top="154,96073" Width="1084,72511">
+      <TfrxLineView Name="Line3" Left="11,33859" Top="0" Width="937,32344" Height="0" Diagonal="True"/>
+      <TfrxMemoView Name="Memo14" Left="11,33859" Top="7,55905999999999" Width="105,82684" Height="18,89765" DisplayFormat.DecimalSeparator="," Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="Jumlah Request : "/>
+      <TfrxSysMemoView Name="SysMemo1" Left="117,16543" Top="7,55905999999999" Width="136,06308" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="[COUNT(MasterData1)]"/>
+    </TfrxFooter>
+  </TfrxReportPage>
+</TfrxReport>

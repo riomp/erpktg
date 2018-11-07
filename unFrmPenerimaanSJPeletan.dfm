@@ -1,0 +1,786 @@
+object frmPenerimaanSJPeletan: TfrmPenerimaanSJPeletan
+  Left = 248
+  Top = 109
+  BorderStyle = bsSingle
+  Caption = 'Penerimaan Surat Jalan Peletan'
+  ClientHeight = 526
+  ClientWidth = 964
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object cxGrid2: TcxGrid
+    Left = 0
+    Top = 43
+    Width = 964
+    Height = 387
+    Align = alClient
+    TabOrder = 0
+    object cxGridDBTableView1: TcxGridDBTableView
+      NavigatorButtons.ConfirmDelete = False
+      DataController.DataSource = dsPel
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      Filtering.ColumnFilteredItemsList = True
+      FilterRow.SeparatorWidth = 2
+      FilterRow.Visible = True
+      OptionsData.CancelOnExit = False
+      OptionsData.Deleting = False
+      OptionsData.DeletingConfirmation = False
+      object cxGridDBTableView1no_po: TcxGridDBColumn
+        Caption = 'No. PO'
+        DataBinding.FieldName = 'no_po'
+      end
+      object cxGridDBTableView1tgl_po: TcxGridDBColumn
+        Caption = 'Tgl. PO'
+        DataBinding.FieldName = 'tgl_po'
+      end
+      object cxGridDBTableView1no_so: TcxGridDBColumn
+        Caption = 'No. SO'
+        DataBinding.FieldName = 'no_so'
+      end
+      object cxGridDBTableView1no_sj: TcxGridDBColumn
+        Caption = 'No. SJ'
+        DataBinding.FieldName = 'no_sj'
+      end
+      object cxGridDBTableView1tgl_sj: TcxGridDBColumn
+        Caption = 'Tgl. SJ'
+        DataBinding.FieldName = 'tgl_sj'
+      end
+      object cxGridDBTableView1ex_customer: TcxGridDBColumn
+        Caption = 'Ex. Customer'
+        DataBinding.FieldName = 'ex_customer'
+      end
+      object cxGridDBTableView1kode_brg: TcxGridDBColumn
+        Caption = 'Kode Brg.'
+        DataBinding.FieldName = 'kode_brg'
+      end
+      object cxGridDBTableView1deskripsi: TcxGridDBColumn
+        Caption = 'Deskripsi'
+        DataBinding.FieldName = 'deskripsi'
+        Width = 391
+      end
+      object cxGridDBTableView1qty_po: TcxGridDBColumn
+        Caption = 'Qty. PO'
+        DataBinding.FieldName = 'qty_po'
+      end
+      object cxGridDBTableView1qty_sj: TcxGridDBColumn
+        Caption = 'Qty. SJ'
+        DataBinding.FieldName = 'qty_sj'
+      end
+      object cxGridDBTableView1qty_baik: TcxGridDBColumn
+        Caption = 'Qty. SJ Baik'
+        DataBinding.FieldName = 'qty_baik'
+      end
+      object cxGridDBTableView1qty_afkir: TcxGridDBColumn
+        Caption = 'Qty. SJ Afkir'
+        DataBinding.FieldName = 'qty_afkir'
+      end
+      object cxGridDBTableView1qty_retur: TcxGridDBColumn
+        Caption = 'Qty. SJ Retur'
+        DataBinding.FieldName = 'qty_retur'
+      end
+    end
+    object cxGridLevel1: TcxGridLevel
+      GridView = cxGridDBTableView1
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 964
+    Height = 43
+    Align = alTop
+    TabOrder = 1
+    object cxLabel1: TcxLabel
+      Left = 14
+      Top = 12
+      Caption = 'Tanggal'
+    end
+    object cxdTgl1: TcxDateEdit
+      Left = 65
+      Top = 11
+      TabOrder = 1
+      Width = 121
+    end
+    object cxLabel2: TcxLabel
+      Left = 190
+      Top = 12
+      Caption = 'S/D'
+    end
+    object cxdTgl2: TcxDateEdit
+      Left = 218
+      Top = 11
+      TabOrder = 3
+      Width = 121
+    end
+    object btnProses: TButton
+      Left = 344
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'Proses'
+      TabOrder = 4
+      OnClick = btnProsesClick
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 478
+    Width = 964
+    Height = 48
+    Align = alBottom
+    TabOrder = 2
+    object btnCetak: TButton
+      Left = 14
+      Top = 12
+      Width = 107
+      Height = 25
+      Caption = '&Cetak Excel'
+      TabOrder = 0
+      OnClick = btnCetakClick
+    end
+    object btnBatal: TButton
+      Left = 125
+      Top = 12
+      Width = 75
+      Height = 25
+      Caption = '&Keluar'
+      TabOrder = 1
+      OnClick = btnBatalClick
+    end
+    object Button1: TButton
+      Left = 210
+      Top = 12
+      Width = 75
+      Height = 25
+      Caption = 'Pilih'
+      TabOrder = 2
+      Visible = False
+    end
+  end
+  object Panel4: TPanel
+    Left = 0
+    Top = 430
+    Width = 964
+    Height = 48
+    Align = alBottom
+    TabOrder = 3
+    object cxNavigator1: TcxNavigator
+      Left = 10
+      Top = 5
+      Width = 248
+      Height = 25
+      Control = cxGrid2
+      Buttons.ConfirmDelete = False
+      Buttons.Insert.Visible = False
+      Buttons.Delete.Visible = False
+      Buttons.Edit.Visible = False
+      Buttons.Post.Visible = False
+      Buttons.Cancel.Visible = False
+      Buttons.Refresh.Visible = True
+      Buttons.SaveBookmark.Visible = False
+      Buttons.GotoBookmark.Visible = False
+      Buttons.Filter.Visible = True
+      InfoPanel.Font.Charset = DEFAULT_CHARSET
+      InfoPanel.Font.Color = clDefault
+      InfoPanel.Font.Height = -11
+      InfoPanel.Font.Name = 'MS Sans Serif'
+      InfoPanel.Font.Style = []
+      TabOrder = 0
+    end
+    object Panel3: TPanel
+      Left = 260
+      Top = 0
+      Width = 432
+      Height = 41
+      BevelOuter = bvNone
+      TabOrder = 1
+      object btnRefresh: TButton
+        Left = 2
+        Top = 6
+        Width = 75
+        Height = 25
+        Caption = 'Refresh'
+        TabOrder = 0
+      end
+      object Button2: TButton
+        Left = 79
+        Top = 6
+        Width = 137
+        Height = 25
+        Caption = 'SPBB - Posting'
+        TabOrder = 1
+        OnClick = Button2Click
+      end
+    end
+  end
+  object pnlPO_SPBB: TPanel
+    Left = 100
+    Top = 60
+    Width = 761
+    Height = 346
+    TabOrder = 4
+    Visible = False
+    object Label5: TLabel
+      Left = 600
+      Top = 313
+      Width = 46
+      Height = 13
+      Caption = 'Total Qty.'
+    end
+    object nxGrd: TNextGrid
+      Left = 20
+      Top = 125
+      Width = 731
+      Height = 176
+      FixedCols = 4
+      GridLinesStyle = lsActiveRows
+      InputSize = 18
+      Options = [goGrid, goHeader, goIndicator]
+      RowSize = 18
+      TabOrder = 26
+      TabStop = True
+      WantTabs = True
+      OnCellDblClick = cell
+      StartRowCount = 1
+      object NxImageColumn1: TNxImageColumn
+        Alignment = taCenter
+        DefaultValue = '0'
+        DefaultWidth = 41
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Header.Caption = 'Hapus'
+        Header.Alignment = taCenter
+        Position = 0
+        SortType = stNumeric
+        Width = 41
+        Images = frmUtama.ImageList1
+      end
+      object nxNoUrut: TNxIncrementColumn
+        DefaultWidth = 24
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Header.Caption = 'No.'
+        Options = [coCanClick, coCanInput, coEditing, coPublicUsing]
+        Position = 1
+        SortType = stAlphabetic
+        Width = 24
+      end
+      object nxColKodeBrg: TNxTextColumn
+        DefaultWidth = 85
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Footer.Caption = 'Kode Brg.'
+        Header.Caption = 'Kode Brg.'
+        InplaceEdit = NxEdit1
+        Options = [coCanClick, coCanInput, coPublicUsing, coShowTextFitHint]
+        Position = 2
+        SortType = stAlphabetic
+        Width = 85
+      end
+      object nxColNmBrg: TNxTextColumn
+        DefaultWidth = 404
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Footer.Caption = 'Nama Barang'
+        Header.Caption = 'Nama Barang'
+        InplaceEdit = NxEdit1
+        Options = [coCanClick, coCanSort, coPublicUsing, coShowTextFitHint]
+        Position = 3
+        SortType = stAlphabetic
+        Width = 404
+      end
+      object nxColQtyBaik: TNxNumberColumn
+        DefaultValue = '0'
+        DefaultWidth = 79
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Header.Caption = 'Qty Baik'
+        Header.Alignment = taRightJustify
+        Position = 4
+        SortType = stNumeric
+        Width = 79
+        EditOptions = [eoAllowAll, eoAllowFloat]
+        Increment = 1.000000000000000000
+        Precision = 0
+      end
+      object nxColHarga: TNxNumberColumn
+        DefaultValue = '0'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Header.Caption = 'Harga'
+        Options = [coCanClick, coCanInput, coCanSort, coEditing, coPublicUsing]
+        Position = 5
+        SortType = stNumeric
+        FormatMask = '#,##0.00'
+        Increment = 1.000000000000000000
+        Precision = 0
+      end
+      object nxColSat: TNxTextColumn
+        DefaultWidth = 50
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Header.Caption = 'Satuan'
+        Position = 6
+        SortType = stAlphabetic
+        Visible = False
+        Width = 50
+      end
+      object NxNumberColumn2: TNxNumberColumn
+        DefaultValue = '0'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Header.Caption = 'Stok G01 '
+        Header.Alignment = taRightJustify
+        InplaceEdit = NxButtonEdit1
+        Options = [coCanClick, coCanInput, coCanSort, coEditing, coPublicUsing]
+        Position = 7
+        SortType = stNumeric
+        Visible = False
+        FormatMask = '#,##0.00'
+        Increment = 1.000000000000000000
+        Precision = 0
+      end
+      object nxColKet: TNxTextColumn
+        DefaultWidth = 195
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Header.Caption = '  Keterangan'
+        InplaceEdit = NxEdit2
+        Options = [coCanClick, coCanInput, coCanSort, coEditing, coPublicUsing, coShowTextFitHint]
+        Position = 8
+        SortType = stAlphabetic
+        Visible = False
+        Width = 195
+      end
+      object NxTextColumn3: TNxTextColumn
+        DefaultWidth = 195
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Header.Caption = '  Keterangan Harga'
+        InplaceEdit = NxEdit2
+        Options = [coCanClick, coCanInput, coCanSort, coEditing, coPublicUsing, coShowTextFitHint]
+        Position = 9
+        SortType = stAlphabetic
+        Visible = False
+        Width = 195
+      end
+      object nxColLokasi: TNxTextColumn
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Footer.Caption = 'Lokasi'
+        Header.Caption = 'Lokasi'
+        Options = [coCanClick, coCanInput, coCanSort, coEditing, coPublicUsing, coShowTextFitHint]
+        Position = 10
+        SortType = stAlphabetic
+        Visible = False
+      end
+      object nxColKondisi: TNxTextColumn
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Header.Caption = 'Kondisi'
+        Options = [coCanClick, coCanInput, coCanSort, coEditing, coPublicUsing, coShowTextFitHint]
+        Position = 11
+        SortType = stAlphabetic
+        Visible = False
+      end
+    end
+    object btnSimpan: TButton
+      Left = 18
+      Top = 315
+      Width = 75
+      Height = 24
+      Caption = 'Simpan'
+      TabOrder = 0
+      OnClick = btnSimpanClick
+    end
+    object btnBatal2: TButton
+      Left = 96
+      Top = 314
+      Width = 75
+      Height = 25
+      Caption = 'Batal'
+      TabOrder = 1
+      OnClick = btnBatal2Click
+    end
+    object cxLabel3: TcxLabel
+      Left = 16
+      Top = 23
+      Caption = 'Deskripsi'
+    end
+    object cxtDeskripsi: TcxTextEdit
+      Left = 86
+      Top = 22
+      Properties.ReadOnly = True
+      TabOrder = 2
+      Width = 405
+    end
+    object cxLabel4: TcxLabel
+      Left = 506
+      Top = 73
+      Caption = 'Deskripsi 1'
+      Visible = False
+    end
+    object cxlDeskripsi: TcxLookupComboBox
+      Left = 561
+      Top = 71
+      Properties.KeyFieldNames = 'kode'
+      Properties.ListColumns = <
+        item
+          FieldName = 'deskripsi'
+        end
+        item
+          FieldName = 'kode'
+        end>
+      Properties.ListSource = dsBrg
+      TabOrder = 3
+      Visible = False
+      Width = 175
+    end
+    object cxLabel5: TcxLabel
+      Left = 16
+      Top = 72
+      Caption = 'Qty. Baik SJ'
+    end
+    object cxsQty: TcxSpinEdit
+      Left = 86
+      Top = 70
+      Properties.AssignedValues.DisplayFormat = True
+      Properties.ValueType = vtFloat
+      TabOrder = 4
+      Width = 121
+    end
+    object cxlblafkir: TcxLabel
+      Left = 221
+      Top = 72
+      Caption = 'Qty Afkir.'
+    end
+    object cxsAfkir: TcxSpinEdit
+      Left = 271
+      Top = 70
+      Properties.AssignedValues.DisplayFormat = True
+      Properties.ReadOnly = True
+      Properties.ValueType = vtFloat
+      TabOrder = 5
+      Width = 75
+    end
+    object cxlblketerangan: TcxLabel
+      Left = 16
+      Top = 48
+      Caption = 'Keterangan'
+    end
+    object cxtketerangan: TcxTextEdit
+      Left = 86
+      Top = 47
+      Properties.ReadOnly = True
+      TabOrder = 6
+      Width = 405
+    end
+    object cxlblDeskripsi2: TcxLabel
+      Left = 501
+      Top = 28
+      Caption = 'Deskripsi 2'
+      Visible = False
+    end
+    object cxldeskripsi2: TcxLookupComboBox
+      Left = 560
+      Top = 26
+      Properties.KeyFieldNames = 'kode'
+      Properties.ListColumns = <
+        item
+          FieldName = 'deskripsi'
+        end
+        item
+          FieldName = 'kode'
+        end>
+      Properties.ListSource = dsBrg
+      TabOrder = 7
+      Visible = False
+      Width = 171
+    end
+    object cxlblqty2: TcxLabel
+      Left = 501
+      Top = 52
+      Caption = 'Qty. Baik 2'
+      Visible = False
+    end
+    object cxsQty2: TcxSpinEdit
+      Left = 561
+      Top = 50
+      Properties.AssignedValues.DisplayFormat = True
+      Properties.ValueType = vtFloat
+      TabOrder = 8
+      Visible = False
+      Width = 121
+    end
+    object cxlblretur: TcxLabel
+      Left = 361
+      Top = 72
+      Caption = 'Qty Retur.'
+    end
+    object cxsRetur: TcxSpinEdit
+      Left = 416
+      Top = 70
+      Properties.AssignedValues.DisplayFormat = True
+      Properties.ReadOnly = True
+      Properties.ValueType = vtFloat
+      TabOrder = 9
+      Width = 75
+    end
+    object cxLabel6: TcxLabel
+      Left = 15
+      Top = 99
+      Caption = 'Nama Barang'
+    end
+    object cxLUBrg: TcxLookupComboBox
+      Left = 87
+      Top = 96
+      Properties.CharCase = ecUpperCase
+      Properties.DropDownAutoSize = True
+      Properties.KeyFieldNames = 'kode'
+      Properties.ListColumns = <
+        item
+          FieldName = 'deskripsi'
+        end
+        item
+          FieldName = 'kode'
+        end>
+      Properties.ListOptions.ColumnSorting = False
+      Properties.ListOptions.SyncMode = True
+      Properties.ListSource = dsBrg
+      TabOrder = 10
+      Width = 404
+    end
+    object cxLabel7: TcxLabel
+      Left = 502
+      Top = 99
+      Caption = 'Qty.'
+    end
+    object cxsQtyBaik: TcxSpinEdit
+      Left = 527
+      Top = 96
+      Properties.DisplayFormat = '#,##0.00'
+      Properties.ValueType = vtFloat
+      TabOrder = 11
+      Width = 78
+    end
+    object btnTambah: TButton
+      Left = 610
+      Top = 93
+      Width = 75
+      Height = 25
+      Caption = '&Tambah'
+      TabOrder = 12
+      OnClick = btnTambahClick
+    end
+    object NxEdit1: TNxEdit
+      Left = 164
+      Top = 220
+      Width = 97
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BorderStyle = bsNone
+      CharCase = ecUpperCase
+      TabOrder = 13
+      Text = 'NXEDIT1'
+      ReadOnly = True
+      Visible = False
+    end
+    object NxEdit2: TNxEdit
+      Left = 129
+      Top = 220
+      Width = 97
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BorderStyle = bsNone
+      CharCase = ecUpperCase
+      MaxLength = 50
+      TabOrder = 14
+      Text = 'NXEDIT2'
+      Visible = False
+    end
+    object NxButtonEdit1: TNxButtonEdit
+      Left = 525
+      Top = 220
+      Width = 121
+      Height = 21
+      BorderStyle = bsNone
+      TabOrder = 15
+      Text = 'NxButtonEdit1'
+      ReadOnly = True
+      Visible = False
+      ButtonCaption = '...'
+      ButtonWidth = 15
+      TransparentColor = clNone
+    end
+    object cxsTotalQty: TcxSpinEdit
+      Left = 652
+      Top = 310
+      Properties.Alignment.Horz = taRightJustify
+      Properties.AssignedValues.DisplayFormat = True
+      Properties.AssignedValues.EditFormat = True
+      Properties.SpinButtons.Visible = False
+      Properties.ValueType = vtFloat
+      TabOrder = 27
+      Width = 99
+    end
+  end
+  object zqrPel: TZReadOnlyQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      
+        'select a.no_bukti no_po, a.tanggal tgl_po, a.ex_customer, b.kode' +
+        '_brg, c.deskripsi, b.qty qty_po, d.no_bukti no_so,'
+      'e.no_bukti no_sj, f.tanggal tgl_sj, e.qty qty_sj,'
+      
+        'e.qty_baik, e.qty_afkir, e.qty_retur, a.keterangan, a.nopol, a.d' +
+        'river,'
+      'b.satuan, b.keterangan as ket, b.mata_uang, b.lokasi, b.harga'
+      'from tbl_po_head a '
+      'inner join tbl_po_det b on a.no_bukti = b.no_bukti'
+      'left join tbl_barang c on b.kode_brg = c.kode'
+      
+        'left join tbl_so_det d on b.no_so_plt = d.no_bukti and d.kode_br' +
+        'g = b.kode_brg'
+      
+        'left join tbl_sj_det e on e.no_so = d.no_bukti and e.kode_brg = ' +
+        'b.kode_brg'
+      'left join tbl_sj_head f on f.no_bukti = e.no_bukti'
+      
+        'where left(a.no_bukti,3) = '#39'POP'#39' and kode_supp = '#39'SDP'#39' and e.no_' +
+        'bukti is not null AND'
+      'a.tanggal between :tgl1 and :tgl2 and a.f_terima_sj = 0'
+      'order by a.tanggal, a.no_bukti;')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'tgl1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tgl2'
+        ParamType = ptUnknown
+      end>
+    Left = 285
+    Top = 369
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'tgl1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tgl2'
+        ParamType = ptUnknown
+      end>
+  end
+  object dsPel: TDataSource
+    DataSet = zqrPel
+    Left = 315
+    Top = 369
+  end
+  object cxStyleRepository1: TcxStyleRepository
+    Left = 410
+    Top = 370
+    PixelsPerInch = 96
+    object cxStyle1: TcxStyle
+      AssignedValues = [svColor, svTextColor]
+      Color = clWindow
+      TextColor = clRed
+    end
+    object cxStyle2: TcxStyle
+      AssignedValues = [svColor, svTextColor]
+      Color = clWindow
+      TextColor = clTeal
+    end
+    object cxStyle3: TcxStyle
+      AssignedValues = [svColor, svTextColor]
+      Color = clAqua
+      TextColor = clBlack
+    end
+    object cxSKuning: TcxStyle
+      AssignedValues = [svColor]
+      Color = clYellow
+    end
+    object cxSHijau: TcxStyle
+      AssignedValues = [svColor, svTextColor]
+      Color = clTeal
+      TextColor = clWhite
+    end
+    object cxSOlive: TcxStyle
+      AssignedValues = [svColor, svTextColor]
+      Color = clOlive
+      TextColor = clWhite
+    end
+    object cxStyle4: TcxStyle
+      AssignedValues = [svColor, svTextColor]
+      Color = clMoneyGreen
+      TextColor = clBlack
+    end
+  end
+  object zqrBrg: TZReadOnlyQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      
+        'SELECT kode, deskripsi FROM tbl_barang where f_aktif=1 ORDER BY ' +
+        'deskripsi')
+    Params = <>
+    Left = 350
+    Top = 369
+  end
+  object dsBrg: TDataSource
+    DataSet = zqrBrg
+    Left = 380
+    Top = 369
+  end
+end

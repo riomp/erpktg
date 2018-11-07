@@ -1,0 +1,222 @@
+inherited frmApprovalTrialAwal: TfrmApprovalTrialAwal
+  Left = 154
+  Top = 36
+  Width = 1031
+  Height = 599
+  VertScrollBar.Visible = False
+  Caption = 'Approval Trial'
+  OldCreateOrder = True
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlAtas: TPanel
+    Width = 1015
+    Height = 47
+    inherited lblJudul: TLabel
+      Top = 13
+      Width = 116
+      Caption = 'Approval Trial'
+    end
+  end
+  inherited pnlTengah: TPanel
+    Top = 47
+    Width = 1015
+    Height = 454
+    object cxGrd: TcxGrid
+      Left = 14
+      Top = 10
+      Width = 985
+      Height = 186
+      TabOrder = 0
+      object cxTbl: TcxGridDBTableView
+        NavigatorButtons.ConfirmDelete = False
+        OnFocusedRecordChanged = cxTblFocusedRecordChanged
+        DataController.DataSource = dsTrial
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsView.GroupByBox = False
+        object cxTblno_trial: TcxGridDBColumn
+          Caption = 'No. Trial'
+          DataBinding.FieldName = 'no_trial'
+          Width = 94
+        end
+        object cxTbltanggal: TcxGridDBColumn
+          Caption = 'Tanggal'
+          DataBinding.FieldName = 'tanggal'
+        end
+        object cxTblkode_brg: TcxGridDBColumn
+          Caption = 'Kode Brg.'
+          DataBinding.FieldName = 'kode_brg'
+        end
+        object cxTbldeskripsi: TcxGridDBColumn
+          Caption = 'Deskripsi'
+          DataBinding.FieldName = 'deskripsi'
+          Width = 281
+        end
+        object cxTblqty: TcxGridDBColumn
+          Caption = 'Qty.'
+          DataBinding.FieldName = 'qty'
+          Width = 54
+        end
+        object cxTbluser: TcxGridDBColumn
+          Caption = 'User'
+          DataBinding.FieldName = 'user'
+          Width = 81
+        end
+        object cxTblf_status: TcxGridDBColumn
+          DataBinding.FieldName = 'f_status'
+          Visible = False
+        end
+        object cxTblkode_brg_jadi: TcxGridDBColumn
+          DataBinding.FieldName = 'kode_brg_jadi'
+          Visible = False
+        end
+        object cxTblf_app_mgmt: TcxGridDBColumn
+          DataBinding.FieldName = 'f_app_mgmt'
+          Visible = False
+        end
+        object cxTblbahan_dari: TcxGridDBColumn
+          DataBinding.FieldName = 'bahan_dari'
+          Visible = False
+        end
+        object cxTblkode_brg_sample: TcxGridDBColumn
+          DataBinding.FieldName = 'kode_brg_sample'
+          Visible = False
+        end
+        object cxTblf_app_awal: TcxGridDBColumn
+          DataBinding.FieldName = 'f_app_awal'
+          Visible = False
+        end
+        object cxTblf_app_awal_user: TcxGridDBColumn
+          DataBinding.FieldName = 'f_app_awal_user'
+          Visible = False
+        end
+        object cxTblf_app_awal_tanggal: TcxGridDBColumn
+          DataBinding.FieldName = 'f_app_awal_tanggal'
+          Visible = False
+        end
+      end
+      object cxGrdLevel1: TcxGridLevel
+        GridView = cxTbl
+      end
+    end
+    object cxLabel1: TcxLabel
+      Left = 14
+      Top = 203
+      Caption = 'Deskripsi'
+    end
+    object cxMemDesk: TcxMemo
+      Left = 14
+      Top = 224
+      Properties.ReadOnly = True
+      TabOrder = 2
+      Height = 89
+      Width = 652
+    end
+    object cxLabel2: TcxLabel
+      Left = 14
+      Top = 318
+      Caption = 'Bahan Dari'
+    end
+    object cxtBahanDari: TcxTextEdit
+      Left = 14
+      Top = 337
+      Properties.ReadOnly = True
+      TabOrder = 4
+      Width = 212
+    end
+    object cxLabel3: TcxLabel
+      Left = 14
+      Top = 363
+      Caption = 'Sample'
+    end
+    object cxtSample: TcxTextEdit
+      Left = 14
+      Top = 382
+      TabOrder = 6
+      Width = 537
+    end
+    object cxLabel4: TcxLabel
+      Left = 14
+      Top = 405
+      Caption = 'Jumlah'
+    end
+    object cxtSatuanSamples: TcxTextEdit
+      Left = 100
+      Top = 424
+      TabOrder = 8
+      Width = 97
+    end
+    object cxsJmlSamples: TcxSpinEdit
+      Left = 14
+      Top = 424
+      Properties.DisplayFormat = '#,#0.00'
+      Properties.ValueType = vtFloat
+      TabOrder = 9
+      Width = 82
+    end
+  end
+  inherited pnlBawah: TPanel
+    Top = 501
+    Width = 1015
+    Height = 62
+    inherited btnKeluar: TButton
+      Left = 902
+      Visible = False
+    end
+    inherited btnSimpan: TButton
+      Left = 825
+      Visible = False
+    end
+    object btnApp: TButton
+      Left = 15
+      Top = 15
+      Width = 75
+      Height = 25
+      Caption = 'Approval'
+      TabOrder = 6
+      OnClick = btnAppClick
+    end
+    object btnTidakApp: TButton
+      Left = 93
+      Top = 15
+      Width = 98
+      Height = 25
+      Caption = 'Tidak Approval'
+      TabOrder = 7
+      OnClick = btnTidakAppClick
+    end
+    object btnKeluar2: TButton
+      Left = 193
+      Top = 15
+      Width = 75
+      Height = 25
+      Caption = 'Keluar'
+      TabOrder = 8
+      OnClick = btnKeluar2Click
+    end
+  end
+  object zqrTrial: TZReadOnlyQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      'SELECT a.*, b.deskripsi '
+      'FROM tbl_logbook_design a '
+      'LEFT JOIN tbl_barang b ON a.kode_brg = b.kode '
+      'WHERE f_app_awal = 0'
+      'AND LEFT(b.deskripsi,6) NOT IN ( '#39'TEPUNG'#39','#39'COMPOU'#39')')
+    Params = <>
+    Left = 255
+    Top = 25
+  end
+  object dsTrial: TDataSource
+    DataSet = zqrTrial
+    Left = 285
+    Top = 25
+  end
+  object idSMTP: TIdSMTP
+    SASLMechanisms = <>
+    Left = 780
+    Top = 15
+  end
+end

@@ -1,0 +1,8 @@
+inherited frmTransBaru: TfrmTransBaru
+  Left = 337
+  Top = 201
+  Caption = 'frmTransBaru'
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+end

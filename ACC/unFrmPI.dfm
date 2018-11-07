@@ -1,0 +1,466 @@
+inherited frmPI: TfrmPI
+  Left = 592
+  Top = 155
+  Width = 940
+  Height = 625
+  BorderIcons = [biSystemMenu]
+  Caption = 'Invoice Pembelian'
+  OldCreateOrder = True
+  Position = poScreenCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlAtas: TPanel
+    Width = 924
+    inherited lblJudul: TLabel
+      Width = 145
+      Caption = 'Invoce Pembelian'
+    end
+  end
+  inherited pnlTengah: TPanel
+    Width = 924
+    Height = 444
+    Align = alClient
+    object cxLabel3: TcxLabel
+      Left = 305
+      Top = 10
+      Caption = 'No. Invoice'
+    end
+    object cxLabel8: TcxLabel
+      Left = 15
+      Top = 9
+      Caption = 'Tanggal'
+    end
+    object cxLabel1: TcxLabel
+      Left = 15
+      Top = 61
+      Caption = 'Supplier'
+    end
+    object cxtNoTrans: TcxTextEdit
+      Left = 378
+      Top = 8
+      Properties.ReadOnly = True
+      Style.Color = clYellow
+      TabOrder = 3
+      Width = 121
+    end
+    object cxChkPosting: TcxCheckBox
+      Left = 214
+      Top = 8
+      Caption = 'Posting'
+      TabOrder = 4
+      Width = 72
+    end
+    object cxdTanggal: TcxDateEdit
+      Left = 88
+      Top = 10
+      Properties.OnChange = cxdTanggalPropertiesChange
+      TabOrder = 5
+      Width = 121
+    end
+    object cxlCustomer: TcxLookupComboBox
+      Left = 88
+      Top = 60
+      Properties.KeyFieldNames = 'kode'
+      Properties.ListColumns = <
+        item
+          Caption = 'Nama'
+          FieldName = 'nama'
+        end
+        item
+          Caption = 'Kode'
+          FieldName = 'kode'
+        end>
+      Properties.ListOptions.SyncMode = True
+      Properties.ListSource = dsSupp
+      Properties.OnChange = cxlCustomerPropertiesChange
+      TabOrder = 6
+      Width = 446
+    end
+    object cxLabel2: TcxLabel
+      Left = 15
+      Top = 37
+      Caption = 'Jenis'
+    end
+    object cxJenis: TcxComboBox
+      Left = 88
+      Top = 33
+      Properties.Items.Strings = (
+        'INVOICE PEMBELIAN'
+        'UANG MUKA PEMBELIAN')
+      Properties.OnChange = cxJenisPropertiesChange
+      TabOrder = 8
+      Text = 'INVOICE PEMBELIAN'
+      Width = 268
+    end
+    object cxLabel6: TcxLabel
+      Left = 15
+      Top = 140
+      Caption = 'No. LPB'
+    end
+    object cxlNoPO: TcxLookupComboBox
+      Left = 88
+      Top = 137
+      Properties.KeyFieldNames = 'no_bukti'
+      Properties.ListColumns = <
+        item
+          Caption = 'No. Bukti'
+          FieldName = 'no_bukti'
+        end>
+      Properties.ListSource = dsPO
+      TabOrder = 10
+      Width = 446
+    end
+    object btnProses: TButton
+      Left = 540
+      Top = 134
+      Width = 75
+      Height = 25
+      Caption = 'Proses'
+      TabOrder = 11
+      OnClick = btnProsesClick
+    end
+    object cxGrid1: TcxGrid
+      Left = 15
+      Top = 195
+      Width = 891
+      Height = 164
+      TabOrder = 12
+      object cxGrid1DBTableView1: TcxGridDBTableView
+        NavigatorButtons.ConfirmDelete = False
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+      end
+      object cxTbl: TcxGridTableView
+        NavigatorButtons.ConfirmDelete = False
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <
+          item
+            Format = '#,##0.00'
+            Kind = skSum
+            Column = cxColSubTotal
+          end
+          item
+            Format = '#,##0.00'
+            Kind = skSum
+            Column = cxColTax
+          end>
+        DataController.Summary.SummaryGroups = <>
+        DataController.OnRecordChanged = cxTblDataControllerRecordChanged
+        OptionsView.Navigator = True
+        OptionsView.Footer = True
+        OptionsView.GroupByBox = False
+        object cxColKodeBrg: TcxGridColumn
+          Caption = 'Kode Brg.'
+          PropertiesClassName = 'TcxTextEditProperties'
+          Properties.ReadOnly = True
+          Width = 89
+        end
+        object cxColDesk: TcxGridColumn
+          Caption = 'Deskripsi'
+          PropertiesClassName = 'TcxLookupComboBoxProperties'
+          Properties.DropDownAutoSize = True
+          Properties.KeyFieldNames = 'kode'
+          Properties.ListColumns = <
+            item
+              FieldName = 'deskripsi'
+            end
+            item
+              FieldName = 'kode'
+            end>
+          Properties.ListSource = dsBrg
+          Width = 316
+        end
+        object cxColQty: TcxGridColumn
+          Caption = 'Qty.'
+          DataBinding.ValueType = 'Float'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,#0.00'
+          Properties.ReadOnly = False
+          Properties.ValueType = vtFloat
+          HeaderAlignmentHorz = taRightJustify
+        end
+        object cxColHarga: TcxGridColumn
+          Caption = 'Harga'
+          DataBinding.ValueType = 'Float'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,##0.00'
+          Properties.EditFormat = '#,##0.00'
+          Properties.ValueType = vtFloat
+          HeaderAlignmentHorz = taRightJustify
+          Width = 101
+        end
+        object cxColTax: TcxGridColumn
+          Caption = 'PPN'
+          DataBinding.ValueType = 'Float'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,##0.00'
+          Properties.ValueType = vtFloat
+          HeaderAlignmentHorz = taRightJustify
+          Width = 100
+        end
+        object cxColSubTotal: TcxGridColumn
+          Caption = 'Subtotal'
+          DataBinding.ValueType = 'Float'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,##0.00'
+          Properties.EditFormat = '#,##0.00'
+          Properties.ValueType = vtFloat
+          HeaderAlignmentHorz = taRightJustify
+          Width = 123
+        end
+      end
+      object cxGrid1Level1: TcxGridLevel
+        GridView = cxTbl
+      end
+    end
+    object cxLabel7: TcxLabel
+      Left = 20
+      Top = 377
+      Caption = 'Keterangan'
+    end
+    object cxmKet: TcxMemo
+      Left = 88
+      Top = 377
+      Lines.Strings = (
+        '')
+      TabOrder = 14
+      Height = 46
+      Width = 398
+    end
+    object cxsTotal: TcxSpinEdit
+      Left = 699
+      Top = 364
+      Properties.Alignment.Horz = taRightJustify
+      Properties.DisplayFormat = '#,#0.00'
+      Properties.ReadOnly = True
+      TabOrder = 15
+      Visible = False
+      Width = 121
+    end
+    object cxLabel4: TcxLabel
+      Left = 15
+      Top = 87
+      Caption = 'Currency'
+    end
+    object cxCurr: TcxComboBox
+      Left = 90
+      Top = 85
+      Properties.Items.Strings = (
+        'IDR'
+        'USD'
+        'EUR')
+      Properties.OnChange = cxCurrPropertiesChange
+      TabOrder = 17
+      Text = 'IDR'
+      Width = 56
+    end
+    object cxLabel5: TcxLabel
+      Left = 150
+      Top = 87
+      Caption = 'Rate'
+    end
+    object cxsRate: TcxSpinEdit
+      Left = 180
+      Top = 84
+      Properties.Alignment.Horz = taRightJustify
+      Properties.DisplayFormat = '#,##0.00'
+      Properties.ValueType = vtFloat
+      TabOrder = 19
+      Width = 91
+    end
+    object cxtAkunSupp: TcxTextEdit
+      Left = 538
+      Top = 110
+      TabOrder = 20
+      Width = 121
+    end
+    object cxLabel10: TcxLabel
+      Left = 15
+      Top = 110
+      Caption = 'Akun'
+    end
+    object cxlAkunSupp: TcxLookupComboBox
+      Left = 88
+      Top = 110
+      Properties.KeyFieldNames = 'noakun'
+      Properties.ListColumns = <
+        item
+          Caption = 'Nama'
+          FieldName = 'nama'
+        end
+        item
+          Caption = 'No. Akun'
+          FieldName = 'noakun'
+        end>
+      Properties.ListOptions.SyncMode = True
+      Properties.ListSource = dsAkun
+      Properties.OnChange = cxlAkunSuppPropertiesChange
+      TabOrder = 22
+      Width = 446
+    end
+    object btnUM: TButton
+      Left = 540
+      Top = 165
+      Width = 151
+      Height = 25
+      Caption = 'Alokasi Uang Muka'
+      TabOrder = 23
+      Visible = False
+      OnClick = btnUMClick
+    end
+    object cxLabel9: TcxLabel
+      Left = 15
+      Top = 170
+      Caption = 'Alokasi UM'
+      Visible = False
+    end
+    object cxlUM: TcxLookupComboBox
+      Left = 88
+      Top = 167
+      Properties.KeyFieldNames = 'no_bukti'
+      Properties.ListColumns = <
+        item
+          FieldName = 'keterangan'
+        end
+        item
+          FieldName = 'total'
+        end
+        item
+          FieldName = 'no_bukti'
+        end>
+      Properties.ListSource = dsUM
+      Properties.OnChange = cxlUMPropertiesChange
+      TabOrder = 25
+      Visible = False
+      Width = 446
+    end
+    object cxtAkunUM: TcxTextEdit
+      Left = 623
+      Top = 135
+      TabOrder = 26
+      Visible = False
+      Width = 121
+    end
+    object cxtNoPO: TcxTextEdit
+      Left = 750
+      Top = 135
+      TabOrder = 27
+      Visible = False
+      Width = 121
+    end
+  end
+  inherited pnlBawah: TPanel
+    Top = 510
+    Width = 924
+    Align = alBottom
+  end
+  object zqrSupp: TZReadOnlyQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      'SELECT kode, nama FROM tbl_supplier'
+      'WHERE f_aktif = 1'
+      'ORDER BY nama ')
+    Params = <>
+    Left = 300
+    Top = 20
+  end
+  object dsSupp: TDataSource
+    DataSet = zqrSupp
+    Left = 330
+    Top = 20
+  end
+  object dsPO: TDataSource
+    DataSet = zqrPO
+    Left = 380
+    Top = 20
+  end
+  object zqrPO: TZReadOnlyQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      'SELECT a.no_bukti'
+      'FROM tbl_spbb_head a '
+      'LEFT JOIN tbl_supplier b ON a.kode_supp = b.kode '
+      
+        'WHERE no_penerimaan IS NOT NULL AND (SELECT ifnull(no_po,0)  FRO' +
+        'M tbl_trsinvoice_head WHERE no_bukti=a.no_bukti)=0 AND  a.kode_s' +
+        'upp = :kode_supp')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'kode_supp'
+        ParamType = ptUnknown
+      end>
+    Left = 405
+    Top = 20
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'kode_supp'
+        ParamType = ptUnknown
+      end>
+  end
+  object dsAkun: TDataSource
+    DataSet = zqrAkun
+    Left = 450
+    Top = 20
+  end
+  object zqrAkun: TZReadOnlyQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      'SELECT noakun, nama, '
+      
+        '(SELECT COUNT(noakun) FROM tbl_coa WHERE induk = a.noakun) jml_a' +
+        'nak '
+      'FROM tbl_coa a'
+      
+        'WHERE (SELECT COUNT(noakun) FROM tbl_coa WHERE induk = a.noakun)' +
+        ' = 0;')
+    Params = <>
+    Left = 475
+    Top = 20
+  end
+  object zBrg: TZQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      'SELECT kode,deskripsi FROM tbl_barang ')
+    Params = <>
+    Left = 515
+    Top = 20
+  end
+  object dsBrg: TDataSource
+    DataSet = zBrg
+    Left = 545
+    Top = 20
+  end
+  object zqrUM: TZReadOnlyQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      'SELECT * FROM tbl_trsinvoice_head'
+      'WHERE jenis='#39'UM'#39' and f_alokasi=0 and f_posted=1 and no_po= :po')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'po'
+        ParamType = ptUnknown
+      end>
+    Left = 585
+    Top = 20
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'po'
+        ParamType = ptUnknown
+      end>
+  end
+  object dsUM: TDataSource
+    DataSet = zqrUM
+    Left = 615
+    Top = 20
+  end
+end

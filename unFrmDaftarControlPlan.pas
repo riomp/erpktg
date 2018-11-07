@@ -1,0 +1,158 @@
+unit unFrmDaftarControlPlan;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, unFrmTplMaster, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, dxSkinBlack,
+  dxSkinBlue, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinFoggy, dxSkinGlassOceans, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
+  dxSkinSummer2008, dxSkinsDefaultPainters, dxSkinValentine,
+  dxSkinXmas2008Blue, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter,
+  cxData, cxDataStorage, DB, cxDBData, ZAbstractRODataset,
+  ZAbstractDataset, ZDataset, StdCtrls, cxGridLevel, cxClasses,
+  cxGridCustomView, cxGridCustomTableView, cxGridTableView,
+  cxGridDBTableView, cxGrid, ComCtrls, cxLabel, ExtCtrls,
+  cxCheckComboBox,
+  cxCheckBox;
+
+type
+  TfrmDaftarControlPlan = class(TfrmTplMaster)
+    cxTbl: TcxGridDBTableView;
+    cxGrd2Level1: TcxGridLevel;
+    cxGrd2: TcxGrid;
+    zqrDaftarCP: TZReadOnlyQuery;
+    dsDaftarCP: TDataSource;
+    btnCetak: TButton;
+    btnKeluar2: TButton;
+    cxTblno_cp: TcxGridDBColumn;
+    cxTblno_is: TcxGridDBColumn;
+    cxTblkode: TcxGridDBColumn;
+    cxTblnama: TcxGridDBColumn;
+    cxTbldeskripsi: TcxGridDBColumn;
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnCetakClick(Sender: TObject);
+    procedure btnKeluar2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmDaftarControlPlan: TfrmDaftarControlPlan;
+
+implementation
+
+uses unTools, unAplikasi, unDm, unFrmLapSPK;
+
+{$R *.dfm}
+
+procedure TfrmDaftarControlPlan.FormCreate(Sender: TObject);
+begin
+  inherited;
+  pnlTengah.Enabled := True;
+end;
+
+procedure TfrmDaftarControlPlan.FormShow(Sender: TObject);
+var
+  aCol: TcxGridDBColumn;
+  i : integer;
+begin
+  inherited;
+  aCol := cxTbl.CreateColumn;
+  with aCol do begin
+    Name := 'colUnbound';
+    Caption := 'Check';
+  end;
+  aCol.DataBinding.ValueTypeClass := TcxStringValueType; //TcxBooleanValueType;
+  aCol.PropertiesClass := TcxCheckBoxProperties;
+  with aCol.Properties as TcxCheckBoxProperties do begin
+    AllowGrayed := false;
+    ValueChecked := 'T';
+    ValueUnchecked := 'F';
+    NullStyle := nssUnchecked;
+    ImmediatePost := True;
+  end;
+  aCol.Index := 0;
+end;
+
+procedure TfrmDaftarControlPlan.btnCetakClick(Sender: TObject);
+var
+  f: TfrmLapSPK;
+  i: Integer;
+  lstSJ: TStringList;
+  chk, sNoSO: string;
+  qCek, qCekPel: TZQuery;
+  s: string;
+begin
+  lstSJ := TStringList.Create;
+  for i := 0 to cxTbl.DataController.RecordCount - 1 do begin
+
+    if VarIsNull(cxTbl.DataController.Values[i,0]) then
+      chk := ''
+    else
+      chk := cxTbl.DataController.Values[i,0];
+
+    if chk = 'T' then begin
+      lstSJ.Add('''' + cxTbl.DataController.Values[i,1] + '''');
+    end;
+  end;
+
+ if lstSJ.Count > 0 then begin
+    f := TfrmLapSPK.Create(Self);
+    with f do begin
+      zqrRouting.Close;
+      s := zqrRouting.SQL.Text;
+      s := StringReplace(s,'xxx',lstSJ.CommaText,[rfReplaceAll]);
+      zqrRouting.SQL.Text := s;
+      zqrRouting.Open;
+
+      zqrMatSaran2.Close;
+      s := zqrMatSaran2.SQL.Text;
+      s := StringReplace(s,'xxx',lstSJ.CommaText,[rfReplaceAll]);
+      zqrMatSaran2.SQL.Text := s;
+      zqrMatSaran2.Open;
+
+      zqrCP.Close;
+      s := zqrCP.SQL.Text;
+      s := StringReplace(s,'xxx',lstSJ.CommaText,[rfReplaceAll]);
+      zqrCP.SQL.Text := s;
+      zqrCP.Open;
+
+      zqrCP.Open;
+      rptCP.ShowReport(True);
+
+      zqrCP.Close;
+      s := zqrCP.SQL.Text;
+      s := StringReplace(s,lstSJ.CommaText,'xxx',[rfReplaceAll]);
+      zqrCP.SQL.Text := s;
+
+      zqrMatSaran2.Close;
+      s := zqrMatSaran2.SQL.Text;
+      s := StringReplace(s,lstSJ.CommaText,'xxx',[rfReplaceAll]);
+      zqrMatSaran2.SQL.Text := s;
+
+      zqrrouting.Close;
+      s := zqrRouting.SQL.Text;
+      s := StringReplace(s,lstSJ.CommaText,'xxx',[rfReplaceAll]);
+      zqrRouting.SQL.Text := s;
+    end;
+  end;
+  
+end;
+
+procedure TfrmDaftarControlPlan.btnKeluar2Click(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+end.

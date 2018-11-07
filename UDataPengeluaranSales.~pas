@@ -1,0 +1,62 @@
+unit UDataPengeluaranSales;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
+  cxStyles, dxSkinsCore, dxSkinsDefaultPainters, dxSkinscxPCPainter,
+  cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit, DB, cxDBData,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, RzButton, cxGridLevel,
+  cxClasses, cxGridCustomView, cxGrid, ExtCtrls, RzPanel;
+
+type
+  TFrm_DataPengeluaran = class(TForm)
+    RzPanel1: TRzPanel;
+    BtnUpdate: TRzToolButton;
+    BtnFilter: TRzToolButton;
+    dbgdata: TcxGrid;
+    dbgdataDBTableView1: TcxGridDBTableView;
+    dbgdataLevel1: TcxGridLevel;
+    RzPanel2: TRzPanel;
+    BtnSelesai: TRzBitBtn;
+    BtnBaru: TRzBitBtn;
+    BtnEdit: TRzBitBtn;
+    BtnHapus: TRzBitBtn;
+    QData: TZQuery;
+    DSData: TDataSource;
+    dbgdataDBTableView1id: TcxGridDBColumn;
+    dbgdataDBTableView1nama: TcxGridDBColumn;
+    dbgdataDBTableView1tgl: TcxGridDBColumn;
+    dbgdataDBTableView1bbm: TcxGridDBColumn;
+    dbgdataDBTableView1km_awal: TcxGridDBColumn;
+    dbgdataDBTableView1km_akhir: TcxGridDBColumn;
+    dbgdataDBTableView1daerah: TcxGridDBColumn;
+    dbgdataDBTableView1entertaint_dinas: TcxGridDBColumn;
+    dbgdataDBTableView1transportasi: TcxGridDBColumn;
+    dbgdataDBTableView1paket_data: TcxGridDBColumn;
+    dbgdataDBTableView1retribusi: TcxGridDBColumn;
+    dbgdataDBTableView1tol: TcxGridDBColumn;
+    dbgdataDBTableView1uang_makan: TcxGridDBColumn;
+    dbgdataDBTableView1sewa_mobil: TcxGridDBColumn;
+    dbgdataDBTableView1penginapan: TcxGridDBColumn;
+    dbgdataDBTableView1expedisi: TcxGridDBColumn;
+    dbgdataDBTableView1lainnya: TcxGridDBColumn;
+    dbgdataDBTableView1total: TcxGridDBColumn;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Frm_DataPengeluaran: TFrm_DataPengeluaran;
+
+implementation
+
+uses UDM, UMain;
+
+{$R *.dfm}
+
+end.

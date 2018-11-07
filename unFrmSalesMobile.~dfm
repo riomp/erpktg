@@ -1,0 +1,840 @@
+inherited frmSalesMobile: TfrmSalesMobile
+  Left = 360
+  Top = 137
+  Align = alClient
+  BorderStyle = bsNone
+  Caption = 'Sales Mobile'
+  ClientHeight = 670
+  ClientWidth = 1327
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlAtas: TPanel
+    Width = 1327
+    inherited lblJudul: TLabel
+      Width = 158
+      Caption = 'Sales Mobile (CRM)'
+    end
+    inherited cxtStat: TcxLabel
+      Style.IsFontAssigned = True
+      Visible = False
+    end
+  end
+  inherited pnlTengah: TPanel
+    Width = 1327
+    Height = 544
+    Align = alClient
+    inherited pg: TPageControl
+      Width = 1325
+      Height = 542
+      inherited TabSheet1: TTabSheet
+        Caption = 'Dashboard Sales'
+        object Label2: TLabel
+          Left = 10
+          Top = 55
+          Width = 169
+          Height = 13
+          Caption = 'Rekapitulasi Activity dan Cost'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object cxLabel6: TcxLabel
+          Left = 14
+          Top = 9
+          Caption = 'Tanggal'
+        end
+        object cxDateEdit1: TcxDateEdit
+          Left = 65
+          Top = 8
+          TabOrder = 1
+          Width = 121
+        end
+        object cxLabel7: TcxLabel
+          Left = 190
+          Top = 9
+          Caption = 'S/D'
+        end
+        object cxDateEdit2: TcxDateEdit
+          Left = 218
+          Top = 8
+          TabOrder = 3
+          Width = 121
+        end
+        object cxGrid4: TcxGrid
+          Left = 10
+          Top = 80
+          Width = 331
+          Height = 151
+          TabOrder = 4
+          object cxGrid4DBTableView1: TcxGridDBTableView
+            NavigatorButtons.ConfirmDelete = False
+            DataController.DataSource = dsD1
+            DataController.Summary.DefaultGroupSummaryItems = <>
+            DataController.Summary.FooterSummaryItems = <
+              item
+                Kind = skSum
+                Column = cxGrid4DBTableView1activity
+              end
+              item
+                Format = '#,##0.00'
+                Kind = skSum
+                Column = cxGrid4DBTableView1cost
+              end>
+            DataController.Summary.SummaryGroups = <>
+            OptionsView.Footer = True
+            OptionsView.GroupByBox = False
+            object cxGrid4DBTableView1nama: TcxGridDBColumn
+              Caption = 'Nama Sales'
+              DataBinding.FieldName = 'nama'
+              Options.Editing = False
+              Width = 148
+            end
+            object cxGrid4DBTableView1activity: TcxGridDBColumn
+              Caption = 'Activity'
+              DataBinding.FieldName = 'activity'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Options.Editing = False
+              Width = 66
+            end
+            object cxGrid4DBTableView1cost: TcxGridDBColumn
+              DataBinding.FieldName = 'cost'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.DisplayFormat = '#,##0.00'
+              Options.Filtering = False
+              Width = 109
+            end
+          end
+          object cxGrid4Level1: TcxGridLevel
+            GridView = cxGrid4DBTableView1
+          end
+        end
+        object Button4: TButton
+          Left = 345
+          Top = 8
+          Width = 75
+          Height = 25
+          Caption = '&Proses'
+          TabOrder = 5
+          OnClick = Button4Click
+        end
+        object DBChart1: TDBChart
+          Left = 360
+          Top = 65
+          Width = 601
+          Height = 381
+          BackWall.Brush.Color = clWhite
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clBlue
+          Title.Font.Height = -24
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Title.Frame.Width = 3
+          Title.Text.Strings = (
+            'Sales Activity')
+          AxisVisible = False
+          LeftAxis.LabelsMultiLine = True
+          LeftAxis.Visible = False
+          Legend.Visible = False
+          View3DOptions.Elevation = 315
+          View3DOptions.Orthogonal = False
+          View3DOptions.Perspective = 0
+          View3DOptions.Rotation = 360
+          TabOrder = 6
+          object Series1: TPieSeries
+            Marks.ArrowLength = 8
+            Marks.Style = smsLabelPercent
+            Marks.Visible = True
+            DataSource = zD1
+            SeriesColor = clRed
+            Title = 'Activity'
+            XLabelsSource = 'nama'
+            Circled = True
+            OtherSlice.Text = 'Other'
+            PieValues.DateTime = False
+            PieValues.Name = 'Pie'
+            PieValues.Multiplier = 1.000000000000000000
+            PieValues.Order = loNone
+            PieValues.ValueSource = 'activity'
+          end
+        end
+      end
+      inherited TabSheet2: TTabSheet
+        Caption = 'Sales Activity'
+        inherited Label1: TLabel
+          Left = 598
+          Top = 454
+          Visible = False
+        end
+        object Shape2: TShape [1]
+          Left = 7
+          Top = 492
+          Width = 21
+          Height = 21
+          Anchors = [akLeft, akBottom]
+          Brush.Color = clRed
+        end
+        inherited cxGrd: TcxGrid
+          Left = 832
+          Top = 370
+          Width = 468
+          Visible = False
+          inherited cxTblView: TcxGridDBTableView
+            DataController.DataSource = ds
+          end
+        end
+        object cxLabel1: TcxLabel
+          Left = 14
+          Top = 9
+          Caption = 'Tanggal'
+        end
+        object cxdTgl1: TcxDateEdit
+          Left = 65
+          Top = 8
+          TabOrder = 2
+          Width = 121
+        end
+        object cxLabel2: TcxLabel
+          Left = 190
+          Top = 9
+          Caption = 'S/D'
+        end
+        object cxdTgl2: TcxDateEdit
+          Left = 218
+          Top = 8
+          TabOrder = 4
+          Width = 121
+        end
+        object btnProses: TButton
+          Left = 345
+          Top = 6
+          Width = 75
+          Height = 25
+          Caption = 'Proses'
+          TabOrder = 5
+          OnClick = btnProsesClick
+        end
+        object btnCetak: TButton
+          Left = 426
+          Top = 6
+          Width = 107
+          Height = 25
+          Caption = '&Cetak Excel'
+          TabOrder = 6
+          OnClick = btnCetakClick
+        end
+        object cxGrid1: TcxGrid
+          Left = 8
+          Top = 40
+          Width = 873
+          Height = 441
+          Anchors = [akLeft, akTop, akRight, akBottom]
+          TabOrder = 7
+          object TblView: TcxGridDBTableView
+            NavigatorButtons.ConfirmDelete = False
+            DataController.DataSource = dsSM
+            DataController.Summary.DefaultGroupSummaryItems = <>
+            DataController.Summary.FooterSummaryItems = <>
+            DataController.Summary.SummaryGroups = <>
+            FilterRow.Visible = True
+            OptionsView.GroupByBox = False
+            Styles.OnGetContentStyle = TblViewStylesGetContentStyle
+            object TblViewid: TcxGridDBColumn
+              Caption = 'ID'
+              DataBinding.FieldName = 'id'
+              Width = 25
+            end
+            object TblViewtgl: TcxGridDBColumn
+              Caption = 'Tgl.Activity'
+              DataBinding.FieldName = 'tgl'
+            end
+            object TblViewnama: TcxGridDBColumn
+              Caption = 'Nama Sales'
+              DataBinding.FieldName = 'sales'
+              Width = 164
+            end
+            object TblViewkategori: TcxGridDBColumn
+              Caption = 'Kategori'
+              DataBinding.FieldName = 'kategori'
+              Width = 75
+            end
+            object TblViewCust: TcxGridDBColumn
+              Caption = 'Customer'
+              DataBinding.FieldName = 'Cust'
+              Width = 148
+            end
+            object TblViewpic: TcxGridDBColumn
+              Caption = 'PIC'
+              DataBinding.FieldName = 'pic'
+            end
+            object TblViewtujuan: TcxGridDBColumn
+              Caption = 'Tujuan'
+              DataBinding.FieldName = 'tujuan'
+              Width = 280
+            end
+            object TblViewketerangan: TcxGridDBColumn
+              Caption = 'Keterangan'
+              DataBinding.FieldName = 'keterangan'
+            end
+            object TblViewtarget: TcxGridDBColumn
+              Caption = 'Target'
+              DataBinding.FieldName = 'target'
+              Width = 239
+            end
+            object TblViewtlp: TcxGridDBColumn
+              Caption = 'Tlp'
+              DataBinding.FieldName = 'tlp'
+            end
+            object TblViewarea: TcxGridDBColumn
+              Caption = 'Area'
+              DataBinding.FieldName = 'area'
+            end
+            object TblViewinfo_produk: TcxGridDBColumn
+              Caption = 'Info Produk'
+              DataBinding.FieldName = 'info_produk'
+            end
+            object TblViewinfo_kompetitor: TcxGridDBColumn
+              Caption = 'Info Kompetitor'
+              DataBinding.FieldName = 'info_kompetitor'
+            end
+            object TblViewstatus: TcxGridDBColumn
+              Caption = 'Status Akitity'
+              DataBinding.FieldName = 'status'
+              Visible = False
+              Width = 123
+            end
+            object TblViewketepatan: TcxGridDBColumn
+              Caption = 'Ketepatan'
+              DataBinding.FieldName = 'ketepatan'
+              Visible = False
+            end
+            object TblViewlat: TcxGridDBColumn
+              Caption = 'Latitude'
+              DataBinding.FieldName = 'lat'
+            end
+            object TblViewlongt: TcxGridDBColumn
+              Caption = 'Longitude'
+              DataBinding.FieldName = 'longt'
+            end
+            object TblViewrencana: TcxGridDBColumn
+              DataBinding.FieldName = 'rencana'
+              Visible = False
+            end
+          end
+          object cxGrid1Level1: TcxGridLevel
+            GridView = TblView
+          end
+        end
+        object cxGroupBox1: TcxGroupBox
+          Left = 888
+          Top = 40
+          Anchors = [akTop, akRight, akBottom]
+          Caption = 'Foto Activity'
+          TabOrder = 8
+          Height = 473
+          Width = 425
+          object Image1: TImage
+            Left = 13
+            Top = 20
+            Width = 401
+            Height = 364
+            Stretch = True
+          end
+        end
+        object cxLabel5: TcxLabel
+          Left = 34
+          Top = 494
+          Anchors = [akLeft, akBottom]
+          Caption = 'Sales Activity Tanpa Rencana Kerja'
+        end
+      end
+      object TabSheet3: TTabSheet
+        Caption = 'Cost Operational Sales'
+        ImageIndex = 2
+        DesignSize = (
+          1317
+          514)
+        object cxLabel3: TcxLabel
+          Left = 14
+          Top = 9
+          Caption = 'Tanggal'
+        end
+        object cxdTgl3: TcxDateEdit
+          Left = 65
+          Top = 8
+          TabOrder = 1
+          Width = 121
+        end
+        object cxLabel4: TcxLabel
+          Left = 190
+          Top = 9
+          Caption = 'S/D'
+        end
+        object cxdTgl4: TcxDateEdit
+          Left = 218
+          Top = 8
+          TabOrder = 3
+          Width = 121
+        end
+        object Button2: TButton
+          Left = 345
+          Top = 6
+          Width = 75
+          Height = 25
+          Caption = 'Proses'
+          TabOrder = 4
+          OnClick = Button2Click
+        end
+        object cxGrid2: TcxGrid
+          Left = 8
+          Top = 48
+          Width = 1305
+          Height = 433
+          Anchors = [akLeft, akTop, akRight, akBottom]
+          TabOrder = 5
+          object cxGridDBTableView1: TcxGridDBTableView
+            NavigatorButtons.ConfirmDelete = False
+            DataController.DataSource = ds
+            DataController.Summary.DefaultGroupSummaryItems = <>
+            DataController.Summary.FooterSummaryItems = <>
+            DataController.Summary.SummaryGroups = <>
+            FilterRow.Visible = True
+            OptionsView.GroupByBox = False
+            object cxGridDBTableView1id: TcxGridDBColumn
+              DataBinding.FieldName = 'id'
+              Width = 35
+            end
+            object cxGridDBTableView1nama: TcxGridDBColumn
+              DataBinding.FieldName = 'sales'
+              Width = 138
+            end
+            object cxGridDBTableView1tgl: TcxGridDBColumn
+              DataBinding.FieldName = 'tgl'
+            end
+            object cxGridDBTableView1daerah: TcxGridDBColumn
+              DataBinding.FieldName = 'daerah'
+              PropertiesClassName = 'TcxTextEditProperties'
+              Properties.ReadOnly = True
+            end
+            object cxGridDBTableView1bbm: TcxGridDBColumn
+              DataBinding.FieldName = 'bbm'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,###'
+              Properties.ReadOnly = True
+            end
+            object cxGridDBTableView1km_awal: TcxGridDBColumn
+              DataBinding.FieldName = 'km_awal'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,###'
+              Properties.ReadOnly = True
+            end
+            object cxGridDBTableView1km_akhir: TcxGridDBColumn
+              DataBinding.FieldName = 'km_akhir'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,###'
+              Properties.ReadOnly = True
+            end
+            object cxGridDBTableView1entertaint_dinas: TcxGridDBColumn
+              DataBinding.FieldName = 'entertaint_dinas'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,###'
+              Properties.ReadOnly = True
+            end
+            object cxGridDBTableView1transportasi: TcxGridDBColumn
+              DataBinding.FieldName = 'transportasi'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,###'
+              Properties.ReadOnly = True
+            end
+            object cxGridDBTableView1paket_data: TcxGridDBColumn
+              DataBinding.FieldName = 'paket_data'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,###'
+              Properties.ReadOnly = True
+            end
+            object cxGridDBTableView1retribusi: TcxGridDBColumn
+              DataBinding.FieldName = 'retribusi'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,###'
+              Properties.ReadOnly = True
+            end
+            object cxGridDBTableView1tol: TcxGridDBColumn
+              DataBinding.FieldName = 'tol'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,###'
+              Properties.ReadOnly = True
+            end
+            object cxGridDBTableView1uang_makan: TcxGridDBColumn
+              DataBinding.FieldName = 'uang_makan'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,###'
+              Properties.ReadOnly = True
+            end
+            object cxGridDBTableView1sewa_mobil: TcxGridDBColumn
+              DataBinding.FieldName = 'sewa_mobil'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,###'
+              Properties.ReadOnly = True
+            end
+            object cxGridDBTableView1penginapan: TcxGridDBColumn
+              DataBinding.FieldName = 'penginapan'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,###'
+              Properties.ReadOnly = True
+            end
+            object cxGridDBTableView1expedisi: TcxGridDBColumn
+              DataBinding.FieldName = 'expedisi'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,###'
+              Properties.ReadOnly = True
+            end
+            object cxGridDBTableView1lainnya: TcxGridDBColumn
+              DataBinding.FieldName = 'lainnya'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,###'
+              Properties.ReadOnly = True
+            end
+            object cxGridDBTableView1total: TcxGridDBColumn
+              DataBinding.FieldName = 'total'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,###'
+              Properties.ReadOnly = True
+            end
+          end
+          object cxGridLevel1: TcxGridLevel
+            GridView = cxGridDBTableView1
+          end
+        end
+        object btnCetak1: TButton
+          Left = 8
+          Top = 488
+          Width = 105
+          Height = 25
+          Anchors = [akLeft, akBottom]
+          Caption = 'Cetak Excel'
+          TabOrder = 6
+          OnClick = btnCetak1Click
+        end
+      end
+      object TabSheet4: TTabSheet
+        Caption = 'Rencana Kerja Sales'
+        ImageIndex = 3
+        DesignSize = (
+          1317
+          514)
+        object btn_cetak2: TButton
+          Left = 8
+          Top = 480
+          Width = 75
+          Height = 25
+          Anchors = [akLeft, akBottom]
+          Caption = 'Cetak Excel'
+          TabOrder = 0
+          OnClick = btn_cetak2Click
+        end
+        object cxGrid3: TcxGrid
+          Left = 8
+          Top = 16
+          Width = 1305
+          Height = 457
+          Anchors = [akLeft, akTop, akRight, akBottom]
+          TabOrder = 1
+          object cxTblRencan: TcxGridDBTableView
+            NavigatorButtons.ConfirmDelete = False
+            DataController.DataSource = dsRencana
+            DataController.Summary.DefaultGroupSummaryItems = <>
+            DataController.Summary.FooterSummaryItems = <>
+            DataController.Summary.SummaryGroups = <>
+            FilterRow.Visible = True
+            object cxTblRencanno: TcxGridDBColumn
+              Caption = 'No.Rencana'
+              DataBinding.FieldName = 'no'
+              Width = 69
+            end
+            object cxTblRencantgl: TcxGridDBColumn
+              Caption = 'Tgl.Recana'
+              DataBinding.FieldName = 'tgl'
+            end
+            object cxTblRencannama_1: TcxGridDBColumn
+              Caption = 'Nama Customer'
+              DataBinding.FieldName = 'nama_1'
+              Width = 188
+            end
+            object cxTblRencanpic: TcxGridDBColumn
+              Caption = 'PIC'
+              DataBinding.FieldName = 'pic'
+            end
+            object cxTblRencanarea: TcxGridDBColumn
+              Caption = 'Area/Daerah'
+              DataBinding.FieldName = 'area'
+            end
+            object cxTblRencantujuan: TcxGridDBColumn
+              Caption = 'Tujuan'
+              DataBinding.FieldName = 'tujuan'
+              Width = 251
+            end
+            object cxTblRencantarget: TcxGridDBColumn
+              Caption = 'Target'
+              DataBinding.FieldName = 'target'
+            end
+            object cxTblRencanketerangan: TcxGridDBColumn
+              Caption = 'Keterangan'
+              DataBinding.FieldName = 'keterangan'
+            end
+            object cxTblRencanstatus: TcxGridDBColumn
+              Caption = 'Status'
+              DataBinding.FieldName = 'status'
+            end
+            object cxTblRencanalasan: TcxGridDBColumn
+              Caption = 'Alasan Batal'
+              DataBinding.FieldName = 'alasan'
+            end
+            object cxTblRencannama: TcxGridDBColumn
+              DataBinding.FieldName = 'sales'
+              Visible = False
+              GroupIndex = 0
+            end
+          end
+          object cxGridLevel2: TcxGridLevel
+            GridView = cxTblRencan
+          end
+        end
+      end
+    end
+  end
+  inherited pnlBawah: TPanel
+    Top = 610
+    Width = 1327
+    Height = 60
+    Align = alBottom
+    inherited btnKeluar: TButton
+      Left = 14
+      Top = 17
+    end
+    inherited btnTambah: TButton
+      Left = 679
+      Top = 17
+      Visible = False
+    end
+    inherited btnEdit: TButton
+      Left = 762
+      Top = 17
+      Visible = False
+    end
+    inherited btnHapus: TButton
+      Left = 837
+      Top = 17
+      Visible = False
+    end
+    inherited btnBatal: TButton
+      Left = 1067
+      Top = 17
+      Visible = False
+    end
+    inherited btnSimpan: TButton
+      Left = 992
+      Top = 17
+      Visible = False
+    end
+    object Button1: TButton
+      Left = 92
+      Top = 19
+      Width = 75
+      Height = 25
+      Caption = 'Lihat Foto'
+      TabOrder = 6
+      OnClick = Button1Click
+    end
+    object Button3: TButton
+      Left = 175
+      Top = 20
+      Width = 75
+      Height = 25
+      Caption = '&Lihat MAP'
+      TabOrder = 7
+      OnClick = Button3Click
+    end
+  end
+  inherited zQry: TZQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      
+        'select a.*,IFNULL(b.nama,a.nama) sales from tbl_costoperational ' +
+        'a left join tbl_sales b on a.nama=b.kode_sales '
+      'WHERE (a.tgl BETWEEN :tgl3 AND :tgl4) '
+      'order by a.tgl desc')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'tgl3'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tgl4'
+        ParamType = ptUnknown
+      end>
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'tgl3'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tgl4'
+        ParamType = ptUnknown
+      end>
+  end
+  object zqrSM: TZQuery
+    Connection = dm.zConn
+    AutoCalcFields = False
+    SQL.Strings = (
+      
+        'select a.*,ifnull(e.nama,a.nama) sales,if(a.kategori='#39'database'#39',' +
+        'if(a.kode_cust is null,'#39'UNDEFINE'#39',b.nama),a.customer) as Cust,'
+      
+        'if(a.plan<>0,'#39'TERENCANA'#39','#39'TIDAK TERENCANA'#39') as status,if(a.plan<' +
+        '>0,if(date(a.tgl)<=c.tgl,'#39'TEPAT WAKTU'#39','#39'TIDAK TEPAT'#39'),'#39#39')'
+      
+        ' as ketepatan,d.lat,d.longt,(SELECT IFNULL(COUNT(*),0) FROM tbl_' +
+        'rencana_kerja WHERE tgl=date(a.tgl) and nama=a.nama) rencana fro' +
+        'm tbl_salesactivity as a'
+      
+        'left join tbl_customer as b on a.kode_cust=b.kode left join tbl_' +
+        'rencana_kerja as c on a.`plan`=c.no join tbl_salesactivity_det a' +
+        's d on a.id=d.id_activity'
+      'LEFT JOIN tbl_sales e on a.`nama`=e.kode_sales'
+      'WHERE (date(a.tgl) BETWEEN :tgl1 AND :tgl2) '
+      'order by date(a.tgl) desc')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'tgl1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tgl2'
+        ParamType = ptUnknown
+      end>
+    Left = 235
+    Top = 20
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'tgl1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tgl2'
+        ParamType = ptUnknown
+      end>
+  end
+  object dsSM: TDataSource
+    DataSet = zqrSM
+    Left = 265
+    Top = 20
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    Left = 535
+    Top = 25
+  end
+  object zRencana: TZQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      
+        'SELECT  a.*,b.nama,ifnull(c.nama,a.nama) sales  FROM tbl_rencana' +
+        '_kerja as a left join tbl_customer as b'
+      
+        'on a.cust=b.kode left join tbl_sales c on a.nama = c.kode_sales ' +
+        'order by a.tgl desc')
+    Params = <>
+    Left = 443
+    Top = 17
+  end
+  object dsRencana: TDataSource
+    DataSet = zRencana
+    Left = 473
+    Top = 12
+  end
+  object dxComponentPrinter1: TdxComponentPrinter
+    Version = 0
+    Left = 660
+    Top = 9
+  end
+  object cxStyleRepository1: TcxStyleRepository
+    Left = 600
+    Top = 15
+    PixelsPerInch = 96
+    object cxStyle1: TcxStyle
+      AssignedValues = [svColor, svTextColor]
+      Color = clWindow
+      TextColor = clRed
+    end
+  end
+  object zD1: TZQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      
+        'select a.nama,(SELECT CAST(IFNULL(COUNT(nama),0) AS UNSIGNED) FR' +
+        'OM tbl_salesactivity WHERE nama=a.kode_sales and DATE(tgl) betwe' +
+        'en :tgl1 and :tgl2) activity,'
+      
+        '(SELECT IFNULL(SUM(total),0) FROM tbl_costoperational WHERE nama' +
+        '=a.kode_sales and tgl between :tgl1 and :tgl2) cost'
+      'from tbl_sales as a'
+      
+        'where a.kode_sales in ('#39'S00006'#39','#39'S00015'#39','#39'S00016'#39','#39'S00017'#39','#39'S000' +
+        '18'#39')'
+      'order by a.nama')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'tgl1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tgl2'
+        ParamType = ptUnknown
+      end>
+    Left = 695
+    Top = 15
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'tgl1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tgl2'
+        ParamType = ptUnknown
+      end>
+  end
+  object dsD1: TDataSource
+    DataSet = zD1
+    Left = 730
+    Top = 15
+  end
+end

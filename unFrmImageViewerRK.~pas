@@ -1,0 +1,134 @@
+unit unFrmImageViewerRK;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, ZDataset, DB, StdCtrls, Jpeg, ShellAPI;
+
+type
+  TfrmImageViewerRK = class(TForm)
+    btnTutup: TButton;
+    ScrollBox: TScrollBox;
+    Image1: TImage;
+    Image2: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    Image5: TImage;
+    Shape1: TShape;
+    Shape2: TShape;
+    Shape3: TShape;
+    Shape4: TShape;
+    Shape5: TShape;
+    Label1: TLabel;
+    Image6: TImage;
+    Shape6: TShape;
+    Shape7: TShape;
+    Image7: TImage;
+    Image8: TImage;
+    Shape8: TShape;
+    Image9: TImage;
+    Shape9: TShape;
+    Shape10: TShape;
+    Image10: TImage;
+    procedure FormShow(Sender: TObject);
+    procedure btnTutupClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Image1DblClick(Sender: TObject);
+  private
+    mJenis: string;
+    mNoRK: string;
+    mNoLKM: string;
+    mNoIS: string;
+  public
+    property Jenis: string read mJenis write mJenis;
+    property NoRK: string read mNoRK write mNoRK;
+    property NoLKM: string read mNoLKM write mNoLKM;
+    property NoIS: string read mNoIS write mNoIS;
+  end;
+
+var
+  frmImageViewerRK: TfrmImageViewerRK;
+
+implementation
+
+uses unDm, unTools;
+
+{$R *.dfm}
+
+procedure TfrmImageViewerRK.FormShow(Sender: TObject);
+var
+  q: TZQuery;
+  i: Integer;
+  img : TImage;
+  Stream: TMemoryStream;
+  jpg: TJPEGImage;
+begin
+  if mJenis = '' then mJenis := 'rk';
+  if mJenis = 'rk' then begin
+    q := OpenRS('SELECT * FROM tbl_img_rk WHERE no_rk = ''%s''',
+      [mNoRK])
+  end
+  else if mJenis = 'is' then begin
+    q := OpenRS('SELECT * FROM tbl_is_image WHERE no_rk = ''%s''',
+      [mNoIS])
+  end
+  else begin
+    q := OpenRS('SELECT * FROM tbl_img_lkm WHERE no_lkm = ''%s''',
+      [mNoLKM]);
+  end;
+
+  if not q.IsEmpty then begin
+    i := 1;
+    while not q.Eof do begin
+      Stream := TMemoryStream.Create;
+      if mJenis = 'is' then
+        TBlobField(q.FieldByName('image')).SaveToStream(Stream)
+      else
+        TBlobField(q.FieldByName('img')).SaveToStream(Stream);
+      Stream.Position := 0;
+
+      jpg := TJPEGImage.Create;
+      jpg.LoadFromStream(Stream);
+
+      img := (Self.FindComponent('Image' + IntToStr(i)) as TImage);
+      img.Picture.Assign(jpg);
+
+      Stream.Free;
+      jpg.Free;
+      Inc(i);
+      q.Next;
+    end;
+  end;
+end;
+
+procedure TfrmImageViewerRK.btnTutupClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TfrmImageViewerRK.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Release;
+end;
+
+procedure TfrmImageViewerRK.Image1DblClick(Sender: TObject);
+var
+  img: TImage;
+  appPath: string;
+begin
+  appPath := ExtractFilePath(Application.ExeName);
+
+  if not DirectoryExists(appPath + 'tmp') then
+    CreateDirectory(PChar(appPath + 'tmp'),nil);
+  if FileExists(appPath + 'tmp\tmp.jpg') then
+    DeleteFile(appPath + 'tmp\tmp.jpg');
+
+  img := (Sender as TImage);
+  img.Picture.SaveToFile(appPath + 'tmp\tmp.jpg');
+
+  ShellExecute(Self.Handle, nil, PChar(appPath + 'tmp\tmp.jpg'), nil, nil, SW_SHOWNORMAL);
+end;
+
+end.

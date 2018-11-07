@@ -1,0 +1,40 @@
+unit UMap;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, GMClasses, GMMap, GMMapVCL, OleCtrls, SHDocVw,
+  GMLinkedComponents, GMMarker, GMMarkerVCL, GMGeoCode, GMInfoWindow;
+
+type
+  TFrm_Map = class(TForm)
+    WebBrowser1: TWebBrowser;
+    GMMap1: TGMMap;
+    GMMarker1: TGMMarker;
+    GMInfoWindow1: TGMInfoWindow;
+    procedure GMMap1AfterPageLoaded(Sender: TObject; First: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Frm_Map: TFrm_Map;
+
+implementation
+
+{$R *.dfm}
+
+
+
+procedure TFrm_Map.GMMap1AfterPageLoaded(Sender: TObject; First: Boolean);
+begin
+  if First then
+  begin
+    GMMap1.DoMap;
+  end;
+end;
+
+end.

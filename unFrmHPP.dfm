@@ -1,0 +1,567 @@
+inherited frmHPP: TfrmHPP
+  Left = 289
+  Top = 137
+  Width = 1295
+  Height = 710
+  Caption = 'HPP'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlAtas: TPanel
+    Width = 1279
+    Height = 49
+    inherited lblJudul: TLabel
+      Top = 13
+      Width = 88
+      Caption = 'Detail HPP'
+    end
+    object cxLabel1: TcxLabel
+      Left = 398
+      Top = 12
+      Caption = 'Tanggal'
+      Visible = False
+    end
+    object cxdTgl1: TcxDateEdit
+      Left = 449
+      Top = 11
+      TabOrder = 1
+      Visible = False
+      Width = 121
+    end
+    object cxLabel2: TcxLabel
+      Left = 574
+      Top = 12
+      Caption = 'S/D'
+      Visible = False
+    end
+    object cxdTgl2: TcxDateEdit
+      Left = 602
+      Top = 11
+      TabOrder = 3
+      Visible = False
+      Width = 121
+    end
+    object btnProses: TButton
+      Left = 731
+      Top = 9
+      Width = 75
+      Height = 25
+      Caption = 'Proses'
+      TabOrder = 4
+      Visible = False
+    end
+  end
+  inherited pnlTengah: TPanel
+    Top = 49
+    Width = 1279
+    Height = 568
+    object Label2: TLabel
+      Left = 8
+      Top = 400
+      Width = 109
+      Height = 13
+      Caption = 'Detail Upah Dan Listrik'
+    end
+    object cxGrid2: TcxGrid
+      Left = 8
+      Top = 8
+      Width = 1257
+      Height = 377
+      TabOrder = 0
+      object cxTblDataFinger: TcxGridDBTableView
+        NavigatorButtons.ConfirmDelete = False
+        OnFocusedRecordChanged = cxTblDataFingerFocusedRecordChanged
+        DataController.DataSource = dsSPK
+        DataController.KeyFieldNames = 'no_mo'
+        DataController.Summary.DefaultGroupSummaryItems = <
+          item
+            Format = '#,##'
+            Kind = skCount
+            FieldName = 'status'
+            DisplayText = 'Total'
+          end>
+        DataController.Summary.FooterSummaryItems = <
+          item
+            Format = '#,##'
+            Kind = skCount
+            FieldName = 'nip'
+            DisplayText = 'Total Karyawan'
+          end>
+        DataController.Summary.SummaryGroups = <>
+        FilterRow.Visible = True
+        OptionsData.Deleting = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
+        OptionsView.Footer = True
+        OptionsView.GroupByBox = False
+        object cxTblDataFingerno_mo: TcxGridDBColumn
+          Caption = 'No.MO'
+          DataBinding.FieldName = 'no_mo'
+          Width = 85
+        end
+        object cxTblDataFingerno_spk: TcxGridDBColumn
+          Caption = 'No.SPK'
+          DataBinding.FieldName = 'no_spk'
+          Width = 93
+        end
+        object cxTblDataFingerno_so: TcxGridDBColumn
+          Caption = 'No.SO'
+          DataBinding.FieldName = 'no_so'
+          Width = 90
+        end
+        object cxTblDataFingertanggal_so: TcxGridDBColumn
+          Caption = 'Tgl.SO'
+          DataBinding.FieldName = 'tanggal_so'
+        end
+        object cxTblDataFingernama: TcxGridDBColumn
+          Caption = 'Nama Customer'
+          DataBinding.FieldName = 'nama'
+          Width = 195
+        end
+        object cxTblDataFingerkode: TcxGridDBColumn
+          Caption = 'Kode Barang'
+          DataBinding.FieldName = 'kode'
+          Width = 99
+        end
+        object cxTblDataFingerdeskripsi: TcxGridDBColumn
+          Caption = 'Deskripsi'
+          DataBinding.FieldName = 'deskripsi'
+          Width = 446
+        end
+        object cxTblDataFingerqty: TcxGridDBColumn
+          Caption = 'Qty.Order'
+          DataBinding.FieldName = 'qty'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.DisplayFormat = '#,###'
+        end
+        object cxTblDataFingersatuan: TcxGridDBColumn
+          Caption = 'Satuan'
+          DataBinding.FieldName = 'satuan'
+          Width = 53
+        end
+        object cxTblDataFingerBB: TcxGridDBColumn
+          Caption = 'BB'
+          DataBinding.FieldName = 'bb'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,##0.00'
+          Properties.ReadOnly = True
+          Properties.ValueType = vtFloat
+          HeaderAlignmentHorz = taCenter
+          Width = 115
+        end
+        object cxTblDataFingerbtkl: TcxGridDBColumn
+          Caption = 'BTKL'
+          DataBinding.FieldName = 'btkl'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,##0.00'
+          Properties.ReadOnly = True
+          Properties.ValueType = vtFloat
+          HeaderAlignmentHorz = taCenter
+          Width = 117
+        end
+        object cxTblDataFingerTotal: TcxGridDBColumn
+          Caption = 'Total HPP'
+          DataBinding.FieldName = 'total'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.DisplayFormat = '#,##0.00'
+          Properties.ReadOnly = True
+          Properties.ValueType = vtFloat
+          GroupSummaryAlignment = taRightJustify
+          HeaderAlignmentHorz = taCenter
+          HeaderGlyphAlignmentHorz = taCenter
+          Width = 170
+        end
+        object cxComplate: TcxGridDBColumn
+          Caption = 'Close'
+          DataBinding.FieldName = 'f_completed'
+          PropertiesClassName = 'TcxCheckBoxProperties'
+          Properties.ValueChecked = 1
+          Properties.ValueUnchecked = 0
+        end
+      end
+      object cxGrid2DBTableView1: TcxGridDBTableView
+        NavigatorButtons.ConfirmDelete = False
+        DataController.DataSource = dsBahan
+        DataController.DetailKeyFieldNames = 'no_mo'
+        DataController.MasterKeyFieldNames = 'no_mo'
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <
+          item
+            Format = '#,##0.00'
+            Kind = skSum
+            FieldName = 'total'
+            Column = cxGrid2DBTableView1total
+          end>
+        DataController.Summary.SummaryGroups = <>
+        OptionsView.Footer = True
+        OptionsView.GroupByBox = False
+        object cxGrid2DBTableView1no_mo: TcxGridDBColumn
+          DataBinding.FieldName = 'no_mo'
+          Visible = False
+          Width = 64
+        end
+        object cxGrid2DBTableView1no_spk: TcxGridDBColumn
+          Caption = 'No.SPK'
+          DataBinding.FieldName = 'no_spk'
+          Width = 166
+        end
+        object cxGrid2DBTableView1kode_brg: TcxGridDBColumn
+          Caption = 'Kode Bahan/NPM'
+          DataBinding.FieldName = 'kode_brg'
+          Width = 106
+        end
+        object cxGrid2DBTableView1deskripsi: TcxGridDBColumn
+          Caption = 'Deskripsi'
+          DataBinding.FieldName = 'deskripsi'
+          Width = 333
+        end
+        object cxGrid2DBTableView1qty: TcxGridDBColumn
+          Caption = 'Qty'
+          DataBinding.FieldName = 'qty'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,##0.00'
+          Width = 95
+        end
+        object cxGrid2DBTableView1satuan: TcxGridDBColumn
+          Caption = 'Satuan'
+          DataBinding.FieldName = 'satuan'
+          Width = 51
+        end
+        object cxGrid2DBTableView1hpp: TcxGridDBColumn
+          Caption = 'HPP'
+          DataBinding.FieldName = 'hpp'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,##0.00'
+          Width = 106
+        end
+        object cxGrid2DBTableView1total: TcxGridDBColumn
+          Caption = 'Total'
+          DataBinding.FieldName = 'total'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,##0.00'
+          Width = 123
+        end
+      end
+      object cxGrid2DBTableView2: TcxGridDBTableView
+        NavigatorButtons.ConfirmDelete = False
+        DataController.DataSource = dsUpah
+        DataController.DetailKeyFieldNames = 'no_mo'
+        DataController.MasterKeyFieldNames = 'no_mo'
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        object cxGrid2DBTableView2no_mo: TcxGridDBColumn
+          DataBinding.FieldName = 'no_mo'
+          Visible = False
+        end
+        object cxGrid2DBTableView2no_spk: TcxGridDBColumn
+          Caption = 'No.SPK'
+          DataBinding.FieldName = 'no_spk'
+        end
+        object cxGrid2DBTableView2no_bukti: TcxGridDBColumn
+          DataBinding.FieldName = 'no_bukti'
+        end
+        object cxGrid2DBTableView2tanggal: TcxGridDBColumn
+          DataBinding.FieldName = 'tanggal'
+        end
+        object cxGrid2DBTableView2mulai: TcxGridDBColumn
+          DataBinding.FieldName = 'mulai'
+        end
+        object cxGrid2DBTableView2selesai: TcxGridDBColumn
+          DataBinding.FieldName = 'selesai'
+        end
+        object cxGrid2DBTableView2durasi: TcxGridDBColumn
+          DataBinding.FieldName = 'durasi'
+        end
+        object cxGrid2DBTableView2mesin: TcxGridDBColumn
+          DataBinding.FieldName = 'mesin'
+        end
+        object cxGrid2DBTableView2operator: TcxGridDBColumn
+          DataBinding.FieldName = 'operator'
+        end
+        object cxGrid2DBTableView2upah: TcxGridDBColumn
+          DataBinding.FieldName = 'upah'
+        end
+        object cxGrid2DBTableView2biaya: TcxGridDBColumn
+          DataBinding.FieldName = 'biaya'
+        end
+        object cxGrid2DBTableView2biayaupah: TcxGridDBColumn
+          DataBinding.FieldName = 'biayaupah'
+        end
+        object cxGrid2DBTableView2biayalistrik: TcxGridDBColumn
+          DataBinding.FieldName = 'biayalistrik'
+        end
+        object cxGrid2DBTableView2total: TcxGridDBColumn
+          DataBinding.FieldName = 'total'
+        end
+      end
+      object cxGridLevel1: TcxGridLevel
+        GridView = cxTblDataFinger
+        object cxMaterial: TcxGridLevel
+          GridView = cxGrid2DBTableView1
+        end
+      end
+    end
+    object cxGrid3: TcxGrid
+      Left = 8
+      Top = 416
+      Width = 1257
+      Height = 137
+      TabOrder = 1
+      object cxTblUpah: TcxGridDBTableView
+        NavigatorButtons.ConfirmDelete = False
+        DataController.DataSource = dsUpah
+        DataController.Summary.DefaultGroupSummaryItems = <
+          item
+            Format = '#,##'
+            Kind = skCount
+            FieldName = 'status'
+            DisplayText = 'Total'
+          end>
+        DataController.Summary.FooterSummaryItems = <
+          item
+            Format = '#,###.00'
+            Kind = skSum
+            FieldName = 'total'
+            Column = cxColTotal
+            DisplayText = 'Total HPP'
+          end>
+        DataController.Summary.SummaryGroups = <>
+        FilterRow.Visible = True
+        OptionsData.Deleting = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
+        OptionsView.Footer = True
+        OptionsView.GroupByBox = False
+        object cxTblUpahno_mo: TcxGridDBColumn
+          DataBinding.FieldName = 'no_mo'
+          Visible = False
+          Width = 94
+        end
+        object cxTblUpahno_spk: TcxGridDBColumn
+          Caption = 'No.SPK'
+          DataBinding.FieldName = 'no_spk'
+          Width = 107
+        end
+        object cxTblUpahno_bukti: TcxGridDBColumn
+          Caption = 'No.LHP'
+          DataBinding.FieldName = 'no_bukti'
+          Width = 82
+        end
+        object cxTblUpahtanggal: TcxGridDBColumn
+          Caption = 'Tgl.LHP'
+          DataBinding.FieldName = 'tanggal'
+        end
+        object cxTblUpahmulai: TcxGridDBColumn
+          Caption = 'Start Produksi'
+          DataBinding.FieldName = 'mulai'
+        end
+        object cxTblUpahselesai: TcxGridDBColumn
+          Caption = 'Finish Produksi'
+          DataBinding.FieldName = 'selesai'
+        end
+        object cxTblUpahdurasi: TcxGridDBColumn
+          Caption = 'Durasi (menit)'
+          DataBinding.FieldName = 'durasi'
+          Width = 71
+        end
+        object cxTblUpahmesin: TcxGridDBColumn
+          Caption = 'Mesin'
+          DataBinding.FieldName = 'mesin'
+          Width = 50
+        end
+        object cxTblUpahoperator: TcxGridDBColumn
+          Caption = 'Operator'
+          DataBinding.FieldName = 'operator'
+          Width = 47
+        end
+        object cxColListrik: TcxGridDBColumn
+          Caption = 'Listrik (Rp)'
+          DataBinding.FieldName = 'biaya'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,###.00'
+          Properties.ValueType = vtFloat
+        end
+        object cxColUpah: TcxGridDBColumn
+          Caption = 'Upah (Rp)'
+          DataBinding.FieldName = 'upah'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,###.00'
+          Properties.ValueType = vtFloat
+          Width = 74
+        end
+        object cxColBiayaUpah: TcxGridDBColumn
+          Caption = 'Biaya Upah (Rp)'
+          DataBinding.FieldName = 'biayaupah'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,###.00'
+          Properties.ValueType = vtFloat
+          Width = 90
+        end
+        object cxColBiayaListrik: TcxGridDBColumn
+          Caption = 'Biaya Listrik (Rp)'
+          DataBinding.FieldName = 'biayalistrik'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,###.00'
+          Properties.ValueType = vtFloat
+          Width = 88
+        end
+        object cxColTotal: TcxGridDBColumn
+          Caption = 'Total Biaya (Rp)'
+          DataBinding.FieldName = 'total'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,###.00'
+          Properties.ValueType = vtFloat
+          Width = 138
+        end
+      end
+      object cxGridLevel3: TcxGridLevel
+        GridView = cxTblUpah
+      end
+    end
+    object cxtMO: TcxTextEdit
+      Left = 424
+      Top = 568
+      TabOrder = 2
+      Visible = False
+      Width = 185
+    end
+  end
+  inherited pnlBawah: TPanel
+    Top = 617
+    Width = 1279
+    Height = 49
+    inherited btnKeluar: TButton
+      Left = 12
+      Top = 9
+    end
+    inherited btnBaru: TButton
+      Left = 179
+      Top = 9
+      Caption = '&Cetak'
+      Visible = True
+    end
+    inherited btnSimpan: TButton
+      Left = 95
+      Top = 8
+      Height = 26
+      Caption = '&Cetak Excel'
+    end
+  end
+  object zqrSPK: TZReadOnlyQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      
+        'SELECT a.no_mo,a.no_spk,a.no_so,a.tanggal_so,a.nama,b.kode,c.des' +
+        'kripsi,d.qty,d.satuan,sf_material(a.no_mo) as bb,'
+      
+        's_btkl(a.no_mo) as btkl,(sf_material(a.no_mo)+s_btkl(a.no_mo)) a' +
+        's total,a.f_completed'
+      
+        'FROM v_spk as a join tbl_routing as b on a.kode_brg=b.kode_brg j' +
+        'oin tbl_barang as c on b.kode=c.kode '
+      'join tbl_so_det as d on b.kode=d.kode_brg and a.no_so=d.no_bukti'
+      
+        ' WHERE a.jenis_spk='#39'BJ'#39' and sf_material(a.no_mo)<>0 and s_btkl(a' +
+        '.no_mo)<>0')
+    Params = <>
+    Left = 154
+    Top = 9
+  end
+  object dsSPK: TDataSource
+    DataSet = zqrSPK
+    Left = 184
+    Top = 12
+  end
+  object zqrBahan: TZReadOnlyQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      
+        'SELECT a.no_mo,a.no_spk,b.kode_brg,c.deskripsi,sum(b.qty) as qty' +
+        ',b.satuan,b.hpp,(sum(b.qty)*b.hpp) as total'
+      
+        'FROM v_spk as a join tbl_history as b on a.no_spk=b.no_spk join ' +
+        'tbl_barang as c'
+      
+        'on b.`kode_brg`=c.kode WHERE b.`tipe`='#39'out_'#39' and  left(b.kode_br' +
+        'g,1)<>'#39'B'#39' '
+      'GROUP BY a.no_mo,a.no_spk,b.kode_brg,c.deskripsi,b.satuan,b.hpp')
+    Params = <>
+    Left = 226
+    Top = 9
+  end
+  object dsBahan: TDataSource
+    DataSet = zqrBahan
+    Left = 256
+    Top = 12
+  end
+  object zqrUpah: TZReadOnlyQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      
+        'SELECT a.no_mo,b.no_spk,b.no_bukti,b.tanggal,b.jam1 as mulai,b.j' +
+        'am2 as selesai,'
+      
+        '((hour(TIMEDIFF(b.jam2,b.jam1))*60)+(MINUTE(TIMEDIFF(b.jam2,b.ja' +
+        'm1)))) as durasi,b.mesin,'
+      
+        '(sf_operator(b.no_bukti) ) as operator,d.upah,if (b.shift=2 ,sf_' +
+        'listriklow('#39'H'#39') , sf_listriklow('#39'L'#39')) as biaya,(d.upah/26/7/60)*' +
+        '(((hour(TIMEDIFF(b.jam2,b.jam1))*60)+(MINUTE(TIMEDIFF(b.jam2,b.j' +
+        'am1))))*sf_operator(b.no_bukti))  as biayaupah,'
+      
+        '(((hour(TIMEDIFF(b.jam2,b.jam1))*60)+(MINUTE(TIMEDIFF(b.jam2,b.j' +
+        'am1))/60))*if (b.shift=2 ,sf_listriklow('#39'H'#39') , sf_listriklow('#39'L'#39 +
+        '))) as biayalistrik,'
+      
+        '((d.upah/26/7/60)*(((hour(TIMEDIFF(b.jam2,b.jam1))*60)+(MINUTE(T' +
+        'IMEDIFF(b.jam2,b.jam1))))*sf_operator(b.no_bukti))) +  (((hour(T' +
+        'IMEDIFF(b.jam2,b.jam1))*60)+(MINUTE(TIMEDIFF(b.jam2,b.jam1))/60)' +
+        ')*if (b.shift=2 ,sf_listriklow('#39'H'#39') , sf_listriklow('#39'L'#39'))) as to' +
+        'tal'
+      
+        'FROM v_spk as a join tbl_hsl_prd as b on a.`no_spk`=b.no_spk joi' +
+        'n tbl_mesin as c'
+      
+        ' on b.mesin=c.kode join (select * from tbl_upah WHERE tgl=(selec' +
+        't max(tgl) from tbl_upah)) as d '
+      'WHERE a.no_mo=:no_mo')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'no_mo'
+        ParamType = ptUnknown
+      end>
+    Left = 290
+    Top = 9
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'no_mo'
+        ParamType = ptUnknown
+      end>
+  end
+  object dsUpah: TDataSource
+    DataSet = zqrUpah
+    Left = 320
+    Top = 12
+  end
+  object cxStyleRepository1: TcxStyleRepository
+    Left = 305
+    Top = 230
+    PixelsPerInch = 96
+    object cxsSpkSelesai: TcxStyle
+      AssignedValues = [svColor]
+      Color = clMoneyGreen
+    end
+  end
+end

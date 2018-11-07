@@ -1,0 +1,135 @@
+unit unFrmSaldoAwalAkun;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, unFrmTplTrans, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
+  dxSkinsDefaultPainters, cxTextEdit, cxMaskEdit, cxDropDownEdit,
+  cxCalendar, cxLabel, StdCtrls, ExtCtrls, cxStyles, dxSkinscxPCPainter,
+  cxCustomData, cxFilter, cxData, cxDataStorage, DB, cxDBData, cxSpinEdit,
+  ZAbstractRODataset, ZDataset, cxGridLevel, cxGridCustomTableView,
+  cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid;
+
+type
+  TfrmSaldoAwalAkun = class(TfrmTplTrans)
+    cxLabel1: TcxLabel;
+    cxdTgl1: TcxDateEdit;
+    cxGrid1: TcxGrid;
+    zqrSummary: TZReadOnlyQuery;
+    dsSummary: TDataSource;
+    cxGrid1Level1: TcxGridLevel;
+    cxTbl: TcxGridTableView;
+    cxTblnoakun: TcxGridColumn;
+    cxTblnama: TcxGridColumn;
+    cxTblsaldo: TcxGridColumn;
+    procedure FormCreate(Sender: TObject);
+    procedure cxdTgl1PropertiesChange(Sender: TObject);
+    procedure btnSimpanClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmSaldoAwalAkun: TfrmSaldoAwalAkun;
+
+implementation
+
+uses
+  unDm, unTools, unAplikasi;
+
+{$R *.dfm}
+
+procedure TfrmSaldoAwalAkun.FormCreate(Sender: TObject);
+var
+  q : TZQuery ;
+  i : Integer ;
+begin
+  inherited;
+  cxdTgl1.Date := LDOM(Date);
+  //zqrSummary.Open;
+
+      //Menampilkan Account
+
+    q := OpenRS('select f.noakun,f.nama,f.sawal from tbl_coa f where (SELECT COUNT(noakun) FROM tbl_coa WHERE induk = f.noakun) = 0');
+    if not q.IsEmpty then begin
+
+      while not q.Eof do begin
+        i := cxTbl.DataController.AppendRecord;
+        with cxTbl.DataController do begin
+           Values[i, cxTblnoakun.Index] := q.FieldByName('noakun').AsString;
+           Values[i, cxTblnama.Index] := q.FieldByname('nama').AsString;
+           Values[i, cxTblsaldo.Index] := q.FieldByName('sawal').AsFloat;
+        end;
+        q.Next;
+      end;
+    end;
+    q.Close;
+end;
+
+procedure TfrmSaldoAwalAkun.cxdTgl1PropertiesChange(Sender: TObject);
+begin
+  inherited;
+  cxdTgl1.Date := LDOM(cxdTgl1.Date);
+end;
+
+procedure TfrmSaldoAwalAkun.btnSimpanClick(Sender: TObject);
+var
+  qp,qj,qjd,qbh : TZQuery ;
+  sNoJ,sAkun : string;
+  i : Integer;
+begin
+  inherited;
+  qp := OpenRS('SELECT * FROM tbl_sa_akun');
+      sNoJ := GetLastFak('saldo_awal_akun');
+            //UpdateFaktur(Copy(sNoJ,1,6));
+
+             qj := OpenRS('SELECT * FROM tbl_jurnal WHERE no_jurnal = ''%s''',[sNoJ]);
+              qj.Insert;
+              qj.FieldByName('no_jurnal').AsString := sNoJ;
+              qj.FieldByName('tanggal').AsDateTime := Aplikasi.Tanggal;
+              qj.FieldByName('tgljam').AsDateTime := Aplikasi.TanggalServer;
+              qj.FieldByName('keterangan').AsString := 'SALDO AWAL AKUN';
+              qj.FieldByName('f_posted').AsString := '1';
+              qj.FieldByName('user').AsString := Aplikasi.NamaUser;
+              qj.FieldByName('jenis').AsString := 'SA';
+              qj.FieldByName('user_dept').AsString := Aplikasi.UserDept;
+              qj.Post;
+              qj.Close;
+
+            for i := 0 to cxTbl.DataController.RecordCount - 1 do begin
+                 with qp do begin
+                  Insert;
+                  FieldByName('tanggal').AsDateTime := cxdTgl1.Date;
+                  FieldByName('noakun').AsString := cxTbl.DataController.Values[i, cxTblnoakun.Index];
+                  FieldByName('saldo').AsFloat := cxTbl.DataController.Values[i, cxTblsaldo.Index];
+                  Post;
+                end;
+
+                qbh := OpenRS('SELECT * FROM tbl_coa WHERE noakun = ''%s''',[cxTbl.DataController.Values[i, cxTblnoakun.Index]]);
+                qbh.Edit;
+                qbh.FieldByName('sawal').AsFloat := cxTbl.DataController.Values[i, cxTblsaldo.Index];
+                qbh.Post;
+
+              qjd := OpenRS('SELECT * FROM tbl_jurnal_det WHERE no_jurnal = ''%s''',[sNoJ]);
+              qjd.Insert;
+              qjd.FieldbyName('tanggal').AsDateTime := Aplikasi.TanggalServer;
+              qjd.FieldByName('no_jurnal').AsString := sNoJ;
+              qjd.FieldByName('akun').AsString := cxTbl.DataController.Values[i, cxTblnoakun.Index];
+              qjd.FieldByName('debet').AsFloat := cxTbl.DataController.Values[i, cxTblsaldo.Index];
+              qjd.FieldByName('keterangan').AsString := 'SALDO AWAL';
+              qjd.FieldByName('kode_suppcust').AsString := Aplikasi.NamaUser;
+              qjd.FieldByName('dc').AsString := 'D';
+              qjd.Post;
+            end;
+            qjd.Close;
+            qp.Close;
+            qbh.Close;
+            MsgBox('Saldo Awal Akun Telah Disimpan');
+
+end;
+
+end.

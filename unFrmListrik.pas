@@ -1,0 +1,126 @@
+unit unFrmListrik;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, unFrmTransBaru, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
+  dxSkinsDefaultPainters, cxStyles, dxSkinscxPCPainter, cxCustomData,
+  cxFilter, cxData, cxDataStorage, DB, cxDBData, cxGridLevel, cxClasses,
+  cxGridCustomView, cxGridCustomTableView, cxGridTableView,
+  cxGridDBTableView, cxGrid, cxDropDownEdit, cxCalendar, cxTextEdit,
+  cxMaskEdit, cxSpinEdit, StdCtrls, ExtCtrls, ZAbstractRODataset,
+  ZAbstractDataset, ZDataset, cxLabel, dxSkinBlack, dxSkinBlue,
+  dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinFoggy,
+  dxSkinGlassOceans, dxSkiniMaginary, dxSkinLilian, dxSkinLiquidSky,
+  dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
+  dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue;
+
+type
+  TfrmListrik = class(TfrmTransBaru)
+    Label1: TLabel;
+    Label2: TLabel;
+    cxsBiaya: TcxSpinEdit;
+    cxDateEdit1: TcxDateEdit;
+    cxGrd: TcxGrid;
+    cxTblView: TcxGridDBTableView;
+    cxGrdLevel1: TcxGridLevel;
+    zQry: TZQuery;
+    ds: TDataSource;
+    cxTblViewid: TcxGridDBColumn;
+    cxTblViewtgl: TcxGridDBColumn;
+    cxTblViewbiaya: TcxGridDBColumn;
+    Label3: TLabel;
+    cbb1: TComboBox;
+    cxTblViewjenis: TcxGridDBColumn;
+    procedure btnSimpanClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure cxTblViewCellDblClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
+    procedure btnHapusClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmListrik: TfrmListrik;
+
+implementation
+
+uses unDm, unAplikasi, unTools;
+
+{$R *.dfm}
+
+procedure TfrmListrik.btnSimpanClick(Sender: TObject);
+var
+  q : TZQuery;
+begin
+ q := OpenRS('SELECT * FROM tbl_listrik where tgl = ''s''',
+            [cxDateEdit1.Date]);
+ with q do begin
+     Insert;
+     FieldByName('tgl').AsDateTime := cxDateEdit1.Date  ;
+     FieldByName('biaya').AsFloat  := cxsBiaya.Value;
+     FieldByName('jenis').AsString  := cbb1.Text;
+     Post ;
+     Close ;
+     ds.DataSet.Refresh ;
+     MsgBox('Data Sudah Disimpan');
+     cxDateEdit1.Date := Aplikasi.TanggalServer;
+     cxsBiaya.value := 0;
+   end;
+end;
+
+procedure TfrmListrik.FormCreate(Sender: TObject);
+begin
+  inherited;
+  cxDateEdit1.Date := Aplikasi.TanggalServer;
+  cxsBiaya.Value := 0;
+end;
+
+procedure TfrmListrik.cxTblViewCellDblClick(Sender: TcxCustomGridTableView;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+  AShift: TShiftState; var AHandled: Boolean);
+var
+   q: TZQuery;
+begin
+  label3.Caption :=  IntToStr(zQry.FieldByName('id').AsInteger) ;
+  cxDateEdit1.Date := zQry.FieldByName('tgl').AsDateTime  ;
+   cxsBiaya.Value :=  zQry.FieldByName('biaya').AsFloat ;
+   cbb1.Text :=  zQry.FieldByName('jenis').AsString ;
+   btnSimpan.Enabled := False;
+   btnHapus.Visible := True ;
+end;
+
+procedure TfrmListrik.btnHapusClick(Sender: TObject);
+begin
+  inherited;
+ try
+        dm.zConn.StartTransaction;
+        dm.zConn.ExecuteDirect('DELETE FROM tbl_listrik WHERE id = ''' + label3.Caption  + '''');
+        dm.zConn.Commit;
+        MsgBox('Berhasil dihapus.');
+        zQry.Close;
+        zQry.Open;
+        ds.DataSet.Refresh ;
+        btnSimpan.Enabled:= True;
+        btnHapus.Visible := False ;
+        cxDateEdit1.Date := Aplikasi.TanggalServer;
+        cxsBiaya.Value := 0;
+      except
+        on E: Exception do begin
+          MsgBox('Error: ' + E.Message);
+          dm.zConn.Rollback;
+        end;
+end;
+end;
+
+end.
