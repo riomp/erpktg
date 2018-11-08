@@ -2,7 +2,9 @@ inherited frmMstSupplier1: TfrmMstSupplier1
   Left = 550
   Top = 238
   Height = 594
+  BorderIcons = [biSystemMenu]
   Caption = 'Data Supplier'
+  OldCreateOrder = True
   Position = poScreenCenter
   OnShow = FormShow
   PixelsPerInch = 96

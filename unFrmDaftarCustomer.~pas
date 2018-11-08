@@ -75,7 +75,7 @@ begin
 
     f :=  TfrmMstCust1.Create(self);
     f.Jenis := 'edit';
-    f.NoSCust:= zQry.FieldByName('kode').AsString;
+    f.NoCust:= zQry.FieldByName('kode').AsString;
     f.ShowModal;
     zQry.Close;
     zQry.Open;

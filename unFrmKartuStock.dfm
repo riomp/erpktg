@@ -1,0 +1,257 @@
+inherited frmKartuStock: TfrmKartuStock
+  Left = 475
+  Top = 223
+  VertScrollBar.Range = 0
+  Align = alClient
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsNone
+  Caption = 'Kartu Stock'
+  ClientHeight = 665
+  ClientWidth = 1117
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlAtas: TPanel
+    Width = 1117
+    Height = 161
+    inherited lblJudul: TLabel
+      Left = 10
+      Top = 11
+      Width = 95
+      Caption = 'Kartu Stock'
+    end
+    object Shape7: TShape
+      Left = 421
+      Top = 125
+      Width = 21
+      Height = 21
+      Brush.Color = clRed
+    end
+    object GroupBox1: TGroupBox
+      Left = 10
+      Top = 40
+      Width = 396
+      Height = 111
+      Caption = 'Filter'
+      TabOrder = 0
+      object cxLabel1: TcxLabel
+        Left = 14
+        Top = 22
+        Caption = 'Tanggal'
+      end
+      object cxdTgl1: TcxDateEdit
+        Left = 95
+        Top = 21
+        TabOrder = 1
+        Width = 121
+      end
+      object cxLabel2: TcxLabel
+        Left = 220
+        Top = 22
+        Caption = 'S/D'
+      end
+      object cxdTgl2: TcxDateEdit
+        Left = 248
+        Top = 21
+        TabOrder = 3
+        Width = 121
+      end
+      object btnProses: TButton
+        Left = 92
+        Top = 79
+        Width = 75
+        Height = 25
+        Caption = 'Proses'
+        TabOrder = 4
+        OnClick = btnProsesClick
+      end
+      object cxLabel3: TcxLabel
+        Left = 14
+        Top = 52
+        Caption = 'Gudang'
+      end
+      object cxlGudang: TcxLookupComboBox
+        Left = 95
+        Top = 50
+        Properties.KeyFieldNames = 'kode'
+        Properties.ListColumns = <
+          item
+            FieldName = 'nama'
+          end>
+        Properties.ListSource = dsGudang
+        TabOrder = 6
+        Width = 216
+      end
+    end
+    object cxLabel14: TcxLabel
+      Left = 448
+      Top = 129
+      Caption = 'Stock <= Minimum Stock / Buffer Stock'
+    end
+  end
+  inherited pnlTengah: TPanel
+    Top = 161
+    Width = 1117
+    Height = 428
+    Align = alClient
+    object cxGrid1: TcxGrid
+      Left = 1
+      Top = 1
+      Width = 1115
+      Height = 426
+      Align = alClient
+      TabOrder = 0
+      object cxTblKS: TcxGridDBTableView
+        NavigatorButtons.ConfirmDelete = False
+        DataController.DataSource = dsKS
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        FilterRow.Visible = True
+        OptionsView.GroupByBox = False
+        Styles.OnGetContentStyle = cxTblKSStylesGetContentStyle
+        object cxColKode: TcxGridDBColumn
+          Caption = 'Kode Barang'
+          DataBinding.FieldName = 'kode_brg'
+          Options.Editing = False
+          Width = 116
+        end
+        object cxColDeskripsi: TcxGridDBColumn
+          Caption = 'Deskripsi'
+          DataBinding.FieldName = 'deskripsi'
+          Options.Editing = False
+          Width = 333
+        end
+        object cxColKelompok: TcxGridDBColumn
+          Caption = 'Kelompok'
+          DataBinding.FieldName = 'kelompok'
+          Options.Editing = False
+          Width = 81
+        end
+        object cxColSubKelompok: TcxGridDBColumn
+          Caption = 'Sub Kelompok'
+          DataBinding.FieldName = 'sub_kelompok'
+          Options.Editing = False
+          Width = 84
+        end
+        object cxColSatuan: TcxGridDBColumn
+          Caption = 'Satuan'
+          DataBinding.FieldName = 'unitid'
+          Options.Editing = False
+        end
+        object cxColSA: TcxGridDBColumn
+          Caption = 'Saldo Awal'
+          DataBinding.FieldName = 'saldo_awal'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.DisplayFormat = '#,##0.00'
+          Properties.ValueType = vtFloat
+          Options.Editing = False
+          Width = 90
+        end
+        object cxColIn: TcxGridDBColumn
+          Caption = 'Masuk'
+          DataBinding.FieldName = 'stock_in'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,##0.00'
+          Properties.ValueType = vtFloat
+          Options.Editing = False
+          Width = 80
+        end
+        object cxColOut: TcxGridDBColumn
+          Caption = 'Keluar'
+          DataBinding.FieldName = 'stock_out'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,##0.00'
+          Properties.ValueType = vtFloat
+          Options.Editing = False
+          Width = 81
+        end
+        object cxColPlot: TcxGridDBColumn
+          Caption = 'Plot SPK'
+          DataBinding.FieldName = 'plot_spk'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,##0.00'
+          Properties.ValueType = vtFloat
+          Options.Editing = False
+        end
+        object cxColEnd: TcxGridDBColumn
+          Caption = 'Stock Fisik'
+          DataBinding.FieldName = 'end_stock'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,##0.00'
+          Properties.ValueType = vtFloat
+          Options.Editing = False
+          Width = 75
+        end
+        object cxColEndPlot: TcxGridDBColumn
+          Caption = 'Stock Af.Plot'
+          DataBinding.FieldName = 'end_stock_plot'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,##0.00'
+          Properties.ValueType = vtFloat
+          Options.Editing = False
+          Width = 81
+        end
+        object cxColBuffer: TcxGridDBColumn
+          DataBinding.FieldName = 'buffer'
+        end
+      end
+      object cxGrid1Level1: TcxGridLevel
+        GridView = cxTblKS
+      end
+    end
+  end
+  inherited pnlBawah: TPanel
+    Top = 589
+    Width = 1117
+    Align = alBottom
+    inherited btnKeluar: TButton
+      Visible = False
+    end
+    inherited btnSimpan: TButton
+      Caption = 'History'
+    end
+  end
+  object zGudang: TZQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      'SELECT * FROM tbl_gudang'
+      'WHERE f_aktif = 1'
+      'ORDER BY nama')
+    Params = <>
+    Left = 164
+    Top = 10
+  end
+  object dsGudang: TDataSource
+    DataSet = zGudang
+    Left = 199
+    Top = 10
+  end
+  object zqrKS: TZReadOnlyQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      'SELECT * FROM _ks')
+    Params = <>
+    Left = 242
+    Top = 10
+  end
+  object dsKS: TDataSource
+    DataSet = zqrKS
+    Left = 276
+    Top = 10
+  end
+  object cxStyleRepository1: TcxStyleRepository
+    Left = 320
+    Top = 10
+    PixelsPerInch = 96
+    object cxStyle1: TcxStyle
+      AssignedValues = [svColor, svTextColor]
+      Color = clRed
+      TextColor = clYellow
+    end
+  end
+end

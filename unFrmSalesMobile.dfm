@@ -27,6 +27,7 @@ inherited frmSalesMobile: TfrmSalesMobile
     inherited pg: TPageControl
       Width = 1325
       Height = 542
+      ActivePage = TabSheet2
       inherited TabSheet1: TTabSheet
         Caption = 'Dashboard Sales'
         object Label2: TLabel
@@ -126,7 +127,11 @@ inherited frmSalesMobile: TfrmSalesMobile
           Top = 65
           Width = 601
           Height = 381
+          AllowPanning = pmNone
+          AllowZoom = False
           BackWall.Brush.Color = clWhite
+          BackWall.Brush.Style = bsClear
+          BackWall.Pen.Visible = False
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clBlue
           Title.Font.Height = -24
@@ -136,6 +141,8 @@ inherited frmSalesMobile: TfrmSalesMobile
           Title.Text.Strings = (
             'Sales Activity')
           AxisVisible = False
+          ClipPoints = False
+          Frame.Visible = False
           LeftAxis.LabelsMultiLine = True
           LeftAxis.Visible = False
           Legend.Visible = False
@@ -143,6 +150,7 @@ inherited frmSalesMobile: TfrmSalesMobile
           View3DOptions.Orthogonal = False
           View3DOptions.Perspective = 0
           View3DOptions.Rotation = 360
+          View3DWalls = False
           TabOrder = 6
           object Series1: TPieSeries
             Marks.ArrowLength = 8

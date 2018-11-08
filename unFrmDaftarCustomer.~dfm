@@ -1,8 +1,13 @@
 inherited frmDaftarCustomer: TfrmDaftarCustomer
   Left = 594
   Top = 263
-  Height = 600
+  VertScrollBar.Range = 0
+  Align = alClient
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsNone
   Caption = 'Master Customer'
+  ClientHeight = 561
+  OldCreateOrder = True
   Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13

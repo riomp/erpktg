@@ -289,7 +289,8 @@ uses
   unFrmDaftarMTS in 'unFrmDaftarMTS.pas' {frmDaftarMTS},
   unFrmDaftarPenerimaanBarang in 'unFrmDaftarPenerimaanBarang.pas' {frmDaftarPenerimaanBarang},
   unFrmPB in 'unFrmPB.pas' {frmPenerimaanBarang},
-  unFrmPilihPO in 'unFrmPilihPO.pas' {frmPilihPO};
+  unFrmPilihPO in 'unFrmPilihPO.pas' {frmPilihPO},
+  unFrmKartuStock in 'unFrmKartuStock.pas' {frmKartuStock};
 
 {$R *.res}
 
@@ -300,8 +301,6 @@ begin
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TfrmUtama, frmUtama);
   Application.CreateForm(TfrmLogin, frmLogin);
-  Application.CreateForm(TfrmPenerimaanBarang, frmPenerimaanBarang);
-  Application.CreateForm(TfrmPilihPO, frmPilihPO);
   frmUtama.Show;
 
   frmLogin.ShowModal;

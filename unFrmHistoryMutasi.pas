@@ -1,0 +1,80 @@
+unit unFrmHistoryMutasi;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, unFrmTplTrans, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxStyles, dxSkinsCore, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter, cxCustomData, cxFilter, cxData, cxDataStorage,
+  cxEdit, DB, cxDBData, cxSpinEdit, cxContainer, cxTextEdit, cxMaskEdit,
+  cxLabel, cxGridLevel, cxGridCustomTableView, cxGridTableView,
+  cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, StdCtrls,
+  ExtCtrls, ZAbstractRODataset, ZAbstractDataset, ZDataset, cxDropDownEdit,
+  cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxCalendar;
+
+type
+  TfrmHistoryMutasi = class(TfrmTplTrans)
+    cxGrid1: TcxGrid;
+    cxtbKS: TcxGridDBTableView;
+    cxtbKSno_bukti: TcxGridDBColumn;
+    cxtbKStanggal: TcxGridDBColumn;
+    cxtbKSColumn1: TcxGridDBColumn;
+    cxtbKSmasuk: TcxGridDBColumn;
+    cxtbKSkeluar: TcxGridDBColumn;
+    cxtbKSstok_akhir: TcxGridDBColumn;
+    cxGrid1Level1: TcxGridLevel;
+    cxLabel4: TcxLabel;
+    cxsSA: TcxSpinEdit;
+    cxLabel3: TcxLabel;
+    cxlGudang: TcxLookupComboBox;
+    zGudang: TZQuery;
+    dsGudang: TDataSource;
+    cxColSatuan: TcxGridDBColumn;
+    zqrKS: TZReadOnlyQuery;
+    dsKS: TDataSource;
+    cxLabel1: TcxLabel;
+    cxdTgl1: TcxDateEdit;
+    cxLabel2: TcxLabel;
+    cxdTgl2: TcxDateEdit;
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+    mIdBrg: String;
+  public
+    { Public declarations }
+     property IdBrg: String read mIdBrg write mIdBrg;
+  end;
+
+var
+  frmHistoryMutasi: TfrmHistoryMutasi;
+
+implementation
+
+uses
+  unDm, unTools, unAplikasi, unFrmKartuStock;
+
+{$R *.dfm}
+
+procedure TfrmHistoryMutasi.FormShow(Sender: TObject);
+var
+  s: string;
+  q: TZQuery;
+begin
+  inherited;
+   s := FormatFloat('#,#0.00', cxsSA.Value);
+  if DecimalSeparator = '.' then
+    s := StringReplace(s,',','.',[rfReplaceall])
+  else if DecimalSeparator = ',' then begin
+    s := StringReplace(s,'.','',[rfReplaceAll]);
+    s := StringReplace(s,',','.',[rfReplaceAll]);
+  end;
+
+  dm.zConn.ExecuteDirect('call sp_kartustokdetail(''' + mIdBrg + ''',''' + cxlGudang.EditValue + ''',''+ s +'',''' + FormatDateTime('yyyy-mm-dd', cxdTgl1.Date) + ''',''' +  FormatDateTime('yyyy-mm-dd', cxdTgl2.Date) + ''')');
+
+  zqrKS.SQL.Text := 'SELECT * FROM _ks1';
+  zqrKS.Open;
+
+end;
+
+end.

@@ -23,7 +23,7 @@ inherited frmMstSupplier1: TfrmMstSupplier1
       Top = 1
       Width = 810
       Height = 411
-      ActivePage = TabSheet1
+      ActivePage = TabSheet4
       Align = alClient
       TabOrder = 0
       object TabSheet1: TTabSheet

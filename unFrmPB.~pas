@@ -361,6 +361,19 @@ begin
             totHutang := 0; totPPN := 0;
             sNoJ := GetLastFak('jurnal');
             UpdateFaktur(Copy(sNoJ,1,6));
+
+            qj := OpenRS('SELECT * FROM tbl_jurnal WHERE no_jurnal = ''%s''');
+              qj.Insert;
+              qj.FieldByName('no_jurnal').AsString := cxtNoBukti.Text ;
+              qj.FieldByName('tanggal').AsDateTime := Aplikasi.Tanggal;
+              qj.FieldByName('tgljam').AsDateTime := Aplikasi.TanggalServer;
+              qj.FieldByName('keterangan').AsString := 'PENERIMAAN BARANG';
+              qj.FieldByName('f_posted').AsString := '1';
+              qj.FieldByName('user').AsString := Aplikasi.NamaUser;
+              qj.FieldByName('user_dept').AsString := Aplikasi.UserDept;
+              qj.Post;
+              qj.Close;
+
             while not q_sd.Eof do begin
               q_sd.Edit;
               q_sd.FieldByName('no_penerimaan').AsString := sNoPB;
@@ -428,17 +441,7 @@ begin
                brg := OpenRS('SELECT * FROM tbl_barang WHERE kode = ''%s''',
                 [q_sd.FieldByName('kode_brg').AsString]);
 
-                qj := OpenRS('SELECT * FROM tbl_jurnal WHERE no_jurnal = ''%s''');
-              qj.Insert;
-              qj.FieldByName('no_jurnal').AsString := cxtNoBukti.Text ;
-              qj.FieldByName('tanggal').AsDateTime := Aplikasi.Tanggal;
-              qj.FieldByName('tgljam').AsDateTime := Aplikasi.TanggalServer;
-              qj.FieldByName('keterangan').AsString := 'PENERIMAAN BARANG';
-              qj.FieldByName('f_posted').AsString := '1';
-              qj.FieldByName('user').AsString := Aplikasi.NamaUser;
-              qj.FieldByName('user_dept').AsString := Aplikasi.UserDept;
-              qj.Post;
-              qj.Close;
+
 
               // simpan jurnal
               sAkun := GetDefaultAkunBrg(q_sd.FieldByName('kode_brg').AsString,'persediaan');

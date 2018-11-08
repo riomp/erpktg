@@ -26,7 +26,7 @@ inherited frmPemakaianBahan: TfrmPemakaianBahan
       Top = 1
       Width = 1268
       Height = 468
-      ActivePage = cxTabSheet5
+      ActivePage = cxTabSheet1
       Align = alClient
       TabOrder = 0
       ClientRectBottom = 468

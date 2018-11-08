@@ -2,7 +2,9 @@ inherited frmMstCust1: TfrmMstCust1
   Left = 611
   Top = 218
   Height = 620
+  BorderIcons = [biSystemMenu]
   Caption = 'Data Customer'
+  OldCreateOrder = True
   Position = poScreenCenter
   OnMouseWheelDown = FormMouseWheelDown
   OnMouseWheelUp = FormMouseWheelUp
@@ -23,7 +25,7 @@ inherited frmMstCust1: TfrmMstCust1
       Top = 1
       Width = 810
       Height = 437
-      ActivePage = TabSheet1
+      ActivePage = TabSheet2
       Align = alClient
       TabOrder = 0
       object TabSheet1: TTabSheet
@@ -633,6 +635,50 @@ inherited frmMstCust1: TfrmMstCust1
             TabOrder = 76
             Transparent = True
             Width = 121
+          end
+        end
+      end
+      object TabSheet2: TTabSheet
+        Caption = 'Alamat Kirim'
+        ImageIndex = 1
+        DesignSize = (
+          802
+          409)
+        object cxGrid9: TcxGrid
+          Left = 6
+          Top = 19
+          Width = 791
+          Height = 181
+          Anchors = [akLeft, akTop, akRight]
+          TabOrder = 0
+          object cxTblAlamat: TcxGridTableView
+            NavigatorButtons.ConfirmDelete = False
+            DataController.Summary.DefaultGroupSummaryItems = <>
+            DataController.Summary.FooterSummaryItems = <>
+            DataController.Summary.SummaryGroups = <>
+            OptionsView.Navigator = True
+            OptionsView.GroupByBox = False
+            object cxColNama: TcxGridColumn
+              Caption = 'Nama Customer'
+              PropertiesClassName = 'TcxTextEditProperties'
+              Properties.CharCase = ecUpperCase
+              Width = 206
+            end
+            object cxColAlamat: TcxGridColumn
+              Caption = 'Alamat Kirim'
+              PropertiesClassName = 'TcxTextEditProperties'
+              Properties.CharCase = ecUpperCase
+              Width = 422
+            end
+            object cxColKota: TcxGridColumn
+              Caption = 'Kota'
+              PropertiesClassName = 'TcxTextEditProperties'
+              Properties.CharCase = ecUpperCase
+              Width = 148
+            end
+          end
+          object cxGridLevel7: TcxGridLevel
+            GridView = cxTblAlamat
           end
         end
       end

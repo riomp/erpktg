@@ -131,6 +131,8 @@ type
     Button4: TButton;
     DBChart1: TDBChart;
     Series1: TPieSeries;
+    DBChart2: TDBChart;
+    PieSeries1: TPieSeries;
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure Button1Click(Sender: TObject);

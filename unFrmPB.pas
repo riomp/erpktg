@@ -402,7 +402,7 @@ begin
                 FieldByName('tipe').AsString := 'IN_';
                 FieldByName('qty').AsFloat := q_sd.FieldByName('qty').AsFloat;
                 FieldByName('satuan').AsString := q_sd.FieldByName('satuan').AsString;
-                FieldByName('gudang').AsString := 'G01';
+                FieldByName('gudang').AsString := q_sd.FieldByName('gudang').AsString;
                 FieldByName('keterangan').AsString := q_sd.FieldByName('keterangan').AsString;
                 FieldByName('user').AsString := Aplikasi.NamaUser;
                 FieldByName('user_dept').AsString := Aplikasi.UserDept;

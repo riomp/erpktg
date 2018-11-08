@@ -1,0 +1,178 @@
+inherited frmHistoryMutasi: TfrmHistoryMutasi
+  Left = 504
+  Top = 218
+  Width = 1075
+  Height = 740
+  BorderIcons = [biSystemMenu]
+  Caption = 'History Mutasi'
+  Position = poScreenCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlAtas: TPanel
+    Width = 1059
+    Height = 151
+    object cxLabel4: TcxLabel
+      Left = 11
+      Top = 121
+      Caption = 'Saldo awal '
+    end
+    object cxsSA: TcxSpinEdit
+      Left = 95
+      Top = 120
+      Properties.Alignment.Horz = taRightJustify
+      Properties.DisplayFormat = '#,#0.00'
+      Properties.ReadOnly = True
+      TabOrder = 1
+      Width = 120
+    end
+    object cxLabel3: TcxLabel
+      Left = 14
+      Top = 92
+      Caption = 'Gudang'
+    end
+    object cxlGudang: TcxLookupComboBox
+      Left = 95
+      Top = 90
+      Properties.KeyFieldNames = 'kode'
+      Properties.ListColumns = <
+        item
+          FieldName = 'nama'
+        end>
+      Properties.ListSource = dsGudang
+      Properties.ReadOnly = False
+      TabOrder = 3
+      Width = 216
+    end
+    object cxLabel1: TcxLabel
+      Left = 14
+      Top = 62
+      Caption = 'Tanggal'
+    end
+    object cxdTgl1: TcxDateEdit
+      Left = 95
+      Top = 61
+      Properties.ReadOnly = True
+      TabOrder = 5
+      Width = 121
+    end
+    object cxLabel2: TcxLabel
+      Left = 220
+      Top = 62
+      Caption = 'S/D'
+    end
+    object cxdTgl2: TcxDateEdit
+      Left = 248
+      Top = 61
+      Properties.ReadOnly = True
+      TabOrder = 7
+      Width = 121
+    end
+  end
+  inherited pnlTengah: TPanel
+    Top = 151
+    Width = 1059
+    Height = 474
+    Align = alClient
+    object cxGrid1: TcxGrid
+      Left = 1
+      Top = 1
+      Width = 1057
+      Height = 472
+      Align = alClient
+      TabOrder = 0
+      object cxtbKS: TcxGridDBTableView
+        NavigatorButtons.ConfirmDelete = False
+        DataController.DataSource = dsKS
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsBehavior.FocusCellOnTab = True
+        object cxtbKSno_bukti: TcxGridDBColumn
+          Caption = 'No. Bukti'
+          DataBinding.FieldName = 'no_bukti'
+          Width = 87
+        end
+        object cxtbKStanggal: TcxGridDBColumn
+          Caption = 'Tgl. Trans'
+          DataBinding.FieldName = 'tanggal'
+          Width = 89
+        end
+        object cxtbKSColumn1: TcxGridDBColumn
+          Caption = 'Tgl. Input'
+          DataBinding.FieldName = 'tgl_input'
+          Width = 121
+        end
+        object cxColSatuan: TcxGridDBColumn
+          Caption = 'Satuan'
+          DataBinding.FieldName = 'unitid'
+        end
+        object cxtbKSmasuk: TcxGridDBColumn
+          Caption = 'Masuk '
+          DataBinding.FieldName = 'masuk'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.DisplayFormat = '#,#0.00'
+          Width = 84
+        end
+        object cxtbKSkeluar: TcxGridDBColumn
+          Caption = 'Keluar'
+          DataBinding.FieldName = 'keluar'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.DisplayFormat = '#,#0.00'
+          Width = 84
+        end
+        object cxtbKSstok_akhir: TcxGridDBColumn
+          Caption = 'Stok Akhir'
+          DataBinding.FieldName = 'stok_akhir'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.DisplayFormat = '#,#0.00'
+          Width = 88
+        end
+      end
+      object cxGrid1Level1: TcxGridLevel
+        GridView = cxtbKS
+      end
+    end
+  end
+  inherited pnlBawah: TPanel
+    Top = 625
+    Width = 1059
+    Align = alBottom
+    inherited btnKeluar: TButton
+      Left = 17
+    end
+    inherited btnSimpan: TButton
+      Left = 850
+      Top = 15
+      Visible = False
+    end
+  end
+  object zGudang: TZQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      'SELECT * FROM tbl_gudang'
+      'WHERE f_aktif = 1'
+      'ORDER BY nama')
+    Params = <>
+    Left = 554
+    Top = 50
+  end
+  object dsGudang: TDataSource
+    DataSet = zGudang
+    Left = 589
+    Top = 50
+  end
+  object zqrKS: TZReadOnlyQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      'SELECT * FROM _ks1')
+    Params = <>
+    Left = 242
+    Top = 10
+  end
+  object dsKS: TDataSource
+    DataSet = zqrKS
+    Left = 276
+    Top = 10
+  end
+end

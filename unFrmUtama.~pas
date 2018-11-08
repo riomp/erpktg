@@ -1475,9 +1475,22 @@ procedure TfrmUtama.mnMstCustClick(Sender: TObject);
 var
   //f: TfrmMstCust;
   f: TfrmDaftarCustomer;
+   ts : TcxTabSheet ;
 begin
-  f := TfrmDaftarCustomer.Create(Self);
-  f.Show;
+  //f := TfrmDaftarCustomer.Create(Self);
+  //f.Show;
+     if not CekTabOpen('Master Customer') then begin
+    ToggleMainPage;
+    ts := TcxTabSheet.Create(Self);
+    ts.PageControl := pgMain;
+
+    f :=TfrmDaftarCustomer.Create(Self) ;
+    f.Parent := ts;
+    ts.Caption := f.Caption;
+    f.Show;
+
+      pgMain.ActivePage := ts;
+  end;
 end;
 
 procedure TfrmUtama.mnPPIC_MutasiSOClick(Sender: TObject);
@@ -3870,7 +3883,7 @@ begin
   //f := TfrmSalesMobile.Create(Self);
   //f.Show;
 
-   if not CekTabOpen('Daftar Sales Mobile') then begin
+   if not CekTabOpen('Sales Mobile') then begin
     ToggleMainPage;
     ts := TcxTabSheet.Create(Self);
     ts.PageControl := pgMain;

@@ -7,7 +7,7 @@ inherited frmMstBrg_KTG: TfrmMstBrg_KTG
   BorderStyle = bsNone
   Caption = 'Master Barang'
   ClientHeight = 688
-  ClientWidth = 1338
+  ClientWidth = 1330
   OldCreateOrder = True
   Visible = True
   OnMouseWheelDown = FormMouseWheelDown
@@ -15,7 +15,7 @@ inherited frmMstBrg_KTG: TfrmMstBrg_KTG
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlAtas: TPanel
-    Width = 1338
+    Width = 1330
     inherited lblJudul: TLabel
       Width = 119
       Caption = 'Master Barang'
@@ -25,20 +25,19 @@ inherited frmMstBrg_KTG: TfrmMstBrg_KTG
     end
   end
   inherited pnlTengah: TPanel
-    Width = 1338
+    Width = 1330
     Height = 546
     Align = alClient
     inherited pg: TPageControl
-      Width = 1336
+      Width = 1328
       Height = 544
-      ActivePage = TabSheet2
       OnChange = pgChange
       inherited TabSheet1: TTabSheet
         Caption = 'Detail dan Dimensi'
         object ScrollBox1: TScrollBox
           Left = 0
           Top = 0
-          Width = 1328
+          Width = 1320
           Height = 516
           Align = alClient
           BorderStyle = bsNone
@@ -3049,7 +3048,7 @@ inherited frmMstBrg_KTG: TfrmMstBrg_KTG
         Caption = 'BOM'
         ImageIndex = 3
         DesignSize = (
-          1328
+          1320
           516)
         object Label56: TLabel
           Left = 12
@@ -3426,7 +3425,7 @@ inherited frmMstBrg_KTG: TfrmMstBrg_KTG
         object cxGrid9: TcxGrid
           Left = 10
           Top = 315
-          Width = 441
+          Width = 433
           Height = 181
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 5
@@ -5096,7 +5095,7 @@ inherited frmMstBrg_KTG: TfrmMstBrg_KTG
   end
   inherited pnlBawah: TPanel
     Top = 612
-    Width = 1338
+    Width = 1330
     Align = alBottom
     inherited btnHapus: TButton
       OnClick = btnHapusClick

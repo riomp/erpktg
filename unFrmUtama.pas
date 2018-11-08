@@ -730,7 +730,7 @@ uses unFrmSettingSA, unFrmKalkulasiStok, unFrmTrsMasuk, unFrmTrsKeluar,
   unFrmVerifikasiMasterBarang, unFrmSettingDefaultAkun,
   unFrmApprovalPermintaanPembelian, unFrmTrsPermintaanPembelian,
   unFrmInvoicePembelian, unFrmLaporanAcc, unFrmTaxType, unFrmTaxGroup,
-  unFrmPurchaseOrderKTG, unFrmDaftarPP, unFrmDaftarPO, unFrmAppPenambahanBahanDIluarBOM, unFrmLaporanProduksi, unFrmDaftarPenerimaanKas, unFrmDaftarPengeluaranKas, unFrmDaftarJurnalUmum, unFrmDaftarJurnal, unSummaryBalance, unFrmDaftarBankMasuk, unFrmDaftarPengeluaranBank, unFrmDaftarInvoicePembelian, unFrmSettingDefaultAkun2, unFrmNilaiTukar, unFrmDaftarSI, unFrmDaftarPembayaranPembelian, unFrmSaldoAwalAkun, unFrmDaftarSupplier, unFrmDaftarCustomer, unFrmDaftarSO, unFrmDaftarQuotation, unDaftarKPO, unFrmDaftarMTS, unFrmDaftarPenerimaanBarang;
+  unFrmPurchaseOrderKTG, unFrmDaftarPP, unFrmDaftarPO, unFrmAppPenambahanBahanDIluarBOM, unFrmLaporanProduksi, unFrmDaftarPenerimaanKas, unFrmDaftarPengeluaranKas, unFrmDaftarJurnalUmum, unFrmDaftarJurnal, unSummaryBalance, unFrmDaftarBankMasuk, unFrmDaftarPengeluaranBank, unFrmDaftarInvoicePembelian, unFrmSettingDefaultAkun2, unFrmNilaiTukar, unFrmDaftarSI, unFrmDaftarPembayaranPembelian, unFrmSaldoAwalAkun, unFrmDaftarSupplier, unFrmDaftarCustomer, unFrmDaftarSO, unFrmDaftarQuotation, unDaftarKPO, unFrmDaftarMTS, unFrmDaftarPenerimaanBarang, unFrmKartuStock;
 
 {$R *.dfm}
 {$R windowsxp.RES}
@@ -1144,10 +1144,24 @@ end;
 
 procedure TfrmUtama.mnStokBrgClick(Sender: TObject);
 var
-  f: TfrmStokMstBrg;
+  f: TfrmKartuStock;
+  ts : TcxTabSheet ;
 begin
-  f := TfrmStokMstBrg.Create(Self);
-  f.Show;
+ // f := TfrmStokMstBrg.Create(Self);
+  //f.Show;
+
+      if not CekTabOpen('Stock Barang') then begin
+    ToggleMainPage;
+    ts := TcxTabSheet.Create(Self);
+    ts.PageControl := pgMain;
+
+    f :=TfrmKartuStock.Create(Self) ;
+    f.Parent := ts;
+    ts.Caption := f.Caption;
+    f.Show;
+
+      pgMain.ActivePage := ts;
+  end;
 end;
 
 procedure TfrmUtama.FormCreate(Sender: TObject);
@@ -1475,9 +1489,22 @@ procedure TfrmUtama.mnMstCustClick(Sender: TObject);
 var
   //f: TfrmMstCust;
   f: TfrmDaftarCustomer;
+   ts : TcxTabSheet ;
 begin
-  f := TfrmDaftarCustomer.Create(Self);
-  f.Show;
+  //f := TfrmDaftarCustomer.Create(Self);
+  //f.Show;
+     if not CekTabOpen('Master Customer') then begin
+    ToggleMainPage;
+    ts := TcxTabSheet.Create(Self);
+    ts.PageControl := pgMain;
+
+    f :=TfrmDaftarCustomer.Create(Self) ;
+    f.Parent := ts;
+    ts.Caption := f.Caption;
+    f.Show;
+
+      pgMain.ActivePage := ts;
+  end;
 end;
 
 procedure TfrmUtama.mnPPIC_MutasiSOClick(Sender: TObject);

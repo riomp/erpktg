@@ -161,6 +161,53 @@ inherited frmSalesMobile: TfrmSalesMobile
             PieValues.ValueSource = 'activity'
           end
         end
+        object DBChart2: TDBChart
+          Left = 975
+          Top = 65
+          Width = 601
+          Height = 381
+          AllowPanning = pmNone
+          AllowZoom = False
+          BackWall.Brush.Color = clWhite
+          BackWall.Brush.Style = bsClear
+          BackWall.Pen.Visible = False
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clBlue
+          Title.Font.Height = -24
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Title.Frame.Width = 3
+          Title.Text.Strings = (
+            'Cost Operasional')
+          AxisVisible = False
+          ClipPoints = False
+          Frame.Visible = False
+          LeftAxis.LabelsMultiLine = True
+          LeftAxis.Visible = False
+          Legend.Visible = False
+          View3DOptions.Elevation = 315
+          View3DOptions.Orthogonal = False
+          View3DOptions.Perspective = 0
+          View3DOptions.Rotation = 360
+          View3DWalls = False
+          TabOrder = 7
+          object PieSeries1: TPieSeries
+            Marks.ArrowLength = 8
+            Marks.Style = smsLabelValue
+            Marks.Visible = True
+            DataSource = zD1
+            SeriesColor = clRed
+            Title = 'Cost'
+            XLabelsSource = 'nama'
+            Circled = True
+            OtherSlice.Text = 'Other'
+            PieValues.DateTime = False
+            PieValues.Name = 'Pie'
+            PieValues.Multiplier = 1.000000000000000000
+            PieValues.Order = loNone
+            PieValues.ValueSource = 'cost'
+          end
+        end
       end
       inherited TabSheet2: TTabSheet
         Caption = 'Sales Activity'

@@ -9,7 +9,9 @@ uses
   dxSkinsDefaultPainters, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, cxSpinEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
   cxMaskEdit, cxDropDownEdit, cxCheckBox, cxTextEdit, cxLabel, ComCtrls,
-  StdCtrls, ExtCtrls;
+  StdCtrls, ExtCtrls, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter,
+  cxData, cxDataStorage, cxGridLevel, cxGridCustomTableView,
+  cxGridTableView, cxClasses, cxGridCustomView, cxGrid;
 
 type
   TfrmMstCust1 = class(TfrmTplTrans)
@@ -107,6 +109,13 @@ type
     dsSatuan: TDataSource;
     zSales: TZQuery;
     dsSales: TDataSource;
+    TabSheet2: TTabSheet;
+    cxGrid9: TcxGrid;
+    cxTblAlamat: TcxGridTableView;
+    cxColNama: TcxGridColumn;
+    cxColAlamat: TcxGridColumn;
+    cxGridLevel7: TcxGridLevel;
+    cxColKota: TcxGridColumn;
     procedure FormCreate(Sender: TObject);
     procedure cxlAkunPropertiesChange(Sender: TObject);
     procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
@@ -191,8 +200,9 @@ end;
 
 procedure TfrmMstCust1.FormShow(Sender: TObject);
 var
-  q, qstok: TZQuery;
+  q, qstok,z: TZQuery;
   Stream: TMemoryStream;
+  i : Integer ;
   //jpg: TJPEGImage;
 begin
   inherited;
@@ -251,6 +261,19 @@ begin
     cxtNoAkun.Text := q.FieldByName('akun_piutang').AsString;
 
     q.Close;
+
+    z := OpenRS('SELECT * FROM tbl_alamat_kirim1 where kode_customer =''%s''',[cxtKode.Text]) ;
+    while not z.Eof do begin
+      with cxTblAlamat.DataController do begin
+       i := AppendRecord ;
+       Values[i, cxColNama.Index] := z.FieldByName('nama').AsString ;
+       Values[i, cxColAlamat.index] := z.FieldByName('alamat').AsString;
+       Values[i, cxColKota.Index] := z.FieldByName('kota').AsString;
+
+      end;
+      z.Next;
+    end;
+    z.Close;
   end;
 end;
 
@@ -259,7 +282,7 @@ var
   f: boolean;
   i: Integer;
   tbl_sa: TZTable;
-  q, qSA: TZQuery;
+  q, qSA,z: TZQuery;
 begin
   if pg.ActivePageIndex <> 0 then pg.ActivePageIndex := 0;
 
@@ -299,7 +322,33 @@ begin
       else begin
         tbl.Locate('kode',cxtKode.Text,[loCaseInsensitive]);
         tbl.Edit;
+
+        try
+          dm.zConn.StartTransaction;
+          dm.zConn.ExecuteDirect('DELETE FROM tbl_alamat_kirim1 WHERE kode_customer = ''' + cxtKode.Text + '''');
+          dm.zConn.Commit;
+        except
+          on E: Exception do begin
+            MsgBox('Error: ' + E.Message);
+            dm.zConn.Rollback;
+          end;
+        end;
+
       end;
+    end;
+
+    with cxTblAlamat.DataController  do begin
+    for i := 0 to cxTblAlamat.DataController.RowCount -1 do begin
+     z := OpenRS('SELECT * FROM tbl_alamat_kirim1 where kode_customer =''%s''',
+        [cxtKode.Text]) ;
+     z.Insert;
+     z.FieldByName('kode_customer').AsString := cxtKode.Text;
+     z.FieldByName('nama').AsString := Values[i, cxColnama.Index] ;
+     z.FieldByName('alamat').AsString := Values[i, cxColAlamat.Index] ;
+     z.FieldByName('kota').AsString := Values[i, cxColKota.Index];
+     z.Post;
+     z.Close;
+    end;
     end;
 
     if f then begin
