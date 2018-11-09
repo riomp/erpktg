@@ -69,7 +69,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Left = 382
       Top = 3
       Caption = 'User Requesting'
-      TabOrder = 24
+      TabOrder = 1
       Height = 89
       Width = 233
       object cxLabel19: TcxLabel
@@ -87,7 +87,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
           end>
         Properties.ListSource = dsDivisi
         Properties.ReadOnly = True
-        TabOrder = 1
+        TabOrder = 3
         Width = 137
       end
       object cxLabel18: TcxLabel
@@ -101,7 +101,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
         Top = 20
         Properties.CharCase = ecUpperCase
         Properties.ReadOnly = True
-        TabOrder = 3
+        TabOrder = 0
         Width = 137
       end
     end
@@ -115,7 +115,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Left = 102
       Top = 33
       Properties.ReadOnly = True
-      TabOrder = 0
+      TabOrder = 6
       Width = 144
     end
     object cxLabel6: TcxLabel
@@ -127,7 +127,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Left = 102
       Top = 81
       Properties.ReadOnly = False
-      TabOrder = 3
+      TabOrder = 8
       Width = 121
     end
     object btnTambah: TButton
@@ -136,7 +136,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Width = 75
       Height = 25
       Caption = '&Tambah'
-      TabOrder = 12
+      TabOrder = 23
       Visible = False
       OnClick = btnTambahClick
     end
@@ -167,7 +167,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Properties.ListOptions.SyncMode = True
       Properties.ListSource = dsSupp
       Properties.OnEditValueChanged = cxLUSuppPropertiesEditValueChanged
-      TabOrder = 5
+      TabOrder = 12
       Width = 472
     end
     object cxLabel10: TcxLabel
@@ -179,7 +179,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Left = 102
       Top = 182
       Properties.ReadOnly = False
-      TabOrder = 9
+      TabOrder = 21
       Width = 121
     end
     object cxLabel13: TcxLabel
@@ -192,7 +192,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Top = 131
       Properties.CharCase = ecUpperCase
       Style.Color = clSkyBlue
-      TabOrder = 11
+      TabOrder = 16
       Width = 389
     end
     object cxmTemplate: TcxMemo
@@ -316,7 +316,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
         '</pre>'
         '</BODY>'
         '</HTML>')
-      TabOrder = 1
+      TabOrder = 0
       Visible = False
       Height = 89
       Width = 185
@@ -340,7 +340,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Left = 1333
       Top = 203
       Properties.ValueType = vtFloat
-      TabOrder = 14
+      TabOrder = 25
       Visible = False
       OnKeyPress = cxsQtyKeyPress
       Width = 78
@@ -351,7 +351,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Width = 20
       Height = 21
       Caption = '...'
-      TabOrder = 6
+      TabOrder = 13
       OnClick = btnCariSuppClick
     end
     object pnlMemo: TPanel
@@ -361,7 +361,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Height = 321
       Caption = 'pnlMemo'
       Color = clSkyBlue
-      TabOrder = 2
+      TabOrder = 5
       Visible = False
       OnExit = pnlMemoExit
       object btnSimpanKet: TButton
@@ -399,7 +399,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Left = 102
       Top = 207
       Properties.DropDownListStyle = lsEditFixedList
-      TabOrder = 10
+      TabOrder = 27
       Width = 219
     end
     object btnCariBrg: TButton
@@ -408,7 +408,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Width = 20
       Height = 21
       Caption = '...'
-      TabOrder = 13
+      TabOrder = 24
       Visible = False
       OnClick = btnCariBrgClick
     end
@@ -438,7 +438,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
         end>
       Properties.ListOptions.SyncMode = True
       Properties.ListSource = dsAlmKirim
-      TabOrder = 8
+      TabOrder = 19
       Width = 472
     end
     object btnCariAlamatKirim: TButton
@@ -447,7 +447,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Width = 20
       Height = 21
       Caption = '...'
-      TabOrder = 7
+      TabOrder = 18
       OnClick = btnCariAlamatKirimClick
     end
     object cxtNoFOBJ: TcxTextEdit
@@ -455,7 +455,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Left = 234
       Top = 81
       Properties.ReadOnly = True
-      TabOrder = 15
+      TabOrder = 9
       Width = 121
     end
     object cxLabel4: TcxLabel
@@ -480,7 +480,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
         end>
       Properties.ListSource = dsPP
       Properties.OnChange = cxlNoPPPropertiesChange
-      TabOrder = 26
+      TabOrder = 2
       Width = 145
     end
     object cxGrid1: TcxGrid
@@ -488,7 +488,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Top = 235
       Width = 1151
       Height = 246
-      TabOrder = 27
+      TabOrder = 30
       object cxTbl: TcxGridTableView
         NavigatorButtons.ConfirmDelete = False
         NavigatorButtons.Insert.Visible = False
@@ -653,7 +653,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Properties.EditFormat = '#,#0.00'
       Properties.ReadOnly = True
       Properties.ValueType = vtFloat
-      TabOrder = 28
+      TabOrder = 29
       Visible = False
       Width = 121
     end
@@ -662,14 +662,14 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Top = 105
       Caption = 'Keterangan'
       Properties.Items = <>
-      TabOrder = 29
+      TabOrder = 11
       Height = 121
       Width = 371
     end
     object cxtCritical: TcxMemo
       Left = 635
       Top = 120
-      TabOrder = 30
+      TabOrder = 15
       Height = 96
       Width = 351
     end
@@ -687,7 +687,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
     inherited btnKeluar: TButton [1]
       Left = 1076
       Top = 8
-      TabOrder = 3
+      TabOrder = 7
     end
     inherited btnBaru: TButton [2]
       Left = 995
@@ -725,7 +725,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Width = 107
       Height = 25
       Caption = 'Cetak PO (Internal)'
-      TabOrder = 7
+      TabOrder = 3
       Visible = False
       OnClick = btnCetakPOInternalClick
     end

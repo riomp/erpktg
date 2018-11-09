@@ -169,7 +169,7 @@ var
 implementation
 
 uses unFrmCari, unTools, unDm, unFrmUtama, unThreadKirimEmail,
-  unFrmLapUmum, unAplikasi, unFrmDaftarPO, unFrmReceivePO;
+  unFrmLapUmum, unAplikasi, unFrmDaftarPO;
 
 const
   CHAPUS: integer = 0;

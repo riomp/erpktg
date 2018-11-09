@@ -169,7 +169,7 @@ var
 implementation
 
 uses unFrmCari, unTools, unDm, unFrmUtama, unThreadKirimEmail,
-  unFrmLapUmum, unAplikasi, unFrmDaftarPO, unFrmReceivePO;
+  unFrmLapUmum, unAplikasi, unFrmDaftarPO;
 
 const
   CHAPUS: integer = 0;
@@ -254,11 +254,12 @@ end;
 
 procedure TfrmPurchaseOrderKTG.btnBaruClick(Sender: TObject);
 var
-  f : TfrmReceivePO ;
+  //f : TfrmReceivePO ;
   i : Integer;
   qh : TZQuery ;
 begin
   inherited;
+  {
 //  cxtNOTrans.Text := GetLastFak('brg_in');
  // Self.Jenis := 'tambah';
  qh := OpenRS('select a.no_bukti,a.tanggal,a.no_po,b.kode_brg,c.deskripsi,b.qty_po,b.qty,b.satuan ' +
@@ -287,7 +288,7 @@ begin
    if VarIsNull(f.cxTblPO.DataController.Summary.FooterSummaryValues[0]) then  f.cxSpinEdit1.EditValue := f.cxsQty.EditValue else
   f.cxSpinEdit1.EditValue := (f.cxsQty.EditValue - f.cxTblPO.DataController.Summary.FooterSummaryValues[0]);
   f.ShowModal;
-
+  }
 end;
 
 function TfrmPurchaseOrderKTG.CekKodeBrg(sKodeBrg : String; Row: Integer) : Boolean;
