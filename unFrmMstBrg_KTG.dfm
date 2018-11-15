@@ -31,7 +31,7 @@ inherited frmMstBrg_KTG: TfrmMstBrg_KTG
     inherited pg: TPageControl
       Width = 1328
       Height = 544
-      ActivePage = TabSheet3
+      ActivePage = TabSheet2
       OnChange = pgChange
       inherited TabSheet1: TTabSheet
         Caption = 'Detail dan Dimensi'
@@ -2588,6 +2588,13 @@ inherited frmMstBrg_KTG: TfrmMstBrg_KTG
             Height = 13
             Caption = 'KG/Jam'
           end
+          object Label85: TLabel
+            Left = 624
+            Top = 242
+            Width = 75
+            Height = 13
+            Caption = 'Default Gudang'
+          end
           object cxsMinTSTD: TcxSpinEdit
             Left = 224
             Top = 40
@@ -2923,6 +2930,18 @@ inherited frmMstBrg_KTG: TfrmMstBrg_KTG
             Properties.ValueType = vtFloat
             TabOrder = 35
             Width = 97
+          end
+          object cxlGudang: TcxLookupComboBox
+            Left = 705
+            Top = 240
+            Properties.KeyFieldNames = 'kode'
+            Properties.ListColumns = <
+              item
+                FieldName = 'nama'
+              end>
+            Properties.ListSource = dsGudang
+            TabOrder = 36
+            Width = 151
           end
         end
         object cxGroupBox5: TcxGroupBox
@@ -5098,6 +5117,9 @@ inherited frmMstBrg_KTG: TfrmMstBrg_KTG
     Top = 612
     Width = 1330
     Align = alBottom
+    inherited btnKeluar: TButton
+      Visible = False
+    end
     inherited btnHapus: TButton
       OnClick = btnHapusClick
     end
@@ -5446,5 +5468,19 @@ inherited frmMstBrg_KTG: TfrmMstBrg_KTG
     DataSet = zqrAfval
     Left = 1213
     Top = 361
+  end
+  object zqrGudang: TZQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      'SELECT * FROM tbl_gudang'
+      '')
+    Params = <>
+    Left = 1058
+    Top = 23
+  end
+  object dsGudang: TDataSource
+    DataSet = zqrGudang
+    Left = 1083
+    Top = 23
   end
 end

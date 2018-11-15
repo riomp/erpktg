@@ -1040,7 +1040,7 @@ begin
       'IFNULL((SELECT SUM(qty) FROM tbl_trskeluar_det WHERE kode_brg = a.kode_brg AND no_spk = a.no_spk),0) qty_ambil ' +
       'FROM tbl_bom_det a ' +
       'LEFT JOIN tbl_barang b ON a.kode_brg = b.kode ' +
-      'WHERE no_spk = ''%s''',[sNoSPK]);
+      'WHERE left(a.kode_brg,1)<>"B" and no_spk = ''%s''',[sNoSPK]);
 
     cxTblPBDet.DataController.RecordCount := 0;
 

@@ -1,8 +1,8 @@
 inherited frmHistoryMutasi: TfrmHistoryMutasi
-  Left = 504
-  Top = 218
-  Width = 1025
-  Height = 667
+  Left = 489
+  Top = 186
+  Width = 681
+  Height = 740
   BorderIcons = [biSystemMenu]
   Caption = 'History Mutasi'
   Position = poScreenCenter
@@ -10,16 +10,16 @@ inherited frmHistoryMutasi: TfrmHistoryMutasi
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlAtas: TPanel
-    Width = 1009
-    Height = 96
+    Width = 665
+    Height = 151
     object cxLabel4: TcxLabel
-      Left = 16
-      Top = 56
+      Left = 11
+      Top = 121
       Caption = 'Saldo awal '
     end
     object cxsSA: TcxSpinEdit
-      Left = 80
-      Top = 55
+      Left = 95
+      Top = 120
       Properties.Alignment.Horz = taRightJustify
       Properties.DisplayFormat = '#,#0.00'
       Properties.ReadOnly = True
@@ -27,13 +27,13 @@ inherited frmHistoryMutasi: TfrmHistoryMutasi
       Width = 120
     end
     object cxLabel3: TcxLabel
-      Left = 224
-      Top = 57
+      Left = 14
+      Top = 92
       Caption = 'Gudang'
     end
     object cxlGudang: TcxLookupComboBox
-      Left = 280
-      Top = 55
+      Left = 95
+      Top = 90
       Properties.KeyFieldNames = 'kode'
       Properties.ListColumns = <
         item
@@ -44,17 +44,41 @@ inherited frmHistoryMutasi: TfrmHistoryMutasi
       TabOrder = 3
       Width = 216
     end
+    object cxLabel1: TcxLabel
+      Left = 14
+      Top = 62
+      Caption = 'Tanggal'
+    end
+    object cxdTgl1: TcxDateEdit
+      Left = 95
+      Top = 61
+      Properties.ReadOnly = True
+      TabOrder = 5
+      Width = 121
+    end
+    object cxLabel2: TcxLabel
+      Left = 220
+      Top = 62
+      Caption = 'S/D'
+    end
+    object cxdTgl2: TcxDateEdit
+      Left = 248
+      Top = 61
+      Properties.ReadOnly = True
+      TabOrder = 7
+      Width = 121
+    end
   end
   inherited pnlTengah: TPanel
-    Top = 96
-    Width = 1009
-    Height = 456
+    Top = 151
+    Width = 665
+    Height = 474
     Align = alClient
     object cxGrid1: TcxGrid
       Left = 1
       Top = 1
-      Width = 1007
-      Height = 454
+      Width = 663
+      Height = 472
       Align = alClient
       TabOrder = 0
       object cxtbKS: TcxGridDBTableView
@@ -111,8 +135,8 @@ inherited frmHistoryMutasi: TfrmHistoryMutasi
     end
   end
   inherited pnlBawah: TPanel
-    Top = 552
-    Width = 1009
+    Top = 625
+    Width = 665
     Align = alBottom
     inherited btnKeluar: TButton
       Left = 17

@@ -252,7 +252,6 @@ uses
   unFrmScheduleKirimPP in 'unFrmScheduleKirimPP.pas' {frmScheduleKriripPP},
   unFrmSchedulePP in 'unFrmSchedulePP.pas' {frmSchedulePP},
   unFrmLaporanProduksi in 'Produksi\unFrmLaporanProduksi.pas' {frmLaporanProduksi},
-  unFrmReceivePO in '..\ERP Trial\ACC\unFrmReceivePO.pas' {frmReceivePO},
   unFrmDaftarPenerimaanKas in 'ACC\unFrmDaftarPenerimaanKas.pas' {frmDaftarTerimaKas},
   unFrmPenerimaanKas3 in 'ACC\unFrmPenerimaanKas3.pas' {frmPenerimaanKas},
   unFrmDaftarPengeluaranKas in 'ACC\unFrmDaftarPengeluaranKas.pas' {frmDaftarKeluarKas},

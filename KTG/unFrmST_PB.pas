@@ -402,7 +402,7 @@ var
   lst, lstQ, lstQ2, lstSPK, lstBrg, lstQtyProd,
   lstSat, lstSO: TStringList;
   i,j: Integer;
-  q, qh, qd, qprod, h, qbh, qbd, qj, qjd: TZQuery;
+  q, qh, qd, qprod, h, qbh, qbd, qj, qjd, qgudang: TZQuery;
   chk, sNoTrs, sNoJ, AD, AK, KodeBrg, sAkun: string;
   qtyProd: Real;
 begin
@@ -465,12 +465,13 @@ begin
         qd.FieldByName('no_spk').AsString := q.FieldByName('no_spk').AsString;
         qd.Post;
 
+        qgudang := OpenRS('SELECT gudang FROM tbl_barang WHERE kode= ''%s''',[q.FieldByName('kode_brg').AsString]);
         h.Insert;
         h.FieldByName('no_bukti').AsString := sNoTrs;
         h.FieldByName('tanggal').AsDateTime := Aplikasi.TanggalServer;
         h.FieldByName('jam').AsDateTime := Aplikasi.ServerTime;
         h.FieldByName('kode_brg').AsString := q.FieldByName('kode_brg').AsString;
-        h.FieldByName('tipe').AsString := 'OUT_';
+        h.FieldByName('tipe').AsString := 'IN_';
         h.FieldByName('qty').AsFloat := q.FieldByName('qty').AsFloat;
         h.FieldByName('satuan').AsString := q.FieldByName('satuan').AsString;
         h.FieldByName('gudang').AsString := 'G-PRD';
@@ -479,9 +480,30 @@ begin
         h.FieldByName('no_so').AsString := q.FieldByName('no_so').AsString;
         h.FieldByName('no_spk').AsString := q.FieldByname('no_spk').AsString;
         h.FieldByName('tgl_input').AsDateTime := Aplikasi.NowServer;
+        h.FieldByName('harga').AsFloat := GetHPP(q.FieldByName('kode_brg').AsString);
         h.FieldByName('hpp').AsFloat := GetHPP(q.FieldByName('kode_brg').AsString);
         h.FieldByName('unit_ktg').AsString := GetUnitKTG(q.FieldByName('kode_brg').AsString);
         h.Post;
+
+        h.Insert;
+        h.FieldByName('no_bukti').AsString := sNoTrs;
+        h.FieldByName('tanggal').AsDateTime := Aplikasi.TanggalServer;
+        h.FieldByName('jam').AsDateTime := Aplikasi.ServerTime;
+        h.FieldByName('kode_brg').AsString := q.FieldByName('kode_brg').AsString;
+        h.FieldByName('tipe').AsString := 'OUT_';
+        h.FieldByName('qty').AsFloat := q.FieldByName('qty').AsFloat;
+        h.FieldByName('satuan').AsString := q.FieldByName('satuan').AsString;
+        h.FieldByName('gudang').AsString := qgudang.FieldByName('gudang').AsString;
+        h.FieldByName('user').AsString := Aplikasi.NamaUser;
+        h.FieldByName('user_dept').AsString := Aplikasi.UserDept;
+        h.FieldByName('no_so').AsString := q.FieldByName('no_so').AsString;
+        h.FieldByName('no_spk').AsString := q.FieldByname('no_spk').AsString;
+        h.FieldByName('tgl_input').AsDateTime := Aplikasi.NowServer;
+        h.FieldByName('hpp').AsFloat := GetHPP(q.FieldByName('kode_brg').AsString);
+        h.FieldByName('unit_ktg').AsString := GetUnitKTG(q.FieldByName('kode_brg').AsString);
+        h.Post;
+
+        qgudang.Close;
 
        { qbh := OpenRS('SELECT * FROM tbl_barang WHERE kode = ''%s''',[q.FieldByName('kode_brg').AsString]);
         qbh.Edit;

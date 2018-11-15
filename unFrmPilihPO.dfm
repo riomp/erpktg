@@ -96,7 +96,7 @@ object frmPilihPO: TfrmPilihPO
             FieldName = 'nama'
           end>
         Properties.ListSource = dsGdg
-        Width = 114
+        Width = 162
       end
       object cxColJmlTerima: TcxGridColumn
         Caption = 'Jml. Datang'

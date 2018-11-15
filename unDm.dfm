@@ -18,6 +18,7 @@ object dm: Tdm
     AutoEncodeStrings = False
     Properties.Strings = (
       'compress=1')
+    Connected = True
     DesignConnection = True
     HostName = '192.168.1.201'
     Port = 0

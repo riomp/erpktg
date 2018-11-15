@@ -92,7 +92,7 @@ object frmPilihPO: TfrmPilihPO
         Properties.ListColumns = <
           item
             Caption = 'Gudang'
-            Fixed = True
+            Width = 70
             FieldName = 'nama'
           end>
         Properties.ListSource = dsGdg

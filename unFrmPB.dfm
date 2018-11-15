@@ -126,7 +126,7 @@ inherited frmPenerimaanBarang: TfrmPenerimaanBarang
           Caption = 'Harga'
           DataBinding.ValueType = 'Float'
           PropertiesClassName = 'TcxSpinEditProperties'
-          Properties.DisplayFormat = '#,##.00'
+          Properties.DisplayFormat = '#,##0.00'
           Properties.ReadOnly = True
           Properties.ValueType = vtFloat
           Visible = False
@@ -171,11 +171,9 @@ inherited frmPenerimaanBarang: TfrmPenerimaanBarang
           Caption = 'Total'
           DataBinding.ValueType = 'Float'
           PropertiesClassName = 'TcxSpinEditProperties'
-          Properties.DisplayFormat = '#,##.00'
-          Properties.ReadOnly = False
+          Properties.DisplayFormat = '#,##0.00'
           Properties.ValueType = vtFloat
           Visible = False
-          Options.Editing = False
           Width = 112
         end
         object cxColIdSatuan: TcxGridColumn

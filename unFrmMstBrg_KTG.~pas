@@ -673,6 +673,10 @@ type
     cxColKonversi: TcxGridColumn;
     cxColSatuan: TcxGridColumn;
     cxGridLevel8: TcxGridLevel;
+    Label85: TLabel;
+    zqrGudang: TZQuery;
+    dsGudang: TDataSource;
+    cxlGudang: TcxLookupComboBox;
     procedure btnTambahClick(Sender: TObject);
     procedure btnEditClick(Sender: TObject);
     procedure btnSimpanClick(Sender: TObject);
@@ -1121,6 +1125,7 @@ begin
       FieldByName('bentuk').Value := cxCmbBentuk.Text;
       FieldByName('kode_supplier').Value := cxlSupplier.EditValue;
       FieldByName('unit_ktg').AsString := cxlUnitKTG.Text;
+      FieldByName('gudang').AsString := cxlGudang.EditValue;
 
       // Treat & Cylinder
       FieldByName('b_stok').AsFloat := cxspBufer.EditValue ;
@@ -1594,6 +1599,7 @@ begin
     cxsStandar.EditValue      := FieldByName('standar_roll').AsFloat;
     cxtInline.Text            := FieldByName('inline').AsString;
     cxlAfval.EditValue        := FieldByName('kode_afval').AsString;
+    cxlGudang.EditValue       := FieldByName('gudang').AsString;
 
     cxlMesin.EditValue        := FieldByName('kode_mesin').asString;
     cxsSpeed.EditValue        := FieldByName('speed').AsFloat;
@@ -2158,6 +2164,7 @@ begin
   zqrAfval.Open ;
   zqrAkunJB.Open ;
   zqrCoa.Open;
+  zqrGudang.Open;
 
   Pg.Pages[4].TabVisible := False ;
 

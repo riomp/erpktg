@@ -198,6 +198,7 @@ inherited frmKartuStock: TfrmKartuStock
         end
         object cxColBuffer: TcxGridDBColumn
           DataBinding.FieldName = 'buffer'
+          Visible = False
         end
       end
       object cxGrid1Level1: TcxGridLevel
@@ -210,7 +211,13 @@ inherited frmKartuStock: TfrmKartuStock
     Width = 1117
     Align = alBottom
     inherited btnKeluar: TButton
+      Left = 1012
       Visible = False
+    end
+    inherited btnBaru: TButton
+      Left = 95
+      Caption = '&History Value'
+      Visible = True
     end
     inherited btnSimpan: TButton
       Caption = 'History'
@@ -220,7 +227,7 @@ inherited frmKartuStock: TfrmKartuStock
     Connection = dm.zConn
     SQL.Strings = (
       'SELECT * FROM tbl_gudang'
-      'WHERE f_aktif = 1'
+      'WHERE f_aktif = 1 and kode<>'#39'G-NON'#39
       'ORDER BY nama')
     Params = <>
     Left = 164

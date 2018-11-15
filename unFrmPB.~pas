@@ -181,6 +181,7 @@ var
   cx: TcxGridTableView;
   i,j: Integer;
   qhrg, qbrg: TZQuery;
+  t1,t2 : Real;
 begin
   inherited;
   if cxlSupp.Text = '' then Abort;
@@ -210,13 +211,25 @@ begin
           cxtbPB.DataController.Values[j, cxColSatuan.Index] := Values[i, f.cxColSatuan.Index];
           //cxtbPB.DataController.Values[j, cxColIdSatuan.Index] := Values[i, f.cxColIdSatuan.Index];
 
-          qhrg := OpenRS('SELECT harga FROM tbl_po_det WHERE no_bukti = ''%s'' AND kode_brg = ''%s''',
+          qhrg := OpenRS('SELECT pajak,harga FROM tbl_po_det WHERE no_bukti = ''%s'' AND kode_brg = ''%s''',
             [Values[i, f.cxColNoPO.Index], Values[i, f.cxColIdBrg.Index]]);
           cxtbPB.DataController.Values[j, cxColHarga.Index] := qhrg.FieldByname('harga').AsFloat;
+          cxtbPB.DataController.Values[j, cxColPPn.Index] := qhrg.FieldByname('pajak').AsString;
+
+          if cxtbPB.DataController.Values[j, cxColPPn.Index]='PPN' then begin
+             t1 := (qhrg.FieldByname('harga').AsFloat * cxtbPB.DataController.Values[j, cxColQtyDatang.Index]) ;
+             t2 := t1 * (10/100);
+             cxtbPB.DataController.Values[j, cxColTotal.Index] := t1 + t2;
+          end
+          else begin
+              cxtbPB.DataController.Values[j, cxColTotal.Index] :=
+            qhrg.FieldByname('harga').AsFloat * cxtbPB.DataController.Values[j, cxColQtyDatang.Index];
+          end;
+
           qhrg.Close;
 
-          cxtbPB.DataController.Values[j, cxColTotal.Index] :=
-            cxtbPB.DataController.Values[j, cxColHarga.Index] * cxtbPB.DataController.Values[j, cxColQtyTerima.Index];
+
+
         end;
       end;
       //HitungTotal;
@@ -380,11 +393,12 @@ begin
               q_sd.FieldByName('f_posted').AsInteger := 1;
               q_sd.Post;
 
-              q_sa := OpenRS('SELECT sf_get_stokakhir(''%s'') sa',[q_sd.FieldByName('kode_brg').AsString]);
+              q_sa := OpenRS('SELECT sf_get_stokakhir_all(''%s'',''%s'') sa',[q_sd.FieldByName('kode_brg').AsString,q_sd.FieldByName('gudang').AsString]);
               sAkhir := q_sa.FieldByName('sa').AsFloat;
               q_sa.Close;
 
-              q_sa := OpenRS('SELECT sf_get_hppakhir(''%s'') hpp',[q_sd.FieldByName('kode_brg').AsString]);
+              //q_sa := OpenRS('SELECT sf_get_hppakhir(''%s'') hpp',[q_sd.FieldByName('kode_brg').AsString]);
+               q_sa := OpenRS('SELECT sf_get_hpp(''%s'') hpp',[q_sd.FieldByName('kode_brg').AsString]);
               hpp_akhir := q_sa.FieldByName('hpp').AsFloat;
               q_sa.Close;
 
@@ -402,7 +416,7 @@ begin
                 FieldByName('tipe').AsString := 'IN_';
                 FieldByName('qty').AsFloat := q_sd.FieldByName('qty').AsFloat;
                 FieldByName('satuan').AsString := q_sd.FieldByName('satuan').AsString;
-                FieldByName('gudang').AsString := 'G01';
+                FieldByName('gudang').AsString := q_sd.FieldByName('gudang').AsString;
                 FieldByName('keterangan').AsString := q_sd.FieldByName('keterangan').AsString;
                 FieldByName('user').AsString := Aplikasi.NamaUser;
                 FieldByName('user_dept').AsString := Aplikasi.UserDept;
@@ -567,7 +581,7 @@ begin
 
 
           in_head.Post;
-
+           
           // simpan in_det
         with cxtbPB.DataController do begin
           for i := 0 to RecordCount - 1 do begin
@@ -578,6 +592,7 @@ begin
             in_det.FieldByname('qty_po').AsFloat := Values[i, cxColQtyPO.Index];
             in_det.FieldByname('qty').AsFloat := Values[i, cxColQtyDatang.Index];
             in_det.FieldByName('satuan').AsString := Values[i, cxColSatuan.Index];
+            in_det.FieldByName('pajak').AsString := Values[i, cxColPPn.Index];
             in_det.FieldByName('harga').AsFloat := Values[i, cxColHarga.Index];
             in_det.FieldByName('sub_total').AsFloat := Values[i, cxColTotal.Index];
             if not VarIsNull(Values[i, cxColKeterangan.Index]) then

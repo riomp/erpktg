@@ -69,8 +69,7 @@ begin
     s := StringReplace(s,'.','',[rfReplaceAll]);
     s := StringReplace(s,',','.',[rfReplaceAll]);
   end;
-
-  dm.zConn.ExecuteDirect('call sp_kartustokdetail(''' + mIdBrg + ''',''' + cxlGudang.EditValue + ''',''+ s +'',''' + FormatDateTime('yyyy-mm-dd', cxdTgl1.Date) + ''',''' +  FormatDateTime('yyyy-mm-dd', cxdTgl2.Date) + ''')');
+  dm.zConn.ExecuteDirect('call sp_kartustokdetail(''' + mIdBrg + ''',''' + cxlGudang.EditValue + ''','''+ s +''',''' + FormatDateTime('yyyy-mm-dd', cxdTgl1.Date) + ''',''' +  FormatDateTime('yyyy-mm-dd', cxdTgl2.Date) + ''')');
 
   zqrKS.SQL.Text := 'SELECT * FROM _ks1';
   zqrKS.Open;

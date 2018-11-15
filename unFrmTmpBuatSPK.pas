@@ -270,7 +270,11 @@ begin
       Values[i, cxCollockGroup.Index] := b.FieldByName('l_group').Value;
       Values[i, cxColSub.Index] := b.FieldByName('kelompok').Value;
 
-      c := OpenRS('SELECT * FROM tbl_barang_det WHERE kode_brg = ''%s'' AND kode_gdg = ''G01''',
+      //c := OpenRS('SELECT * FROM tbl_barang_det WHERE kode_brg = ''%s'' AND kode_gdg = ''G01''',
+         // [b.FieldByName('kode_brg').AsString]);
+
+      //12-11-2018
+      c := OpenRS('SELECT sf_get_stok2(''%s'',''G-BB'') as stok',
           [b.FieldByName('kode_brg').AsString]);
       Values[i, cxColStock.Index] := c.FieldByName('stok').AsFloat;
       Values[i, cxColLayer1.Index] := b.FieldByName('layer1').AsFloat;

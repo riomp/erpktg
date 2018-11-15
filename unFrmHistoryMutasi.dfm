@@ -1,7 +1,7 @@
 inherited frmHistoryMutasi: TfrmHistoryMutasi
-  Left = 504
-  Top = 218
-  Width = 1075
+  Left = 489
+  Top = 186
+  Width = 749
   Height = 740
   BorderIcons = [biSystemMenu]
   Caption = 'History Mutasi'
@@ -10,7 +10,7 @@ inherited frmHistoryMutasi: TfrmHistoryMutasi
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlAtas: TPanel
-    Width = 1059
+    Width = 733
     Height = 151
     object cxLabel4: TcxLabel
       Left = 11
@@ -71,13 +71,13 @@ inherited frmHistoryMutasi: TfrmHistoryMutasi
   end
   inherited pnlTengah: TPanel
     Top = 151
-    Width = 1059
+    Width = 733
     Height = 474
     Align = alClient
     object cxGrid1: TcxGrid
       Left = 1
       Top = 1
-      Width = 1057
+      Width = 731
       Height = 472
       Align = alClient
       TabOrder = 0
@@ -136,7 +136,7 @@ inherited frmHistoryMutasi: TfrmHistoryMutasi
   end
   inherited pnlBawah: TPanel
     Top = 625
-    Width = 1059
+    Width = 733
     Align = alBottom
     inherited btnKeluar: TButton
       Left = 17

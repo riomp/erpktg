@@ -53,6 +53,7 @@ type
       ARecord: TcxCustomGridRecord; AItem: TcxCustomGridTableItem;
       out AStyle: TcxStyle);
     procedure btnSimpanClick(Sender: TObject);
+    procedure btnBaruClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -65,7 +66,7 @@ var
 implementation
 
 uses
-  unDm, unTools, unAplikasi, unFrmHistoryMutasi;
+  unDm, unTools, unAplikasi, unFrmHistoryMutasi, unFrmHistoryMutasiValue;
 
 {$R *.dfm}
 
@@ -89,6 +90,15 @@ begin
 
   zqrKS.SQL.Text := 'SELECT * FROM _ks';
   zqrKS.Open;
+
+  if cxlGudang.EditValue='G-BB' then begin
+    cxColPlot.Visible := True ;
+    cxColEndPlot.Visible := True ;
+  end
+  else begin
+     cxColPlot.Visible := False ;
+    cxColEndPlot.Visible := False ;
+  end;
 
   {q := OpenRS('SELECT * FROM _ks');
 
@@ -130,6 +140,24 @@ begin
   f.IdBrg := zqrKS.FieldByName('kode_brg').AsString;
   f.lblJudul.Caption := zqrKS.FieldByName('kode_brg').AsString  + ' - ' + zqrKS.FieldByName('deskripsi').AsString;
   f.cxsSA.EditValue :=  zqrKS.FieldByName('saldo_awal').AsFloat ;
+  f.cxdTgl1.Date := cxdTgl1.Date ;
+  f.cxdTgl2.Date := cxdTgl2.Date ;
+  f.zGudang.Open;
+  f.cxlGudang.EditValue := cxlGudang.EditValue;
+  f.ShowModal;
+end;
+
+procedure TfrmKartuStock.btnBaruClick(Sender: TObject);
+var
+  f : TfrmHistoryMutasiValue ;
+begin
+  inherited;
+    f := TFrmHistoryMutasiValue.Create(Self);
+  f.IdBrg := zqrKS.FieldByName('kode_brg').AsString;
+  f.lblJudul.Caption := zqrKS.FieldByName('kode_brg').AsString  + ' - ' + zqrKS.FieldByName('deskripsi').AsString;
+  f.cxsSA.EditValue :=  zqrKS.FieldByName('saldo_awal').AsFloat ;
+  f.cxSAV.EditValue :=  zqrKS.FieldByName('hpp_awal').AsFloat ;
+  f.cxsTSAV.EditValue :=  (zqrKS.FieldByName('saldo_awal').AsFloat * zqrKS.FieldByName('hpp_awal').AsFloat) ;
   f.cxdTgl1.Date := cxdTgl1.Date ;
   f.cxdTgl2.Date := cxdTgl2.Date ;
   f.zGudang.Open;

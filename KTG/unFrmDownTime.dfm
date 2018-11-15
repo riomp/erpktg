@@ -1,10 +1,14 @@
 inherited frmDownTime: TfrmDownTime
   Left = 473
   Top = 115
-  Width = 1192
-  Height = 735
+  VertScrollBar.Range = 0
   VertScrollBar.Visible = False
+  Align = alClient
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsNone
   Caption = 'Input Hasil Produksi + Downtime + Pengambilan BOM'
+  ClientHeight = 696
+  ClientWidth = 1176
   OldCreateOrder = True
   Position = poScreenCenter
   WindowState = wsMaximized
@@ -15,17 +19,18 @@ inherited frmDownTime: TfrmDownTime
     Width = 1176
     Height = 43
     inherited lblJudul: TLabel
-      Top = 10
-      Width = 442
-      Caption = 'Input Hasil Produksi + Downtime + Pengambilan BOM'
+      Left = 5
+      Top = 5
+      Width = 655
+      Height = 32
+      Caption = 'BON Bahan + Transfer Bahan Produksi'
     end
   end
   inherited pnlTengah: TPanel
-    Left = 984
-    Top = 140
-    Width = 1090
-    Height = 429
-    Align = alNone
+    Top = 80
+    Width = 1176
+    Height = 458
+    Align = alClient
     Visible = False
     object cxGrid1: TcxGrid
       Left = 281
@@ -160,10 +165,9 @@ inherited frmDownTime: TfrmDownTime
     end
   end
   inherited pnlBawah: TPanel
-    Left = 955
-    Top = 476
-    Width = 1076
-    Align = alNone
+    Top = 538
+    Width = 1176
+    Align = alBottom
     Visible = False
   end
   object Panel1: TPanel
@@ -316,12 +320,12 @@ inherited frmDownTime: TfrmDownTime
     Left = 0
     Top = 80
     Width = 1176
-    Height = 534
+    Height = 458
     ActivePage = cxTabSheet4
     Align = alClient
     Style = 7
     TabOrder = 6
-    ClientRectBottom = 533
+    ClientRectBottom = 457
     ClientRectLeft = 1
     ClientRectRight = 1175
     ClientRectTop = 21
@@ -570,7 +574,7 @@ inherited frmDownTime: TfrmDownTime
       ImageIndex = 1
       DesignSize = (
         1174
-        512)
+        436)
       object cxGrid3: TcxGrid
         Left = 15
         Top = 20
@@ -1050,7 +1054,7 @@ inherited frmDownTime: TfrmDownTime
       TabVisible = False
       DesignSize = (
         1174
-        512)
+        436)
       object cxGrid7: TcxGrid
         Left = 15
         Top = 20
@@ -1221,7 +1225,7 @@ inherited frmDownTime: TfrmDownTime
       ImageIndex = 3
       DesignSize = (
         1174
-        512)
+        436)
       object cxGrid6: TcxGrid
         Left = 15
         Top = 242
@@ -1449,7 +1453,7 @@ inherited frmDownTime: TfrmDownTime
       ImageIndex = 5
       DesignSize = (
         1174
-        512)
+        436)
       object cxGrid8: TcxGrid
         Left = 15
         Top = 20
@@ -1795,7 +1799,7 @@ inherited frmDownTime: TfrmDownTime
       ImageIndex = 6
       DesignSize = (
         1174
-        512)
+        436)
       object cxGrid11: TcxGrid
         Left = 15
         Top = 20
@@ -2038,7 +2042,7 @@ inherited frmDownTime: TfrmDownTime
       ImageIndex = 7
       DesignSize = (
         1174
-        512)
+        436)
       object Label73: TLabel
         Left = 17
         Top = 192
