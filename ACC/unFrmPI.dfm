@@ -210,6 +210,7 @@ inherited frmPI: TfrmPI
           Properties.Alignment.Horz = taRightJustify
           Properties.DisplayFormat = '#,##0.00'
           Properties.EditFormat = '#,##0.00'
+          Properties.ReadOnly = True
           Properties.ValueType = vtFloat
           HeaderAlignmentHorz = taRightJustify
           Width = 123

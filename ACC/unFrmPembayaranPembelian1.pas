@@ -81,17 +81,17 @@ begin
   inherited;
 
   if Self.Jenis='tambah' then begin
-  q := OpenRS('SELECT akun_hutang FROM tbl_supplier WHERE kode = ''%s''',[zqrSupp.FieldByName('kode').AsString]);
-  cxtAkunSupp.Text := q.FieldByName('akun_hutang').AsString;
-  q.Close;
+    q := OpenRS('SELECT akun_hutang FROM tbl_supplier WHERE kode = ''%s''',[zqrSupp.FieldByName('kode').AsString]);
+    cxtAkunSupp.Text := q.FieldByName('akun_hutang').AsString;
+    q.Close;
 
-  cxTbl.DataController.RecordCount := 0;
-  q := OpenRS('select a.no_bukti, a.tanggal, sum(b.subtotal) total,(SELECT IFNULL(SUM(jml_pembayaran),0) FROM tbl_trspelunasan_det) bayar,(sum(b.subtotal) - (SELECT IFNULL(SUM(jml_pembayaran),0) FROM tbl_trspelunasan_det)) sisa ' +
-              'FROM tbl_trsinvoice_head a JOIN tbl_trsinvoice_det b ON a.no_bukti = b.no_bukti ' +
-              'LEFT JOIN tbl_spbb_head c ON c.no_po = b.no_so ' +
-              'LEFT JOIN tbl_spbb_det d ON d.no_bukti = c.no_bukti and d.kode_brg=b.kode_brg ' +
-              'where a.jenis="PI" and a.kode_supp = ''%s'' ' +
-              'group by a.no_bukti, a.tanggal',[zqrSupp.FieldByname('kode').AsString]) ;
+    cxTbl.DataController.RecordCount := 0;
+    q := OpenRS('select a.no_bukti, a.tanggal, sum(b.subtotal) total,(SELECT IFNULL(SUM(jml_pembayaran),0) FROM tbl_trspelunasan_det where no_invoice=a.no_bukti) bayar,' +
+                '(sum(b.subtotal) - (SELECT IFNULL(SUM(jml_pembayaran),0) FROM tbl_trspelunasan_det where no_invoice=a.no_bukti)) sisa FROM tbl_trsinvoice_head a JOIN tbl_trsinvoice_det b ON a.no_bukti = b.no_bukti ' +
+                'LEFT JOIN tbl_spbb_head c ON c.no_po = b.no_so ' +
+                'LEFT JOIN tbl_spbb_det d ON d.no_bukti = c.no_bukti and d.kode_brg=b.kode_brg ' +
+                'where a.jenis="PI" and a.kode_supp = ''%s'' ' +
+                'group by a.no_bukti, a.tanggal',[zqrSupp.FieldByname('kode').AsString]) ;
   {q := OpenRS('select a.no_bukti, a.tanggal, sum(d.qty * d.harga) total ' +
           'FROM tbl_trsinvoice_head a ' +
           'INNER JOIN tbl_trsinvoice_det b ON a.no_bukti = b.no_bukti ' +
@@ -389,8 +389,8 @@ begin
   if AItemIndex = cxColDibayar.Index then begin
       if ( ADataController.Values[ARecordIndex, cxColDibayar.Index] >
         (ADataController.Values[ARecordIndex, cxColSisa.Index])) then begin
-        MsgBox('Jumlah Pembayaran Melebihi Invoice.');
-        Abort
+        //MsgBox('Jumlah Pembayaran Melebihi Invoice.');
+        //Abort
       end;
   end;
 end;

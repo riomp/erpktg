@@ -103,7 +103,7 @@ inherited frmDaftarJurnal: TfrmDaftarJurnal
         object cxTblJurnalDetketerangan: TcxGridDBColumn
           Caption = 'Keterangan'
           DataBinding.FieldName = 'keterangan'
-          Width = 514
+          Width = 603
         end
         object cxTblJurnalDetdebet: TcxGridDBColumn
           Caption = 'Debet'

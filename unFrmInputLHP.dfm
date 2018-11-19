@@ -1,6 +1,6 @@
 inherited frmInputLHP: TfrmInputLHP
-  Left = 573
-  Top = 122
+  Left = 571
+  Top = 169
   Width = 882
   Height = 648
   Caption = 'Input LHP'
@@ -232,7 +232,7 @@ inherited frmInputLHP: TfrmInputLHP
       Top = 160
       Width = 856
       Height = 251
-      ActivePage = cxTabSheet1
+      ActivePage = cxTabSheet3
       Color = clGradientInactiveCaption
       ParentColor = False
       TabOrder = 10
@@ -332,7 +332,7 @@ inherited frmInputLHP: TfrmInputLHP
         object Label18: TLabel
           Left = 6
           Top = 204
-          Width = 65
+          Width = 51
           Height = 13
           Caption = 'Total Afval'
           Color = clGradientInactiveCaption

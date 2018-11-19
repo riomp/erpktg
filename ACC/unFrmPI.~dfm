@@ -386,7 +386,10 @@ inherited frmPI: TfrmPI
       'SELECT a.no_bukti'
       'FROM tbl_spbb_head a '
       'LEFT JOIN tbl_supplier b ON a.kode_supp = b.kode '
-      'WHERE no_penerimaan IS NOT NULL  AND  a.kode_supp = :kode_supp')
+      
+        'WHERE no_penerimaan IS NOT NULL AND (SELECT ifnull(COUNT(no_po),' +
+        '0)  FROM tbl_trsinvoice_head WHERE no_po=a.no_bukti)=0 AND  a.ko' +
+        'de_supp = :kode_supp')
     Params = <
       item
         DataType = ftUnknown

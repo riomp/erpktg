@@ -234,6 +234,7 @@ inherited frmPembayaranPembelian1: TfrmPembayaranPembelian1
       Left = 592
       Top = 20
       TabOrder = 14
+      Visible = False
       Width = 121
     end
   end

@@ -273,6 +273,7 @@ inherited frmDaftarJurnal: TfrmDaftarJurnal
     Align = alBottom
     inherited btnKeluar: TButton
       Left = 17
+      Visible = False
     end
     inherited btnSimpan: TButton
       Left = 95

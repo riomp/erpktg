@@ -30,7 +30,7 @@ inherited frmLHP: TfrmLHP
       Top = 1
       Width = 1066
       Height = 415
-      ActivePage = cxTabSheet1
+      ActivePage = cxTabSheet2
       Align = alClient
       TabOrder = 0
       ClientRectBottom = 415

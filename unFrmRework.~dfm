@@ -1,6 +1,6 @@
 inherited frmRework: TfrmRework
-  Left = 437
-  Top = 61
+  Left = 614
+  Top = 85
   Width = 898
   Height = 667
   Caption = 'Rework'

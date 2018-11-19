@@ -524,7 +524,7 @@ begin
         qbd.Close;
 
         dm.zConn.ExecuteDirect('UPDATE tbl_trspengeluaranbb_det SET fkeluar = 1 WHERE no_bukti = ''' +
-          q.FieldByName('no_bukti').AsString + '''');
+          q.FieldByName('no_bukti').AsString + ''' AND kode_brg = ''' + q.FieldByName('kode_brg').AsString + '''');
 
         //sNoJ := GetLastFak('jurnal');
         //UpdateFaktur(Copy(sNoJ,1,6));

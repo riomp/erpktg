@@ -129,6 +129,7 @@ inherited frmPenerimaanBarang: TfrmPenerimaanBarang
           Properties.DisplayFormat = '#,##0.00'
           Properties.ReadOnly = True
           Properties.ValueType = vtFloat
+          Visible = False
           Width = 88
         end
         object cxColGdg: TcxGridColumn

@@ -458,7 +458,7 @@ begin
           FieldByName('tipe').AsString := 'IN_';
           FieldByName('qty').AsFloat := cxTblHP.DataController.Summary.FooterSummaryValues[0];
           FieldByName('satuan').AsString := cxTblHP.DataController.Values[0, cxColNoTblHPSat1.Index];
-          FieldByName('gudang').AsString := 'G-WIP';
+          FieldByName('gudang').AsString := 'G-PRD';
           FieldByName('user').AsString := Aplikasi.NamaUser;
           FieldByName('user_dept').AsString := Aplikasi.UserDept;
           FieldByName('no_spk').AsString := txtSPK.Text;
@@ -538,7 +538,7 @@ begin
         qd.FieldByName('no_bukti').AsString := sNoBukti;
         qd.FieldByName('kode_brg').AsString :=txtKode.Text;
         qd.FieldByName('qty').AsFloat := cxTblHP.DataController.Summary.FooterSummaryValues[0];
-        qd.FieldByName('kode_gdg').AsString := 'G-WIP';
+        qd.FieldByName('kode_gdg').AsString := 'G-PRD';
         qd.FieldByName('satuan').AsString := cxTblHP.DataController.Values[0, cxColNoTblHPSat1.Index];
         qd.FieldByName('no_spk').AsString := txtSPK.Text;
         qd.Post;
@@ -554,7 +554,7 @@ begin
           FieldByName('tipe').AsString := 'IN_';
           FieldByName('qty').AsFloat := cxTblHP.DataController.Summary.FooterSummaryValues[0];
           FieldByName('satuan').AsString := cxTblHP.DataController.Values[0, cxColNoTblHPSat1.Index];
-          FieldByName('gudang').AsString := 'G02';
+          FieldByName('gudang').AsString := 'G-PRD';
           FieldByName('user').AsString := Aplikasi.NamaUser;
           FieldByName('user_dept').AsString := Aplikasi.UserDept;
           FieldByName('no_spk').AsString := txtSPK.Text;
@@ -668,7 +668,7 @@ begin
           jml_bahan := qbom.FieldByName('qty').AsFloat / cxsQtySpk.EditValue;
           qd.FieldByName('qty').AsFloat := jml_bahan * cxTblHP.DataController.Summary.FooterSummaryValues[0];
 
-          qd.FieldByName('kode_gdg').AsString := 'G-WIP';
+          qd.FieldByName('kode_gdg').AsString := 'G-PRD';
           qd.FieldByName('satuan').AsString := cxtUnitSPK.Text;
           qd.FieldByName('no_spk').AsString := txtSPK.Text;
 
@@ -715,7 +715,7 @@ begin
           else
             qbd.Edit;
           qbd.FieldByName('kode_brg').AsString := qbom.FieldByName('kode_brg').AsString;
-          qbd.FieldByName('kode_gdg').AsString := 'G-WIP';
+          qbd.FieldByName('kode_gdg').AsString := 'G-PRD';
           qbd.FieldByName('stok').AsFloat := qbd.FieldByName('stok').AsFloat - (jml_bahan * cxTblHP.DataController.Summary.FooterSummaryValues[0]);
           qbd.Post;
           qbd.Close;
@@ -865,7 +865,7 @@ begin
         with cxTblPakaiBBDet.DataController do begin
           for j := 0 to RecordCount -1 do begin
             z := OpenRS('SELECT * FROM tbl_pemakaian_bahan where no_bukti =''%s''',[sNoTrs]) ;
-            if  Values[j,cxGridColumn31.Index]<>0 then begin
+            if  Values[j,cxGridColumn31.Index]>=0 then begin
               z.Insert;
               z.FieldByName('no_spk').AsString := txtSPK.Text;
               z.FieldByName('no_bukti').AsString := sNoTrs;
@@ -896,6 +896,29 @@ begin
               z.FieldByName('f_dozing').AsInteger := 0;
               z.Post;
               z.Close;
+
+               qhst := OpenRS('SELECT * FROM tbl_history WHERE no_bukti = ''%s''',[sNoTrs]);
+              with qhst do begin
+                Insert;
+                FieldByName('no_bukti').AsString := sNoTrs;
+                FieldByName('tanggal').AsDateTime := cxdTglPrd.EditValue;
+                FieldByName('jam').AsDateTime := Aplikasi.ServerTime;
+                FieldByName('kode_brg').AsString := Values[j , cxGridColumn18.Index];
+                FieldByName('tipe').AsString := 'OUT_';
+                if (Values[j,cxGridColumn31.Index]<>null) then
+                FieldByName('qty').AsFloat :=  Values[j,cxGridColumn31.Index];
+                FieldByName('satuan').AsString := Values[j , cxGridColumn30.Index];
+                FieldByName('gudang').AsString := 'G-PRD';
+                FieldByName('user').AsString := Aplikasi.NamaUser;
+                FieldByName('user_dept').AsString := Aplikasi.UserDept;
+                FieldByName('no_spk').AsString := txtSPK.Text;
+                FieldByName('no_lhp').AsString := sNoTrs;
+                FieldByName('tgl_input').AsDateTime := Aplikasi.NowServer;
+                FieldByName('hpp').AsFloat := GetHPP(Values[j , cxGridColumn18.Index]);
+                FieldByName('unit_ktg').AsString := GetUnitKTG(Values[j , cxGridColumn18.Index]);
+                Post;
+              end;
+
             end;
           end;
         end;

@@ -1,9 +1,13 @@
 inherited frmLHP: TfrmLHP
   Left = 406
   Top = 236
-  Width = 1084
-  Height = 567
+  VertScrollBar.Range = 0
+  Align = alClient
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsNone
   Caption = 'Laporan Hasil Produksi'
+  ClientHeight = 528
+  ClientWidth = 1068
   Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
@@ -388,6 +392,7 @@ inherited frmLHP: TfrmLHP
     Align = alBottom
     inherited btnKeluar: TButton
       Left = 967
+      Visible = False
     end
     inherited btnEdit: TButton
       Left = 95

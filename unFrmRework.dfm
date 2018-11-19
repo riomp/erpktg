@@ -238,7 +238,7 @@ inherited frmRework: TfrmRework
       Top = 185
       Width = 856
       Height = 291
-      ActivePage = cxTabSheet3
+      ActivePage = cxTabSheet1
       TabOrder = 16
       ClientRectBottom = 291
       ClientRectRight = 856
