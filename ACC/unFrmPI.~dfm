@@ -1,7 +1,7 @@
 inherited frmPI: TfrmPI
-  Left = 592
-  Top = 155
-  Width = 940
+  Left = 499
+  Top = 186
+  Width = 1003
   Height = 625
   BorderIcons = [biSystemMenu]
   Caption = 'Invoice Pembelian'
@@ -11,14 +11,14 @@ inherited frmPI: TfrmPI
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlAtas: TPanel
-    Width = 924
+    Width = 987
     inherited lblJudul: TLabel
       Width = 145
       Caption = 'Invoce Pembelian'
     end
   end
   inherited pnlTengah: TPanel
-    Width = 924
+    Width = 987
     Height = 444
     Align = alClient
     object cxLabel3: TcxLabel
@@ -86,11 +86,13 @@ inherited frmPI: TfrmPI
       Left = 88
       Top = 33
       Properties.Items.Strings = (
-        'INVOICE PEMBELIAN'
-        'UANG MUKA PEMBELIAN')
+        'INVOICE PEMBELIAN (LPB)'
+        'UANG MUKA PEMBELIAN'
+        'INVOICE PEMBELIAN (DARI PO)'
+        'INVOICE PEMBELIAN (TANPA PO)')
       Properties.OnChange = cxJenisPropertiesChange
       TabOrder = 8
-      Text = 'INVOICE PEMBELIAN'
+      Text = 'INVOICE PEMBELIAN (LPB)'
       Width = 268
     end
     object cxLabel6: TcxLabel
@@ -121,9 +123,9 @@ inherited frmPI: TfrmPI
       OnClick = btnProsesClick
     end
     object cxGrid1: TcxGrid
-      Left = 15
+      Left = 20
       Top = 195
-      Width = 891
+      Width = 931
       Height = 164
       TabOrder = 12
       object cxGrid1DBTableView1: TcxGridDBTableView
@@ -145,8 +147,14 @@ inherited frmPI: TfrmPI
             Format = '#,##0.00'
             Kind = skSum
             Column = cxColTax
+          end
+          item
+            Format = '#,##0.00'
+            Kind = skSum
+            Column = cxColGross
           end>
         DataController.Summary.SummaryGroups = <>
+        DataController.OnBeforePost = cxTblDataControllerBeforePost
         DataController.OnRecordChanged = cxTblDataControllerRecordChanged
         OptionsView.Navigator = True
         OptionsView.Footer = True
@@ -193,6 +201,18 @@ inherited frmPI: TfrmPI
           HeaderAlignmentHorz = taRightJustify
           Width = 101
         end
+        object cxColGross: TcxGridColumn
+          Caption = 'Harga Gross'
+          DataBinding.ValueType = 'Float'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DisplayFormat = '#,##0.00'
+          Properties.ReadOnly = True
+          Properties.ValueType = vtFloat
+          HeaderAlignmentHorz = taRightJustify
+          Options.Editing = False
+          Width = 125
+        end
         object cxColTax: TcxGridColumn
           Caption = 'PPN'
           DataBinding.ValueType = 'Float'
@@ -210,6 +230,7 @@ inherited frmPI: TfrmPI
           Properties.Alignment.Horz = taRightJustify
           Properties.DisplayFormat = '#,##0.00'
           Properties.EditFormat = '#,##0.00'
+          Properties.ReadOnly = True
           Properties.ValueType = vtFloat
           HeaderAlignmentHorz = taRightJustify
           Width = 123
@@ -225,28 +246,28 @@ inherited frmPI: TfrmPI
       Caption = 'Keterangan'
     end
     object cxmKet: TcxMemo
-      Left = 88
+      Left = 83
       Top = 377
       Lines.Strings = (
         '')
       TabOrder = 14
-      Height = 46
+      Height = 59
       Width = 398
     end
-    object cxsTotal: TcxSpinEdit
-      Left = 699
+    object cxsGross: TcxSpinEdit
+      Left = 809
       Top = 364
       Properties.Alignment.Horz = taRightJustify
-      Properties.DisplayFormat = '#,#0.00'
+      Properties.DisplayFormat = '#,##0.00'
       Properties.ReadOnly = True
       TabOrder = 15
-      Visible = False
-      Width = 121
+      Width = 132
     end
     object cxLabel4: TcxLabel
       Left = 15
       Top = 87
       Caption = 'Currency'
+      Visible = False
     end
     object cxCurr: TcxComboBox
       Left = 90
@@ -258,12 +279,14 @@ inherited frmPI: TfrmPI
       Properties.OnChange = cxCurrPropertiesChange
       TabOrder = 17
       Text = 'IDR'
+      Visible = False
       Width = 56
     end
     object cxLabel5: TcxLabel
       Left = 150
       Top = 87
       Caption = 'Rate'
+      Visible = False
     end
     object cxsRate: TcxSpinEdit
       Left = 180
@@ -272,6 +295,7 @@ inherited frmPI: TfrmPI
       Properties.DisplayFormat = '#,##0.00'
       Properties.ValueType = vtFloat
       TabOrder = 19
+      Visible = False
       Width = 91
     end
     object cxtAkunSupp: TcxTextEdit
@@ -354,10 +378,43 @@ inherited frmPI: TfrmPI
       Visible = False
       Width = 121
     end
+    object cxLabel11: TcxLabel
+      Left = 710
+      Top = 367
+      Caption = 'Harga Gross'
+    end
+    object cxLabel12: TcxLabel
+      Left = 710
+      Top = 387
+      Caption = 'Tax'
+    end
+    object cxLabel13: TcxLabel
+      Left = 710
+      Top = 412
+      Caption = 'Harga Total'
+    end
+    object cxsTax: TcxSpinEdit
+      Left = 809
+      Top = 389
+      Properties.Alignment.Horz = taRightJustify
+      Properties.DisplayFormat = '#,##0.00'
+      Properties.ReadOnly = True
+      TabOrder = 31
+      Width = 132
+    end
+    object cxsTotal: TcxSpinEdit
+      Left = 809
+      Top = 414
+      Properties.Alignment.Horz = taRightJustify
+      Properties.DisplayFormat = '#,##0.00'
+      Properties.ReadOnly = True
+      TabOrder = 32
+      Width = 132
+    end
   end
   inherited pnlBawah: TPanel
     Top = 510
-    Width = 924
+    Width = 987
     Align = alBottom
   end
   object zqrSupp: TZReadOnlyQuery

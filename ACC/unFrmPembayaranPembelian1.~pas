@@ -46,6 +46,7 @@ type
     dsAkun: TDataSource;
     zqrAkun: TZReadOnlyQuery;
     cxtAkunSupp: TcxTextEdit;
+    cxColCheck: TcxGridColumn;
     procedure cxlSupplierPropertiesChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSimpanClick(Sender: TObject);
@@ -86,8 +87,8 @@ begin
     q.Close;
 
     cxTbl.DataController.RecordCount := 0;
-    q := OpenRS('select a.no_bukti, a.tanggal, sum(b.subtotal) total,(SELECT IFNULL(SUM(jml_pembayaran),0) FROM tbl_trspelunasan_det where no_invoice=a.no_bukti) bayar,(sum(b.subtotal) - (SELECT IFNULL(SUM(jml_pembayaran),0) FROM tbl_trspelunasan_det where no_invoice=a.no_bukti)) sisa ' +
-                'FROM tbl_trsinvoice_head a JOIN tbl_trsinvoice_det b ON a.no_bukti = b.no_bukti ' +
+    q := OpenRS('select a.no_bukti, a.tanggal, sum(b.subtotal) total,(SELECT IFNULL(SUM(jml_pembayaran),0) FROM tbl_trspelunasan_det where no_invoice=a.no_bukti) bayar,' +
+                '(sum(b.subtotal) - (SELECT IFNULL(SUM(jml_pembayaran),0) FROM tbl_trspelunasan_det where no_invoice=a.no_bukti)) sisa FROM tbl_trsinvoice_head a JOIN tbl_trsinvoice_det b ON a.no_bukti = b.no_bukti ' +
                 'LEFT JOIN tbl_spbb_head c ON c.no_po = b.no_so ' +
                 'LEFT JOIN tbl_spbb_det d ON d.no_bukti = c.no_bukti and d.kode_brg=b.kode_brg ' +
                 'where a.jenis="PI" and a.kode_supp = ''%s'' ' +
@@ -392,6 +393,12 @@ begin
         //MsgBox('Jumlah Pembayaran Melebihi Invoice.');
         //Abort
       end;
+  end
+  else if AItemIndex = cxColCheck.Index then begin
+
+   if ADataController.Values[ARecordIndex, cxColCheck.Index] = 1 then
+     ADataController.Values[ARecordIndex, cxColDibayar.Index] := ADataController.Values[ARecordIndex, cxColSisa.Index] ;
+
   end;
 end;
 

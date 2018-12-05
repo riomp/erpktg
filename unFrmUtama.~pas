@@ -3956,9 +3956,23 @@ end;
 procedure TfrmUtama.mnPRD_InputDownTimeClick(Sender: TObject);
 var
   f: TfrmDownTime;
+   ts : TcxTabSheet;
 begin
-  f := TfrmDownTime.Create(Self);
-  f.Show;
+ // f := TfrmDownTime.Create(Self);
+ // f.Show;
+
+  if not CekTabOpen('BON + Transfer Bahan') then begin
+    ToggleMainPage;
+    ts := TcxTabSheet.Create(Self);
+    ts.PageControl := pgMain;
+
+    f :=TfrmDownTime.Create(Self) ;
+    f.Parent := ts;
+    ts.Caption := f.Caption;
+    f.Show;
+
+      pgMain.ActivePage := ts;
+  end;
 end;
 
 procedure TfrmUtama.mnWHL_ST_PBClick(Sender: TObject);

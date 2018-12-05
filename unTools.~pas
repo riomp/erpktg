@@ -72,6 +72,7 @@ function GetLastFakFOBJ(sHeader: string): string;
 function GetLastNoPOPajak: string;
 procedure OpenSQL(lst: TList);
 procedure SplitStr(const Source, Delimiter: String; var DelimitedList: TStringList);
+function GetSatuan(kode_brg: String; var satuan: string): String;
 
 function GetHPP(sKodeBrg: string; sGudang: string): Real; overload;
 function GetHPP(sKodeBrg: string): Real; overload;
@@ -404,6 +405,10 @@ begin
     depan := 'UM/'
     else if sTipe = 'invoice_pembelian' then
     depan := 'PI/'
+    else if sTipe = 'invoice_pembelian1' then
+    depan := 'PIPO/'
+    else if sTipe = 'invoice_pembelian2' then
+    depan := 'PITP/'
     else if sTipe = 'jurnal_umum' then
     depan := 'JU/'
     else if sTipe = 'saldo_awal_akun' then
@@ -1680,6 +1685,20 @@ begin
   q := OpenRS('SELECT akun_hutang FROM tbl_supplier WHERE kode = ''%s''',[sKode]);
   if not q.IsEmpty then
     Result := q.FieldByName('akun_hutang').AsString
+  else
+    Result := '';
+  q.Close;
+end;
+
+function GetSatuan(kode_brg: String; var satuan: string): String;
+var
+  q: TZQuery;
+begin
+  q := OpenRS('SELECT unitid FROM tbl_barang WHERE kode = ''%s''',[kode_brg]);
+  if not q.IsEmpty then begin
+    Result := q.FieldByName('unitid').AsString;
+    satuan := q.FieldByName('unitid').AsString;
+  end
   else
     Result := '';
   q.Close;

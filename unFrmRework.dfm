@@ -211,6 +211,7 @@ inherited frmRework: TfrmRework
         end>
       Properties.ListSource = dsMesin
       Properties.MaxLength = 0
+      Properties.OnChange = cxlMesinPropertiesChange
       TabOrder = 13
       Width = 201
     end
@@ -297,6 +298,7 @@ inherited frmRework: TfrmRework
                 Column = cxColNoTblHPQty3
               end>
             DataController.Summary.SummaryGroups = <>
+            DataController.OnRecordChanged = cxTblHPDataControllerRecordChanged
             OptionsView.Navigator = True
             OptionsView.Footer = True
             OptionsView.GroupByBox = False
@@ -367,6 +369,14 @@ inherited frmRework: TfrmRework
           Properties.ValueType = vtFloat
           TabOrder = 2
           Width = 81
+        end
+        object cxtLOT: TcxTextEdit
+          Left = 370
+          Top = 241
+          Properties.ReadOnly = True
+          TabOrder = 3
+          Visible = False
+          Width = 161
         end
       end
       object cxTabSheet2: TcxTabSheet

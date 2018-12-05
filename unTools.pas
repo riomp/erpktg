@@ -405,6 +405,10 @@ begin
     depan := 'UM/'
     else if sTipe = 'invoice_pembelian' then
     depan := 'PI/'
+    else if sTipe = 'invoice_pembelian1' then
+    depan := 'PIPO/'
+    else if sTipe = 'invoice_pembelian2' then
+    depan := 'PITP/'
     else if sTipe = 'jurnal_umum' then
     depan := 'JU/'
     else if sTipe = 'saldo_awal_akun' then
@@ -613,6 +617,10 @@ begin
     depan := 'UM/'
     else if sTipe = 'invoice_pembelian' then
     depan := 'PI/'
+      else if sTipe = 'invoice_pembelian1' then
+    depan := 'PIPO/'
+    else if sTipe = 'invoice_pembelian2' then
+    depan := 'PITP/'
       else if sTipe = 'jurnal_umum' then
     depan := 'JU/'
   else if sTipe = 'invoice-pembelian' then

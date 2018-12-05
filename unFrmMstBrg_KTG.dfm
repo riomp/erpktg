@@ -31,7 +31,7 @@ inherited frmMstBrg_KTG: TfrmMstBrg_KTG
     inherited pg: TPageControl
       Width = 1328
       Height = 544
-      ActivePage = TabSheet2
+      ActivePage = TabSheet4
       OnChange = pgChange
       inherited TabSheet1: TTabSheet
         Caption = 'Detail dan Dimensi'

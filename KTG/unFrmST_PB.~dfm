@@ -1,10 +1,14 @@
 inherited frmST_PB: TfrmST_PB
   Left = 391
   Top = 147
-  Width = 1098
-  Height = 578
+  VertScrollBar.Range = 0
   VertScrollBar.Visible = False
+  Align = alClient
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsNone
   Caption = 'Serah Terima Hasil Produksi + Pengiriman BOM'
+  ClientHeight = 776
+  ClientWidth = 1134
   OldCreateOrder = True
   Position = poScreenCenter
   WindowState = wsMaximized
@@ -12,7 +16,7 @@ inherited frmST_PB: TfrmST_PB
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlAtas: TPanel
-    Width = 1082
+    Width = 1134
     Height = 43
     inherited lblJudul: TLabel
       Top = 10
@@ -169,7 +173,7 @@ inherited frmST_PB: TfrmST_PB
   object Panel1: TPanel
     Left = 0
     Top = 43
-    Width = 1082
+    Width = 1134
     Height = 37
     Align = alTop
     TabOrder = 1
@@ -212,6 +216,7 @@ inherited frmST_PB: TfrmST_PB
     Height = 25
     Caption = 'Keluar'
     TabOrder = 7
+    Visible = False
     OnClick = btnKeluar2Click
   end
   object cxGrid2: TcxGrid
@@ -323,15 +328,15 @@ inherited frmST_PB: TfrmST_PB
   object pg: TcxPageControl
     Left = 0
     Top = 80
-    Width = 1082
-    Height = 426
+    Width = 1134
+    Height = 696
     ActivePage = cxTabSheet2
-    Align = alTop
+    Align = alClient
     Style = 7
     TabOrder = 2
-    ClientRectBottom = 425
+    ClientRectBottom = 695
     ClientRectLeft = 1
-    ClientRectRight = 1081
+    ClientRectRight = 1133
     ClientRectTop = 21
     object cxTabSheet1: TcxTabSheet
       Caption = 'Serah Terima Hasil Produksi'
@@ -532,17 +537,18 @@ inherited frmST_PB: TfrmST_PB
       Caption = 'Pengiriman BOM'
       ImageIndex = 1
       DesignSize = (
-        1080
-        404)
+        1132
+        674)
       object cxGrid3: TcxGrid
         Left = 15
         Top = 20
-        Width = 1044
+        Width = 1096
         Height = 216
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 0
         object cxTblPB: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
+          OnFocusedRecordChanged = cxTblPBFocusedRecordChanged
           DataController.DataSource = dsPB
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -608,24 +614,130 @@ inherited frmST_PB: TfrmST_PB
       end
       object btnSimpanPB: TButton
         Left = 15
-        Top = 242
+        Top = 527
         Width = 75
         Height = 25
         Caption = 'Simpan'
         TabOrder = 1
         OnClick = btnSimpanPBClick
       end
+      object GroupBox1: TGroupBox
+        Left = 15
+        Top = 250
+        Width = 581
+        Height = 266
+        Caption = 'No.Trans / Kode Barang'
+        TabOrder = 2
+        DesignSize = (
+          581
+          266)
+        object cxGrid9: TcxGrid
+          Left = 5
+          Top = 26
+          Width = 561
+          Height = 235
+          Anchors = [akLeft, akTop, akRight]
+          TabOrder = 0
+          object cxTblLot: TcxGridTableView
+            NavigatorButtons.ConfirmDelete = False
+            DataController.Summary.DefaultGroupSummaryItems = <>
+            DataController.Summary.FooterSummaryItems = <
+              item
+                Kind = skSum
+                Column = cxColQty
+              end>
+            DataController.Summary.SummaryGroups = <>
+            DataController.OnRecordChanged = cxTblLotDataControllerRecordChanged
+            OptionsView.Navigator = True
+            OptionsView.GroupByBox = False
+            object cxCollot: TcxGridColumn
+              Caption = 'No.LOT'
+              PropertiesClassName = 'TcxLookupComboBoxProperties'
+              Properties.KeyFieldNames = 'lot'
+              Properties.ListColumns = <
+                item
+                  FieldName = 'lot'
+                end>
+              Properties.ListSource = dsLot
+              Width = 285
+            end
+            object cxColStock: TcxGridColumn
+              Caption = 'Stock'
+              DataBinding.ValueType = 'Float'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,##0.00'
+              Properties.EditFormat = '#,##0.00'
+              Properties.ValueType = vtFloat
+              Width = 121
+            end
+            object cxColQty: TcxGridColumn
+              Caption = 'Qty'
+              DataBinding.ValueType = 'Float'
+              PropertiesClassName = 'TcxSpinEditProperties'
+              Properties.Alignment.Horz = taRightJustify
+              Properties.DisplayFormat = '#,##0.00'
+              Properties.EditFormat = '#,##0.00'
+              Properties.ValueType = vtFloat
+              Width = 122
+            end
+            object cxColGudang: TcxGridColumn
+              Visible = False
+            end
+            object cxColSatuan: TcxGridColumn
+              Visible = False
+            end
+          end
+          object cxGridLevel7: TcxGridLevel
+            GridView = cxTblLot
+          end
+        end
+      end
+      object cxtNoBukti: TcxTextEdit
+        Left = 147
+        Top = 246
+        Properties.ReadOnly = True
+        TabOrder = 3
+        Width = 146
+      end
+      object cxtKode: TcxTextEdit
+        Left = 295
+        Top = 246
+        Properties.CharCase = ecUpperCase
+        Properties.ReadOnly = True
+        TabOrder = 4
+        Width = 131
+      end
+      object btn1: TButton
+        Left = 430
+        Top = 245
+        Width = 75
+        Height = 25
+        Caption = 'Simpan LOT'
+        TabOrder = 5
+        OnClick = btn1Click
+      end
+      object cxsqty: TcxSpinEdit
+        Left = 650
+        Top = 290
+        Properties.DisplayFormat = '#,##0.00'
+        Properties.EditFormat = '#,#0.00'
+        Properties.ValueType = vtFloat
+        TabOrder = 6
+        Visible = False
+        Width = 121
+      end
     end
     object cxTabSheet3: TcxTabSheet
       Caption = 'Penerimaan Pengembalian Bahan Baku'
       ImageIndex = 2
       DesignSize = (
-        1080
-        404)
+        1132
+        674)
       object cxGrid4: TcxGrid
         Left = 15
         Top = 20
-        Width = 1044
+        Width = 1096
         Height = 216
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 0
@@ -858,5 +970,36 @@ inherited frmST_PB: TfrmST_PB
     DataSet = zqrReturBOM
     Left = 685
     Top = 30
+  end
+  object dsLot: TDataSource
+    DataSet = zqrLot
+    Left = 647
+    Top = 355
+  end
+  object zqrLot: TZQuery
+    Connection = dm.zConn
+    SQL.Strings = (
+      'SELECT a.lot'
+      'FROM tbl_historybb_lot a where'
+      
+        '((SELECT IFNULL(SUM(qty),0) FROM tbl_historybb_lot WHERE tipe=1 ' +
+        'and gudang in ('#39'G-BB'#39','#39'G-NPM'#39') and lot=a.lot and kode_brg=:kode)' +
+        '-(SELECT IFNULL(SUM(qty),0) FROM tbl_historybb_lot WHERE tipe=0 ' +
+        'and gudang='#39'G-PRD'#39' and lot=a.lot and kode_brg=:kode)) > 0'
+      ' ')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'kode'
+        ParamType = ptUnknown
+      end>
+    Left = 677
+    Top = 355
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'kode'
+        ParamType = ptUnknown
+      end>
   end
 end

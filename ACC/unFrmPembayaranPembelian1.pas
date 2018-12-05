@@ -46,6 +46,7 @@ type
     dsAkun: TDataSource;
     zqrAkun: TZReadOnlyQuery;
     cxtAkunSupp: TcxTextEdit;
+    cxColCheck: TcxGridColumn;
     procedure cxlSupplierPropertiesChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSimpanClick(Sender: TObject);
@@ -392,6 +393,15 @@ begin
         //MsgBox('Jumlah Pembayaran Melebihi Invoice.');
         //Abort
       end;
+  end
+  else if AItemIndex = cxColCheck.Index then begin
+
+   if ADataController.Values[ARecordIndex, cxColCheck.Index] = 1 then begin
+     ADataController.Values[ARecordIndex, cxColDibayar.Index] := ADataController.Values[ARecordIndex, cxColSisa.Index] ;
+   end else begin
+     ADataController.Values[ARecordIndex, cxColDibayar.Index] := 0 ;
+   end;
+
   end;
 end;
 

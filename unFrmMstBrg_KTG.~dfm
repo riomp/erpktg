@@ -5117,6 +5117,9 @@ inherited frmMstBrg_KTG: TfrmMstBrg_KTG
     Top = 612
     Width = 1330
     Align = alBottom
+    inherited btnKeluar: TButton
+      Visible = False
+    end
     inherited btnHapus: TButton
       OnClick = btnHapusClick
     end

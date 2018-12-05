@@ -3978,9 +3978,23 @@ end;
 procedure TfrmUtama.mnWHL_ST_PBClick(Sender: TObject);
 var
   f: TfrmST_PB;
+  ts : TcxTabSheet;
 begin
-  f := TfrmST_PB.Create(Self);
-  f.Show;
+  //f := TfrmST_PB.Create(Self);
+ // f.Show;
+
+  if not CekTabOpen('Serah Terima Hasil Produksi + Pengiriman BOM') then begin
+    ToggleMainPage;
+    ts := TcxTabSheet.Create(Self);
+    ts.PageControl := pgMain;
+
+    f :=TfrmST_PB.Create(Self) ;
+    f.Parent := ts;
+    ts.Caption := f.Caption;
+    f.Show;
+
+      pgMain.ActivePage := ts;
+  end;
 end;
 
 procedure TfrmUtama.mnPRD_InputHasilProduksiTimbClick(Sender: TObject);

@@ -41,7 +41,7 @@ type
     cxGrid1Level1: TcxGridLevel;
     cxLabel7: TcxLabel;
     cxmKet: TcxMemo;
-    cxsTotal: TcxSpinEdit;
+    cxsGross: TcxSpinEdit;
     cxLabel4: TcxLabel;
     cxCurr: TcxComboBox;
     cxLabel5: TcxLabel;
@@ -63,6 +63,12 @@ type
     cxtAkunUM: TcxTextEdit;
     cxColTax: TcxGridColumn;
     cxtNoPO: TcxTextEdit;
+    cxLabel11: TcxLabel;
+    cxLabel12: TcxLabel;
+    cxLabel13: TcxLabel;
+    cxsTax: TcxSpinEdit;
+    cxsTotal: TcxSpinEdit;
+    cxColGross: TcxGridColumn;
     procedure cxdTanggalPropertiesChange(Sender: TObject);
     procedure cxJenisPropertiesChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -77,6 +83,8 @@ type
       AItemIndex: Integer);
     procedure btnUMClick(Sender: TObject);
     procedure cxlUMPropertiesChange(Sender: TObject);
+    procedure cxTblDataControllerBeforePost(
+      ADataController: TcxCustomDataController);
   private
     { Private declarations }
     mNoPI: string;
@@ -99,9 +107,18 @@ procedure TfrmPI.cxdTanggalPropertiesChange(Sender: TObject);
 begin
   inherited;
   if Self.Jenis='tambah' then begin
-    if cxJenis.Text = 'INVOICE PEMBELIAN' then
-    cxtNoTrans.Text := GetLastFak('invoice_pembelian',cxdTanggal.Date)
-    else  cxtNoTrans.Text := GetLastFak('uang_muka',cxdTanggal.Date) ;
+    if cxJenis.Text = 'INVOICE PEMBELIAN (LPB)' then begin
+      cxtNoTrans.Text := GetLastFak('invoice_pembelian',cxdTanggal.Date);
+    end
+    else if cxJenis.Text = 'UANG MUKA PEMBELIAN' then begin
+      cxtNoTrans.Text := GetLastFak('uang_muka',cxdTanggal.Date) ;
+     end
+    else if cxJenis.Text = 'INVOICE PEMBELIAN (DARI PO)' then begin
+      cxtNoTrans.Text := GetLastFak('invoice_pembelian1',cxdTanggal.Date) ;
+     end
+    else if cxJenis.Text = 'INVOICE PEMBELIAN (TANPA PO)' then begin
+      cxtNoTrans.Text := GetLastFak('invoice_pembelian2',cxdTanggal.Date) ;
+    end;
   end;
 end;
 
@@ -112,20 +129,27 @@ begin
   inherited;
   if Self.Jenis='tambah' then begin
 
-      if cxJenis.Text='INVOICE PEMBELIAN' then begin
+      if cxJenis.Text='INVOICE PEMBELIAN (LPB)' then begin
 
         cxtNoTrans.Text := GetLastFak('invoice_pembelian',cxdTanggal.Date);
         // get akun supplier
+        cxLabel4.Visible := False ;
+        cxLabel5.Visible := False ;
+        cxCurr.Visible   := False ;
+        cxsRate.Visible  := False ;
         cxLabel6.Caption := 'No.LPB';
-        q := OpenRS('SELECT * FROM tbl_supplier WHERE kode = ''%s''',[cxlCustomer.EditValue]);
+        cxLabel6.Visible := True ;
+        cxlNoPO.Visible  := True ;
+        btnProses.Visible:= True ;
+
+       { q := OpenRS('SELECT * FROM tbl_supplier WHERE kode = ''%s''',[cxlCustomer.EditValue]);
         if not q.IsEmpty then begin
           cxtAkunSupp.Text := q.FieldByName('akun_hutang').AsString;
           cxlAkunSupp.EditValue := q.FieldByName('akun_hutang').AsString;
         end;
-        q.Close;
+        q.Close; }
 
         cxmKet.Text := 'INVOICE PEMBELIAN';
-        btnProses.Visible := True;
 
             with zBrg do begin
           Close ;
@@ -134,10 +158,16 @@ begin
         end;
 
       end
-      else begin
+      else if  cxJenis.Text='UANG MUKA PEMBELIAN' then begin
 
         cxtNoTrans.Text := GetLastFak('uang_muka',cxdTanggal.Date);
+        cxLabel4.Visible := True ;
+        cxLabel5.Visible := True ;
+        cxCurr.Visible   := True ;
+        cxsRate.Visible  := True ;
         cxLabel6.Caption := 'No.PO';
+        cxLabel6.Visible := True ;
+        cxlNoPO.Visible  := True ;
 
         with zqrPO do begin
           Close ;
@@ -160,7 +190,46 @@ begin
 
         cxmKet.Text := 'UANG MUKA PEMBELIAN';
         btnProses.Visible := False;
-  end;
+      end
+      else if  cxJenis.Text='INVOICE PEMBELIAN (DARI PO)' then begin
+
+        cxtNoTrans.Text := GetLastFak('invoice_pembelian1',cxdTanggal.Date);
+        // get akun supplier
+        cxLabel4.Visible := False ;
+        cxLabel5.Visible := False ;
+        cxCurr.Visible   := False ;
+        cxsRate.Visible  := False ;
+        cxLabel6.Caption := 'No.PO';
+        cxLabel6.Visible := True ;
+        cxlNoPO.Visible  := True ;
+        btnProses.Visible:= True ;
+
+        {q := OpenRS('SELECT * FROM tbl_supplier WHERE kode = ''%s''',[cxlCustomer.EditValue]);
+        if not q.IsEmpty then begin
+          cxtAkunSupp.Text := q.FieldByName('akun_hutang').AsString;
+          cxlAkunSupp.EditValue := q.FieldByName('akun_hutang').AsString;
+        end;
+        q.Close; }
+       end
+      else if  cxJenis.Text='INVOICE PEMBELIAN (TANPA PO)' then begin
+
+      cxtNoTrans.Text := GetLastFak('invoice_pembelian2',cxdTanggal.Date);
+        // get akun supplier
+        cxLabel4.Visible := True ;
+        cxLabel5.Visible := True ;
+        cxCurr.Visible   := True ;
+        cxsRate.Visible  := True ;
+        cxLabel6.Visible := False ;
+        cxlNoPO.Visible  := False ;
+        btnProses.Visible:= False ;
+
+        {q := OpenRS('SELECT * FROM tbl_supplier WHERE kode = ''%s''',[cxlCustomer.EditValue]);
+        if not q.IsEmpty then begin
+          cxtAkunSupp.Text := q.FieldByName('akun_hutang').AsString;
+          cxlAkunSupp.EditValue := q.FieldByName('akun_hutang').AsString;
+        end;
+        q.Close;  }
+      end;
   end
   else begin
 
@@ -185,10 +254,12 @@ var
 begin
   inherited;
 
-  if cxJenis.Text='INVOICE PEMBELIAN' then begin
-      zqrPO.Close;
+  if cxJenis.Text='INVOICE PEMBELIAN (LPB)' then begin
+
+    zqrPO.Close;
     zqrPO.ParamByName('kode_supp').AsString := zqrSupp.FieldByName('kode').AsString;
     zqrPO.Open;
+
     // get akun supplier
     q := OpenRS('SELECT * FROM tbl_supplier WHERE kode = ''%s''',[cxlCustomer.EditValue]);
     if not q.IsEmpty then begin
@@ -198,7 +269,8 @@ begin
     q.Close;
 
   end
-  else begin
+  else if cxJenis.Text='UANG MUKA PEMBELIAN' then begin
+
      with zqrAkun do begin
       Close ;
       SQL.Text := 'SELECT noakun, nama FROM tbl_coa a WHERE (SELECT COUNT(noakun) FROM tbl_coa WHERE induk = a.noakun) = 0 AND induk = 115000' ;
@@ -211,6 +283,27 @@ begin
       ParamByName('supp').Value := cxlCustomer.EditValue ;
       Open;
     end;
+  end
+  else if cxJenis.Text='INVOICE PEMBELIAN (DARI PO)' then begin
+
+       with zqrPO do begin
+      Close ;
+      SQL.Text := 'SELECT no_bukti FROM tbl_po_head WHERE f_approval=1 and kode_supp=:supp';
+      ParamByName('supp').Value := cxlCustomer.EditValue ;
+      Open;
+    end;
+
+    // get akun supplier
+    q := OpenRS('SELECT * FROM tbl_supplier WHERE kode = ''%s''',[cxlCustomer.EditValue]);
+    if not q.IsEmpty then begin
+      cxtAkunSupp.Text := q.FieldByName('akun_hutang').AsString;
+      cxlAkunSupp.EditValue := q.FieldByName('akun_hutang').AsString;
+    end;
+    q.Close;
+    
+  end
+  else if cxJenis.Text='INVOICE PEMBELIAN (TANPA PO)' then begin
+
   end;
 
     q := OpenRS('SELECT nama FROM tbl_supplier WHERE kode = ''%s''',[cxlCustomer.EditValue]);
@@ -331,7 +424,7 @@ begin
         end;
 
       end;
-     end else begin
+     end else if cxJenis.Text='INVOICE PEMBELIAN (LPB)' then begin
         if Self.Jenis = 'tambah' then begin
         sNoTrs := GetLastFak('invoice_pembelian',cxdTanggal.Date);
         UpdateFaktur(Copy(sNoTrs,1,7));
@@ -344,6 +437,244 @@ begin
       end;
 
       if cxChkPosting.Checked then begin
+
+        sNoJ := cxtNoTrans.Text;
+
+        qj := OpenRS('SELECT * FROM tbl_jurnal WHERE no_jurnal = ''%s''');
+        qj.Insert;
+        qj.FieldByName('no_jurnal').AsString := sNoJ;
+        qj.FieldByName('tanggal').AsDateTime := Aplikasi.Tanggal;
+        qj.FieldByName('tgljam').AsDateTime := Aplikasi.TanggalServer;
+        qj.FieldByName('keterangan').AsString := cxmKet.Text;
+        qj.FieldByName('f_posted').AsString := '1';
+        qj.FieldByName('user').AsString := Aplikasi.NamaUser;
+        qj.FieldByName('user_dept').AsString := Aplikasi.UserDept;
+        qj.Post;
+        qj.Close;
+
+        for i := 0 to cxTbl.DataController.RecordCount - 1 do begin
+
+            qjd := OpenRS('SELECT * FROM tbl_jurnal_det WHERE no_jurnal = ''%s''',[sNoJ]);
+
+
+
+              if Copy(cxTbl.DataController.Values[i, cxColKodeBrg.index],1,3)='BL2' then begin
+               sAkun := GetDefaultAkun('ppnmasukanblmfaktur');
+                qjd.Insert;
+                qjd.FieldbyName('tanggal').AsDateTime := Aplikasi.TanggalServer;
+                qjd.FieldByName('no_jurnal').AsString := sNoJ;
+                qjd.FieldByName('no_trans').AsString := sNoTrs;
+                qjd.FieldByName('akun').AsString := sAkun;
+                qjd.FieldByName('kode_brg').AsString := cxTbl.DataController.Values[i, cxColKodeBrg.index];
+                qjd.FieldByName('kredit').AsFloat :=cxTbl.DataController.Values[i, cxColSubTotal.index];
+                qjd.FieldByName('keterangan').AsString := 'PPN MASUKAN BELUM DIFAKTURKAN TRANSAKSI :' + sNoTrs;
+                qjd.FieldByName('dc').AsString := 'K';
+                qjd.Post;
+
+                sAkun := GetDefaultAkun('ppnmasukan');
+                qjd.Insert;
+                qjd.FieldbyName('tanggal').AsDateTime := Aplikasi.TanggalServer;
+                qjd.FieldByName('no_jurnal').AsString := sNoJ;
+                qjd.FieldByName('no_trans').AsString := sNoTrs;
+                qjd.FieldByName('akun').AsString := sAkun;
+                qjd.FieldByName('kode_brg').AsString := cxTbl.DataController.Values[i, cxColKodeBrg.index];
+                qjd.FieldByName('debet').AsFloat :=cxTbl.DataController.Values[i, cxColSubTotal.index];
+                qjd.FieldByName('keterangan').AsString := 'PPN MASUKAN TRANSAKSI :' + sNoTrs;
+                qjd.FieldByName('dc').AsString := 'D';
+                qjd.Post;
+
+                end
+                else  if Copy(cxTbl.DataController.Values[i, cxColKodeBrg.index],1,3)='BL1' then begin
+                     sAkun := GetDefaultAkun('uang_muka_pembelian_idr');
+                      qjd.Insert;
+                      qjd.FieldbyName('tanggal').AsDateTime := Aplikasi.TanggalServer;
+                      qjd.FieldByName('no_jurnal').AsString := sNoJ;
+                      qjd.FieldByName('no_trans').AsString := sNoTrs;
+                      qjd.FieldByName('akun').AsString := sAkun;
+                      qjd.FieldByName('kredit').AsFloat := cxTbl.DataController.Values[i, cxColSubTotal.index];
+                      qjd.FieldByName('keterangan').AsString := 'UANG MUKA PEMBELIAN NO: ' + sNoTrs + '['+ cxmKet.Text + ']';
+                      qjd.FieldByName('dc').AsString := 'K';
+                      qjd.Post;
+
+                       sAkun := GetDefaultAkun('bankidr');
+                        qjd := OpenRS('SELECT * FROM tbl_jurnal_det WHERE no_jurnal = ''%s''',[sNoJ]);
+                        qjd.Insert;
+                        qjd.FieldbyName('tanggal').AsDateTime := Aplikasi.TanggalServer;
+                        qjd.FieldByName('no_jurnal').AsString := sNoJ;
+                        qjd.FieldByName('no_trans').AsString := sNoTrs;
+                        qjd.FieldByName('akun').AsString := sAkun;
+                        qjd.FieldByName('debet').AsFloat :=  cxTbl.DataController.Values[i, cxColSubTotal.index];
+                        qjd.FieldByName('keterangan').AsString := 'Bank BCA SINGOSARI IDR - 368 301 0 444';
+                        qjd.FieldByName('dc').AsString := 'D';
+                        qjd.FieldByName('kode_suppcust').AsString := cxlCustomer.EditValue;
+                        qjd.Post;
+
+                end else begin
+                       sAkun := cxtAkunSupp.Text;
+                        qjd.Insert;
+                        qjd.FieldbyName('tanggal').AsDateTime := Aplikasi.TanggalServer;
+                        qjd.FieldByName('no_jurnal').AsString := sNoJ;
+                        qjd.FieldByName('no_trans').AsString := sNoTrs;
+                        qjd.FieldByName('akun').AsString := sAkun;
+                        qjd.FieldByName('kredit').AsFloat :=  cxTbl.DataController.Values[i, cxColSubTotal.index];
+                        qjd.FieldByName('keterangan').AsString := cxmKet.Text;
+                        qjd.FieldByName('kode_suppcust').AsString := cxlCustomer.EditValue;
+                        qjd.FieldByName('dc').AsString := 'K';
+                        qjd.Post;
+
+                         sAkun := GetDefaultAkunBrg(cxTbl.DataController.Values[i, cxColKodeBrg.index],'blm_tertagih');
+                      qjd.Insert;
+                      qjd.FieldbyName('tanggal').AsDateTime := Aplikasi.TanggalServer;
+                      qjd.FieldByName('no_jurnal').AsString := sNoJ;
+                      qjd.FieldByName('no_trans').AsString := sNoTrs;
+                      qjd.FieldByName('akun').AsString := sAkun;
+                      qjd.FieldByName('kode_brg').AsString := cxTbl.DataController.Values[i, cxColKodeBrg.index];
+                      qjd.FieldByName('debet').AsFloat := cxTbl.DataController.Values[i, cxColSubTotal.index];
+                      qjd.FieldByName('keterangan').AsString :=sNoTrs + '['+ cxmKet.Text + ']';
+                      qjd.FieldByName('dc').AsString := 'D';
+                      qjd.FieldByName('kode_suppcust').AsString := cxlCustomer.EditValue;
+                      qjd.Post;
+                end;
+        end;
+
+        
+        // update flag transaksi invoice
+        dm.zConn.ExecuteDirect('UPDATE tbl_trsinvoice_head SET f_posted = 1 ' +
+          'WHERE no_bukti = ' + QuotedStr(sNoTrs));
+
+      end;
+     end else if cxJenis.Text='INVOICE PEMBELIAN (DARI PO)' then begin
+
+         if Self.Jenis = 'tambah' then begin
+          sNoTrs := GetLastFak('invoice_pembelian1',cxdTanggal.Date);
+          UpdateFaktur(Copy(sNoTrs,1,9));
+
+        end
+        else begin
+          sNoTrs := cxtNoTrans.Text;
+          dm.zConn.ExecuteDirect('DELETE FROM tbl_trsinvoice_det WHERE no_bukti = ' + QuotedStr(sNoTrs));
+        end;
+
+        if cxChkPosting.Checked then begin
+
+        sNoJ := cxtNoTrans.Text;
+
+        qj := OpenRS('SELECT * FROM tbl_jurnal WHERE no_jurnal = ''%s''');
+        qj.Insert;
+        qj.FieldByName('no_jurnal').AsString := sNoJ;
+        qj.FieldByName('tanggal').AsDateTime := Aplikasi.Tanggal;
+        qj.FieldByName('tgljam').AsDateTime := Aplikasi.TanggalServer;
+        qj.FieldByName('keterangan').AsString := cxmKet.Text;
+        qj.FieldByName('f_posted').AsString := '1';
+        qj.FieldByName('user').AsString := Aplikasi.NamaUser;
+        qj.FieldByName('user_dept').AsString := Aplikasi.UserDept;
+        qj.Post;
+        qj.Close;
+
+        for i := 0 to cxTbl.DataController.RecordCount - 1 do begin
+
+            qjd := OpenRS('SELECT * FROM tbl_jurnal_det WHERE no_jurnal = ''%s''',[sNoJ]);
+
+
+
+              if Copy(cxTbl.DataController.Values[i, cxColKodeBrg.index],1,3)='BL2' then begin
+               sAkun := GetDefaultAkun('ppnmasukanblmfaktur');
+                qjd.Insert;
+                qjd.FieldbyName('tanggal').AsDateTime := Aplikasi.TanggalServer;
+                qjd.FieldByName('no_jurnal').AsString := sNoJ;
+                qjd.FieldByName('no_trans').AsString := sNoTrs;
+                qjd.FieldByName('akun').AsString := sAkun;
+                qjd.FieldByName('kode_brg').AsString := cxTbl.DataController.Values[i, cxColKodeBrg.index];
+                qjd.FieldByName('kredit').AsFloat :=cxTbl.DataController.Values[i, cxColSubTotal.index];
+                qjd.FieldByName('keterangan').AsString := 'PPN MASUKAN BELUM DIFAKTURKAN TRANSAKSI :' + sNoTrs;
+                qjd.FieldByName('dc').AsString := 'K';
+                qjd.Post;
+
+                sAkun := GetDefaultAkun('ppnmasukan');
+                qjd.Insert;
+                qjd.FieldbyName('tanggal').AsDateTime := Aplikasi.TanggalServer;
+                qjd.FieldByName('no_jurnal').AsString := sNoJ;
+                qjd.FieldByName('no_trans').AsString := sNoTrs;
+                qjd.FieldByName('akun').AsString := sAkun;
+                qjd.FieldByName('kode_brg').AsString := cxTbl.DataController.Values[i, cxColKodeBrg.index];
+                qjd.FieldByName('debet').AsFloat :=cxTbl.DataController.Values[i, cxColSubTotal.index];
+                qjd.FieldByName('keterangan').AsString := 'PPN MASUKAN TRANSAKSI :' + sNoTrs;
+                qjd.FieldByName('dc').AsString := 'D';
+                qjd.Post;
+
+                end
+                else  if Copy(cxTbl.DataController.Values[i, cxColKodeBrg.index],1,3)='BL1' then begin
+                     sAkun := GetDefaultAkun('uang_muka_pembelian_idr');
+                      qjd.Insert;
+                      qjd.FieldbyName('tanggal').AsDateTime := Aplikasi.TanggalServer;
+                      qjd.FieldByName('no_jurnal').AsString := sNoJ;
+                      qjd.FieldByName('no_trans').AsString := sNoTrs;
+                      qjd.FieldByName('akun').AsString := sAkun;
+                      qjd.FieldByName('kredit').AsFloat := cxTbl.DataController.Values[i, cxColSubTotal.index];
+                      qjd.FieldByName('keterangan').AsString := 'UANG MUKA PEMBELIAN NO: ' + sNoTrs + '['+ cxmKet.Text + ']';
+                      qjd.FieldByName('dc').AsString := 'K';
+                      qjd.Post;
+
+                       sAkun := GetDefaultAkun('bankidr');
+                        qjd := OpenRS('SELECT * FROM tbl_jurnal_det WHERE no_jurnal = ''%s''',[sNoJ]);
+                        qjd.Insert;
+                        qjd.FieldbyName('tanggal').AsDateTime := Aplikasi.TanggalServer;
+                        qjd.FieldByName('no_jurnal').AsString := sNoJ;
+                        qjd.FieldByName('no_trans').AsString := sNoTrs;
+                        qjd.FieldByName('akun').AsString := sAkun;
+                        qjd.FieldByName('debet').AsFloat :=  cxTbl.DataController.Values[i, cxColSubTotal.index];
+                        qjd.FieldByName('keterangan').AsString := 'Bank BCA SINGOSARI IDR - 368 301 0 444';
+                        qjd.FieldByName('dc').AsString := 'D';
+                        qjd.FieldByName('kode_suppcust').AsString := cxlCustomer.EditValue;
+                        qjd.Post;
+
+                end else begin
+                       sAkun := cxtAkunSupp.Text;
+                        qjd.Insert;
+                        qjd.FieldbyName('tanggal').AsDateTime := Aplikasi.TanggalServer;
+                        qjd.FieldByName('no_jurnal').AsString := sNoJ;
+                        qjd.FieldByName('no_trans').AsString := sNoTrs;
+                        qjd.FieldByName('akun').AsString := sAkun;
+                        qjd.FieldByName('kredit').AsFloat :=  cxTbl.DataController.Values[i, cxColSubTotal.index];
+                        qjd.FieldByName('keterangan').AsString := cxmKet.Text;
+                        qjd.FieldByName('kode_suppcust').AsString := cxlCustomer.EditValue;
+                        qjd.FieldByName('dc').AsString := 'K';
+                        qjd.Post;
+
+                         sAkun := GetDefaultAkunBrg(cxTbl.DataController.Values[i, cxColKodeBrg.index],'blm_tertagih');
+                      qjd.Insert;
+                      qjd.FieldbyName('tanggal').AsDateTime := Aplikasi.TanggalServer;
+                      qjd.FieldByName('no_jurnal').AsString := sNoJ;
+                      qjd.FieldByName('no_trans').AsString := sNoTrs;
+                      qjd.FieldByName('akun').AsString := sAkun;
+                      qjd.FieldByName('kode_brg').AsString := cxTbl.DataController.Values[i, cxColKodeBrg.index];
+                      qjd.FieldByName('debet').AsFloat := cxTbl.DataController.Values[i, cxColSubTotal.index];
+                      qjd.FieldByName('keterangan').AsString :=sNoTrs + '['+ cxmKet.Text + ']';
+                      qjd.FieldByName('dc').AsString := 'D';
+                      qjd.FieldByName('kode_suppcust').AsString := cxlCustomer.EditValue;
+                      qjd.Post;
+                end;
+        end;
+
+        
+        // update flag transaksi invoice
+        dm.zConn.ExecuteDirect('UPDATE tbl_trsinvoice_head SET f_posted = 1 ' +
+          'WHERE no_bukti = ' + QuotedStr(sNoTrs));
+
+      end;
+     end else if cxJenis.Text='INVOICE PEMBELIAN (TANPA PO)' then begin
+
+         if Self.Jenis = 'tambah' then begin
+          sNoTrs := GetLastFak('invoice_pembelian1',cxdTanggal.Date);
+          UpdateFaktur(Copy(sNoTrs,1,9));
+
+        end
+        else begin
+          sNoTrs := cxtNoTrans.Text;
+          dm.zConn.ExecuteDirect('DELETE FROM tbl_trsinvoice_det WHERE no_bukti = ' + QuotedStr(sNoTrs));
+        end;
+
+        if cxChkPosting.Checked then begin
 
         sNoJ := cxtNoTrans.Text;
 
@@ -469,9 +800,18 @@ begin
         FieldByName('user').AsString := aplikasi.NamaUser;
         FieldByName('user_dept').AsString := aplikasi.UserDept;
         FieldByName('keterangan').AsString := cxmKet.Lines.Text;
-        if cxJenis.Text='UANG MUKA PEMBELIAN' then
-        FieldByName('jenis').AsString := 'UM'
-        else FieldByName('jenis').AsString := 'PI';
+        if cxJenis.Text='UANG MUKA PEMBELIAN' then begin
+          FieldByName('jenis').AsString := 'UM';
+        end
+        else if cxJenis.Text='INVOICE PEMBELIAN (LPB)' then begin
+          FieldByName('jenis').AsString := 'PI';
+        end
+        else if cxJenis.Text='INVOICE PEMBELIAN (DARI PO)' then begin
+          FieldByName('jenis').AsString := 'PIPO';
+        end
+        else if cxJenis.Text='INVOICE PEMBELIAN (TANPA PO)' then begin
+          FieldByName('jenis').AsString := 'PITP';
+        end;
         FieldByName('curr').AsString := cxCurr.Text;
         FieldByName('noakun').AsString := cxlAkunSupp.EditValue;
         FieldByName('rate').AsFloat := cxsRate.EditValue;
@@ -576,12 +916,18 @@ begin
       cxlAkunSupp.EditValue := q.FieldByName('noakun').AsString;
       cxlNoPO.EditValue := q.FieldByName('no_po').AsString;
        cxsTotal.EditValue := q.FieldByName('total').AsFloat;
-       
+
     if q.FieldByName('jenis').AsString = 'UM' then begin
         cxJenis.Text := 'UANG MUKA PEMBELIAN' ;
-         btnProses.Visible := False;
-         cxJenis.Enabled := False ;
-          cxLabel6.Caption := 'No.PO';
+         cxLabel4.Visible := True ;
+        cxLabel5.Visible := True ;
+        cxCurr.Visible   := True ;           
+        cxsRate.Visible  := True ;
+        cxLabel6.Caption := 'No.PO';
+        cxLabel6.Visible := True ;
+        cxlNoPO.Visible  := True ;
+        btnProses.Visible := False;
+        
          with zBrg do begin
           Close ;
           SQL.Text := 'SELECT kode,deskripsi FROM tbl_barang where left(kode,3)="BL1"' ;
@@ -596,7 +942,18 @@ begin
       end;
         
     end
-    else begin
+    else if q.FieldByName('jenis').AsString = 'PI' then begin
+       cxJenis.Text := 'INVOICE PEMBELIAN (LPB)' ;
+
+      cxLabel4.Visible := False ;
+        cxLabel5.Visible := False ;
+        cxCurr.Visible   := False ;
+        cxsRate.Visible  := False ;
+        cxLabel6.Caption := 'No.LPB';
+        cxLabel6.Visible := True ;
+        cxlNoPO.Visible  := True ;
+        btnProses.Visible:= True ;
+        
       with zqrPO do begin
        Close ;
        SQL.Text := 'SELECT a.no_bukti FROM tbl_spbb_head a LEFT JOIN tbl_supplier b ON a.kode_supp = b.kode  ' +
@@ -604,6 +961,37 @@ begin
        ParamByName('kode_supp1').Value := cxlCustomer.EditValue ;
        Open;
       end;
+    end
+    else if q.FieldByName('jenis').AsString = 'PIPO' then begin
+       cxJenis.Text := 'INVOICE PEMBELIAN (DARI PO)' ;
+
+       cxLabel4.Visible := False ;
+        cxLabel5.Visible := False ;
+        cxCurr.Visible   := False ;
+        cxsRate.Visible  := False ;
+        cxLabel6.Caption := 'No.PO';
+        cxLabel6.Visible := True ;
+        cxlNoPO.Visible  := True ;
+        btnProses.Visible:= True ;
+
+         with zqrPO do begin
+      Close ;
+      SQL.Text := 'SELECT no_bukti FROM tbl_po_head WHERE f_approval=1 and kode_supp=:supp';
+      ParamByName('supp').Value := cxlCustomer.EditValue ;
+      Open;
+      end;
+
+     end
+    else if q.FieldByName('jenis').AsString = 'PITP' then begin
+       cxJenis.Text := 'INVOICE PEMBELIAN (TANPA PO)' ;
+
+       cxLabel4.Visible := True ;
+        cxLabel5.Visible := True ;
+        cxCurr.Visible   := True ;
+        cxsRate.Visible  := True ;
+        cxLabel6.Visible := False ;
+        cxlNoPO.Visible  := False ;
+        btnProses.Visible:= False ;
 
     end;
 
@@ -643,7 +1031,7 @@ end;
 procedure TfrmPI.btnProsesClick(Sender: TObject);
 var
   q,z,qPO: TZQuery;
-  i: Integer;
+  i: Integer;                                           
   total: Real;
 begin
   inherited;
@@ -665,6 +1053,7 @@ begin
           Values[i, cxColDesk.Index] := q.FieldByName('kode_brg').AsString;
           Values[i, cxColQty.Index] := q.FieldByName('qty').AsFloat;
           Values[i, cxColHarga.Index] := q.FieldByName('harga').AsFloat;
+          Values[i, cxColGross.Index] := (q.FieldByName('qty').AsFloat * q.FieldByName('harga').AsFloat);
           if (q.FieldByName('pajak').AsString='PPN') or (q.FieldByName('ppn').AsString='PPN') then
            Values[i, cxColTax.Index] := (q.FieldByName('harga').AsFloat * q.FieldByName('qty').AsFloat)*0.1
            else    Values[i, cxColTax.Index] := 0 ;
@@ -679,6 +1068,8 @@ begin
     //if total > 0 then
       ///cxsTotal.Value := total;
       cxsTotal.EditValue := cxTbl.DataController.Summary.FooterSummaryValues[0];
+      cxsGross.EditValue := cxTbl.DataController.Summary.FooterSummaryValues[2] ;
+      cxsTax.EditValue   := cxTbl.DataController.Summary.FooterSummaryValues[1];
   end;
 
    z := OpenRS('SELECT COUNT(no_po) jumlah FROM tbl_trsinvoice_head WHERE jenis="UM" and f_alokasi=0 and no_po = ''%s''',[cxtNoPO.Text]);
@@ -718,19 +1109,32 @@ begin
       finally
         cxTbl.EndUpdate;
       end;
-    end else if (AItemIndex = cxColHarga.Index) then begin
+    end else if (AItemIndex = cxColQty.Index) or (AItemIndex = cxColHarga.Index) or (AItemIndex = cxColTax.Index) then begin
 
       try
         cxTbl.BeginUpdate;
-        ADataController.Values [ARecordIndex, cxColSubTotal.Index] :=
+        ADataController.Values [ARecordIndex, cxColGross.Index] :=
           ADataController.Values [ARecordIndex, cxColQty.Index] *
           ADataController.Values [ARecordIndex, cxColHarga.Index] ;
+
+          if not VarIsNull(ADataController.Values [ARecordIndex, cxColTax.Index]) then begin
+            ADataController.Values [ARecordIndex, cxColSubTotal.Index] :=
+           (ADataController.Values [ARecordIndex, cxColQty.Index] *
+            ADataController.Values [ARecordIndex, cxColHarga.Index]) + ADataController.Values [ARecordIndex, cxColTax.Index] ;
+          end
+          else begin
+             ADataController.Values [ARecordIndex, cxColSubTotal.Index] :=
+           (ADataController.Values [ARecordIndex, cxColQty.Index] *
+            ADataController.Values [ARecordIndex, cxColHarga.Index]);
+          end;
 
           // total := total +  ADataController.Values [ARecordIndex, cxColSubTotal.Index];
 
               // if total > 0 then
-      //cxsTotal.Value := total;
-      cxsTotal.EditValue := cxTbl.DataController.Summary.FooterSummaryValues[0] ;
+        //cxsTotal.Value := total;
+        cxsTotal.EditValue := cxTbl.DataController.Summary.FooterSummaryValues[0] ;
+        cxsGross.EditValue := cxTbl.DataController.Summary.FooterSummaryValues[2] ;
+        cxsTax.EditValue   := cxTbl.DataController.Summary.FooterSummaryValues[1];
       finally
         cxTbl.EndUpdate;
       end;
@@ -772,6 +1176,15 @@ begin
   q := OpenRS('SELECT * FROM tbl_trsinvoice_head WHERE no_bukti = ''%s''',[cxlUM.EditValue]);
   cxtAkunUM.Text := q.FieldByName('noakun').AsString;
   q.Close;
+end;
+
+procedure TfrmPI.cxTblDataControllerBeforePost(
+  ADataController: TcxCustomDataController);
+begin
+  inherited;
+   cxsTotal.EditValue := cxTbl.DataController.Summary.FooterSummaryValues[0] ;
+   cxsGross.EditValue := cxTbl.DataController.Summary.FooterSummaryValues[2] ;
+   cxsTax.EditValue   := cxTbl.DataController.Summary.FooterSummaryValues[1];
 end;
 
 end.

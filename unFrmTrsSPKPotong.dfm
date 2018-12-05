@@ -1,6 +1,6 @@
 inherited frmTrsSPKPotong: TfrmTrsSPKPotong
-  Left = 238
-  Top = 61
+  Left = 513
+  Top = 137
   VertScrollBar.Range = 0
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
@@ -704,7 +704,6 @@ inherited frmTrsSPKPotong: TfrmTrsSPKPotong
   end
   object zqrBrg: TZReadOnlyQuery
     Connection = dm.zConn
-    Active = True
     SQL.Strings = (
       'SELECT * FROM v_brg_per_gdg ORDER BY deskripsi')
     Params = <>
@@ -723,7 +722,6 @@ inherited frmTrsSPKPotong: TfrmTrsSPKPotong
   end
   object zqrNoBukti: TZReadOnlyQuery
     Connection = dm.zConn
-    Active = True
     SQL.Strings = (
       
         'SELECT no_bukti, tanggal, user, user_dept FROM tbl_trsspkpotong_' +

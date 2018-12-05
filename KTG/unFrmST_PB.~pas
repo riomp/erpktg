@@ -20,7 +20,7 @@ uses
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   ZAbstractRODataset, ZDataset, cxGridLevel, cxClasses, cxGridCustomView,
   cxGrid, scExcelExport,cxGridExportLink, ShellAPI, cxCheckBox, cxPC,
-  cxDBLookupComboBox, cxSpinEdit;
+  cxDBLookupComboBox, cxSpinEdit, ZAbstractDataset;
 
 type
   TfrmST_PB = class(TfrmTplTrans)
@@ -164,17 +164,39 @@ type
     cxTblSTColumn1: TcxGridDBColumn;
     zqrReturBOM: TZReadOnlyQuery;
     dsReturBOM: TDataSource;
+    GroupBox1: TGroupBox;
+    cxtNoBukti: TcxTextEdit;
+    cxtKode: TcxTextEdit;
+    cxGrid9: TcxGrid;
+    cxTblLot: TcxGridTableView;
+    cxCollot: TcxGridColumn;
+    cxColQty: TcxGridColumn;
+    cxGridLevel7: TcxGridLevel;
+    dsLot: TDataSource;
+    zqrLot: TZQuery;
+    cxColStock: TcxGridColumn;
+    btn1: TButton;
+    cxsqty: TcxSpinEdit;
+    cxColGudang: TcxGridColumn;
+    cxColSatuan: TcxGridColumn;
     procedure FormCreate(Sender: TObject);
     procedure btnKeluar2Click(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
     procedure btnProsesClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    procedure btnSimpanLOT1Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnSimpanPBClick(Sender: TObject);
     procedure btnSimpanSTClick(Sender: TObject);
     procedure btnSimpanReturBOMClick(Sender: TObject);
+    procedure cxTblPBFocusedRecordChanged(Sender: TcxCustomGridTableView;
+      APrevFocusedRecord, AFocusedRecord: TcxCustomGridRecord;
+      ANewItemRecordFocusingChanged: Boolean);
+    procedure cxTblLotDataControllerRecordChanged(
+      ADataController: TcxCustomDataController; ARecordIndex,
+      AItemIndex: Integer);
+    procedure btn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -254,7 +276,7 @@ begin
   end;
 end;
 
-procedure TfrmST_PB.Button2Click(Sender: TObject);
+procedure TfrmST_PB.btnSimpanLOT1Click(Sender: TObject);
 var
   lst: TStringList;
   i,j: Integer;
@@ -480,6 +502,7 @@ begin
         h.FieldByName('no_so').AsString := q.FieldByName('no_so').AsString;
         h.FieldByName('no_spk').AsString := q.FieldByname('no_spk').AsString;
         h.FieldByName('tgl_input').AsDateTime := Aplikasi.NowServer;
+        h.FieldByName('harga').AsFloat := GetHPP(q.FieldByName('kode_brg').AsString);
         h.FieldByName('hpp').AsFloat := GetHPP(q.FieldByName('kode_brg').AsString);
         h.FieldByName('unit_ktg').AsString := GetUnitKTG(q.FieldByName('kode_brg').AsString);
         h.Post;
@@ -523,7 +546,7 @@ begin
         qbd.Close;
 
         dm.zConn.ExecuteDirect('UPDATE tbl_trspengeluaranbb_det SET fkeluar = 1 WHERE no_bukti = ''' +
-          q.FieldByName('no_bukti').AsString + '''');
+          q.FieldByName('no_bukti').AsString + ''' AND kode_brg = ''' + q.FieldByName('kode_brg').AsString + '''');
 
         //sNoJ := GetLastFak('jurnal');
         //UpdateFaktur(Copy(sNoJ,1,6));
@@ -930,6 +953,118 @@ begin
         MsgBox('Error: ' + E.Message);
       end;
     end;
+  end;
+
+end;
+
+procedure TfrmST_PB.cxTblPBFocusedRecordChanged(
+  Sender: TcxCustomGridTableView; APrevFocusedRecord,
+  AFocusedRecord: TcxCustomGridRecord;
+  ANewItemRecordFocusingChanged: Boolean);
+  var
+  q : TZQuery ;
+  i,j : Integer ;
+  sSatuan : string ;
+  sQty : Real ;
+begin
+  inherited;
+    try
+
+    i := cxTblPB.DataController.GetFocusedRecordIndex;
+    cxtKode.Text := cxTblPB.DataController.Values[i, cxTblPBkode_brg.Index];
+    cxtNoBukti.Text := cxTblPB.DataController.Values[i, cxColNoTrans.Index];
+    sSatuan :=  cxTblPB.DataController.Values[i, cxTblPBsatuan.Index];
+    sQty :=  cxTblPB.DataController.Values[i, cxTblPBqty.Index];
+    cxsqty.EditValue := sQty ;
+
+    zqrLot.Close;
+    zqrLot.ParamByName('kode').AsString :=  cxtKode.Text;
+    zqrLot.Open;
+
+
+    cxTblLot.DataController.RecordCount := 0;
+      q := OpenRS('SELECT * FROM tbl_historybb_lot where tipe=0 and no_trans =''%s'' and kode_brg=''%s'' and gudang="G-PRD"',[cxtNoBukti.Text,cxtkode.Text]) ;
+    while not q.Eof do begin
+      with cxTblLot.DataController do begin
+       j := AppendRecord ;
+       Values[j, cxCollot.Index] := q.FieldByName('lot').AsString ;
+       Values[j, cxColqty.Index] := q.FieldByName('qty').Asfloat ;
+      end;
+      q.Next;
+    end;
+    q.Close;
+  except
+  end;
+end;
+
+procedure TfrmST_PB.cxTblLotDataControllerRecordChanged(
+  ADataController: TcxCustomDataController; ARecordIndex,
+  AItemIndex: Integer);
+var
+  q : TZQuery ;
+  i  : Integer ;
+begin
+  inherited;
+   if AItemIndex = cxCollot.Index then begin
+    try
+      cxTblLot.BeginUpdate;
+        q := OpenRS('SELECT a.lot,a.kode_brg,a.gudang,a.satuan,(IF(a.tipe=1,IFNULL(SUM(a.qty),0),0)-IF(a.tipe=0,IFNULL(SUM(a.qty),0),0)) qty FROM tbl_historybb_lot as a WHERE a.lot=''%s'' and a.kode_brg=''%s'' and gudang in ("G-BB","G-NPM")',
+        [ADataController.Values[ARecordIndex, cxCollot.Index],cxtKode.Text]);
+
+        ADataController.Values[ARecordIndex, cxColStock.Index] := q.FieldByName('qty').AsFloat;
+        ADataController.Values[ARecordIndex, cxColGudang.Index] := q.FieldByName('gudang').AsString;
+        ADataController.Values[ARecordIndex, cxColSatuan.Index] := q.FieldByName('satuan').AsString;
+    finally
+      cxTblLot.EndUpdate;
+    end;
+  end
+  else if AItemIndex = cxColQty.Index then begin
+      if ( ADataController.Values[ARecordIndex, cxColQty.Index] >
+        (ADataController.Values[ARecordIndex, cxColStock.Index])) then begin
+        MsgBox('Jumlah Barang Diterima Melebihi Stock.');
+        Abort
+      end;
+  end;
+end;
+
+procedure TfrmST_PB.btn1Click(Sender: TObject);
+var
+  z : TZQuery ;
+  i : Integer ;
+begin
+  inherited;
+  if cxsqty.EditValue <> cxTblLot.DataController.Summary.FooterSummaryValues[0] then begin
+    MsgBox('Qty tidak sama dengan yang diterima');
+  end else begin
+     dm.zConn.ExecuteDirect(
+    Format('DELETE FROM tbl_historybb_lot WHERE tipe=0 and no_trans = ''%s'' and kode_brg=''%s'' and gudang in ("G-BB","G-NPM")',[cxtNoBukti.text,cxtkode.Text]));
+    dm.zConn.ExecuteDirect(
+    Format('DELETE FROM tbl_historybb_lot WHERE tipe=1 and no_trans = ''%s'' and kode_brg=''%s'' and gudang="G-PRD"',[cxtNoBukti.text,cxtkode.Text]));
+   z := OpenRS('SELECT * FROM tbl_historybb_lot WHERE  tipe=1 and no_trans = ''%s'' and kode_brg=''%s'' and gudang="G-PRD"',[cxtNoBukti.text,cxtkode.Text]);
+   with cxTblLot.DataController do begin
+    for i := 0 to RecordCount - 1 do begin
+      z.Insert;
+      z.FieldByName('no_trans').Value := cxtNoBukti.Text;
+      z.FieldByName('kode_brg').Value := cxtkode.Text;
+      z.FieldByName('lot').Value := Values[i, cxCollot.Index];
+      z.FieldByName('qty').Value := Values[i, cxColqty.Index];
+      z.FieldByName('tipe').Value := 1;
+      z.FieldByName('satuan').Value := Values[i, cxColsatuan.Index];
+      z.FieldByName('gudang').Value := 'G-PRD';
+      z.Post;
+
+        z.Insert;
+      z.FieldByName('no_trans').Value := cxtNoBukti.Text;
+      z.FieldByName('kode_brg').Value := cxtkode.Text;
+      z.FieldByName('lot').Value := Values[i, cxCollot.Index];
+      z.FieldByName('qty').Value := Values[i, cxColqty.Index];
+      z.FieldByName('tipe').Value := 0;
+      z.FieldByName('satuan').Value := Values[i, cxColsatuan.Index];
+      z.FieldByName('gudang').Value := Values[i, cxColgudang.Index];
+      z.Post;
+    end;
+  end;
+    z.Close ;
   end;
 
 end;

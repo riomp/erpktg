@@ -148,6 +148,15 @@ inherited frmPembayaranPembelian1: TfrmPembayaranPembelian1
         OptionsView.Navigator = True
         OptionsView.Footer = True
         OptionsView.GroupByBox = False
+        object cxColCheck: TcxGridColumn
+          Caption = 'Check'
+          DataBinding.ValueType = 'Integer'
+          PropertiesClassName = 'TcxCheckBoxProperties'
+          Properties.NullStyle = nssUnchecked
+          Properties.ValueChecked = 1
+          Properties.ValueUnchecked = 0
+          Width = 40
+        end
         object cxColNoInvoice: TcxGridColumn
           Caption = 'No. Invoice'
           Width = 110

@@ -150,6 +150,14 @@ inherited frmInputLHP: TfrmInputLHP
       Height = 13
       Caption = 'Jam Opr Lembur'
     end
+    object Label20: TLabel
+      Left = 206
+      Top = 440
+      Width = 38
+      Height = 13
+      Caption = 'No.LOT'
+      Visible = False
+    end
     object txtSPK: TEdit
       Left = 115
       Top = 10
@@ -906,7 +914,7 @@ inherited frmInputLHP: TfrmInputLHP
       end
     end
     object cxlMesin: TcxLookupComboBox
-      Left = 430
+      Left = 435
       Top = 80
       Properties.DropDownAutoSize = True
       Properties.KeyFieldNames = 'kode'
@@ -919,6 +927,7 @@ inherited frmInputLHP: TfrmInputLHP
         end>
       Properties.ListSource = dsMesin
       Properties.MaxLength = 0
+      Properties.OnChange = cxlMesinPropertiesChange
       TabOrder = 11
       Width = 201
     end
@@ -1102,7 +1111,16 @@ inherited frmInputLHP: TfrmInputLHP
       Properties.ReadOnly = True
       Properties.ValueType = vtFloat
       TabOrder = 30
+      Visible = False
       Width = 121
+    end
+    object cxtLOT: TcxTextEdit
+      Left = 265
+      Top = 440
+      Properties.ReadOnly = True
+      TabOrder = 31
+      Visible = False
+      Width = 161
     end
   end
   inherited pnlBawah: TPanel

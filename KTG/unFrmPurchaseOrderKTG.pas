@@ -109,6 +109,10 @@ type
     cxCheckGroup1: TcxCheckGroup;
     cxtCritical: TcxMemo;
     cxColKeterangan: TcxGridColumn;
+    cxLabel2: TcxLabel;
+    cxCurr: TcxComboBox;
+    cxLabel5: TcxLabel;
+    cxsRate: TcxSpinEdit;
     procedure FormCreate(Sender: TObject);
     procedure btnBaruClick(Sender: TObject);
     procedure btnBatalClick(Sender: TObject);
@@ -250,6 +254,8 @@ begin
   zqrTax.Open;
 
   cxtNoTrans.Text := GetLastFak('po');
+
+  cxsRate.Value := 1 ;
 end;
 
 procedure TfrmPurchaseOrderKTG.btnBaruClick(Sender: TObject);
@@ -495,6 +501,8 @@ begin
       in_head.FieldByName('kode_supp').AsString := zqrSupp.FieldByName('kode').AsString;
       in_head.FieldByName('tgl_required').AsDateTime := cxdTglKirim.Date;
       in_head.FieldByName('kode_alamat_kirim').AsString := cxlAlamatKirim.EditValue;
+      in_head.FieldByName('currency').AsString := cxCurr.Text;
+      in_head.FieldByName('rate').AsFloat := cxsRate.EditValue;
 
       sJenisPO := 'st';
 
@@ -550,6 +558,8 @@ begin
         in_det.FieldByName('harga').AsFloat := cxTbl.DataController.Values[i, cxColHarga.Index];
         in_det.FieldByName('sub_total').AsFloat := cxTbl.DataController.Values[i, cxColSubTotal.Index];
         in_det.FieldByName('sub_total_tax').AsFloat := cxTbl.DataController.Values[i, cxColSubtotaltax.Index];
+        in_det.FieldByName('mata_uang').AsString := cxCurr.Text;
+        in_det.FieldByName('nilai_tukar').AsFloat := cxsRate.EditValue;
         if not VarIsNull(cxTbl.DataController.Values[i, cxColKeterangan.Index]) then
         in_det.FieldByName('keterangan').AsString := cxTbl.DataController.Values[i, cxColKeterangan.Index]
         else
@@ -1964,7 +1974,7 @@ begin
       cxtNoTrans.Text := mNoPO ;
       cxtNoTrans.Properties.ReadOnly := True ;
 
-      q := OpenRS('SELECT a.no_bukti, a.no_fobj, a.tanggal,a.note, a.kode_supp, a.f_completed, a.kode_alamat_kirim, b.alamat, a.pembayaran, a.user, a.user_dept, a.tgl_required, a.divisi, ' +
+      q := OpenRS('SELECT a.no_bukti, a.no_fobj, a.tanggal,a.note,a.currency,a.rate, a.kode_supp, a.f_completed, a.kode_alamat_kirim, b.alamat, a.pembayaran, a.user, a.user_dept, a.tgl_required, a.divisi, ' +
           'c.kode_brg, d.deskripsi, e.nama, e.kontak, c.qty, c.satuan, c.harga,c.sub_total,c.sub_total_tax, c.keterangan, c.pajak, c.mata_uang, c.nilai_tukar, c.lokasi, a.f_approval, a.user_request, c.kondisi, c.qty * c.harga AS total ' +
           'FROM tbl_po_head a ' +
           'LEFT JOIN tbl_alamat_kirim b ON a.kode_alamat_kirim = b.kode ' +
@@ -1993,6 +2003,8 @@ begin
       cxlDivisi.EditValue :=  q.FieldByName('divisi').AsString;
       cxtUser.Text := q.FieldByName('user_request').AsString ;
        cxtCritical.Text :=  q.FieldByName('note').AsString ;
+       cxCurr.Text := q.FieldByName('currency').AsString ;
+       cxsRate.Value := q.FieldByName('rate').AsFloat ;
 
 
       if q.FieldByName('f_approval').AsInteger = 1 then
@@ -2060,7 +2072,7 @@ begin
       cxtNoTrans.Text := mNoPO ;
       cxtNoTrans.Properties.ReadOnly := True ;
 
-      q := OpenRS('SELECT a.no_bukti, a.no_fobj, a.tanggal, a.kode_supp, a.f_completed, a.kode_alamat_kirim, b.alamat, a.pembayaran, a.user, a.user_dept, a.tgl_required, a.divisi, ' +
+      q := OpenRS('SELECT a.no_bukti, a.no_fobj, a.tanggal,a.currency,a.rate, a.kode_supp, a.f_completed, a.kode_alamat_kirim, b.alamat, a.pembayaran, a.user, a.user_dept, a.tgl_required, a.divisi, ' +
           'c.kode_brg, d.deskripsi, e.nama, e.kontak, c.qty, c.satuan, c.harga, c.keterangan, c.pajak, c.mata_uang, c.nilai_tukar, c.lokasi, a.f_approval, a.user_request, c.kondisi, c.qty * c.harga AS total ' +
           'FROM tbl_po_head a ' +
           'LEFT JOIN tbl_alamat_kirim b ON a.kode_alamat_kirim = b.kode ' +
@@ -2088,7 +2100,8 @@ begin
       cxCmbPembayaran.Text := q.FieldByName('pembayaran').AsString;
       cxlDivisi.EditValue :=  q.FieldByName('divisi').AsString;
       cxtUser.Text := q.FieldByName('user_request').AsString ;
-
+      cxCurr.Text := q.FieldByName('currency').AsString ;
+       cxsRate.Value := q.FieldByName('rate').AsFloat ;
 
       if q.FieldByName('f_approval').AsInteger = 1 then
         f_app_po := True

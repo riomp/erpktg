@@ -1,38 +1,33 @@
 [Closed Files]
-File_0=SourceModule,'D:\ERP KTG\16-11-2017\KTG\unFrmDownTime.pas',0,1,1024,42,1043,1,0
-File_1=SourceModule,'D:\ERP KTG\16-11-2017\KTG\unFrmST_PB.pas',0,1,478,99,488,1,0
-File_2=SourceModule,'D:\ERP KTG\16-11-2017\unFrmSerahTerimaSPK.pas',0,1,1,1,1,0,0
-File_3=SourceModule,'C:\Program Files (x86)\Borland\Delphi7\Component\ZEOSDBO-7.1.4-stable\src\dbc\ZDbcMySqlUtils.pas',0,1,417,66,427,0,0
-File_4=SourceModule,'D:\ERP KTG\16-11-2017\ACC\unFrmDaftarPembayaranPembelian.pas',0,1,1,1,1,1,0
-File_5=SourceModule,'D:\ERP KTG\16-11-2017\ACC\unFrmPembayaranPembelian1.pas',0,1,96,11,123,0,0
-File_6=SourceModule,'D:\ERP KTG\16-11-2017\ACC\unFrmDaftarInvoicePembelian.pas',0,1,1,1,1,0,0
-File_7=SourceModule,'D:\ERP KTG\16-11-2017\ACC\unFrmDaftarJurnal.pas',0,1,1,1,1,0,0
-File_8=SourceModule,'D:\ERP KTG\16-11-2017\unFrmSalesMobile.pas',0,1,358,81,363,0,0
-File_9=SourceModule,'D:\ERP KTG\16-11-2017\unTools.pas',0,1,84,16,108,0,0
+File_0=SourceModule,'D:\ERP KTG\16-11-2017\KTG\unFrmPurchaseOrderKTG.pas',0,1,226,50,249,0,0
+File_1=SourceModule,'D:\ERP KTG\16-11-2017\unFrmMstCust1.pas',0,1,1,1,1,0,0
+File_2=SourceModule,'D:\ERP KTG\16-11-2017\unFrmQuotetion.pas',0,1,1,1,1,0,0
+File_3=SourceModule,'D:\ERP KTG\16-11-2017\unFrmSalesOrder_NEW.pas',0,1,1,1,1,0,0
+File_4=SourceModule,'D:\ERP KTG\16-11-2017\unFrmMstCust.pas',0,1,1,1,1,0,0
+File_5=SourceModule,'D:\ERP KTG\16-11-2017\unFrmRework.pas',0,1,243,65,249,1,0
+File_6=SourceModule,'D:\ERP KTG\16-11-2017\ACC\unFrmPembayaranPembelian1.pas',0,1,75,136,90,1,0
+File_7=SourceModule,'D:\ERP KTG\16-11-2017\unFrmTrsSPKPotong.pas',0,1,572,114,575,1,0
+File_8=SourceModule,'D:\ERP KTG\16-11-2017\unFrmLHP.pas',0,1,156,1,161,0,0
+File_9=SourceModule,'C:\Program Files (x86)\Borland\Delphi7\Component\ZEOSDBO-7.1.4-stable\src\component\ZAbstractConnection.pas',0,1,931,68,944,0,0
 
 [Modules]
-Module0=D:\ERP KTG\16-11-2017\unFrmUtama.pas
-Module1=D:\ERP KTG\16-11-2017\unFrmLHP.pas
-Module2=D:\ERP KTG\16-11-2017\unFrmMstBrg_KTG.pas
-Module3=D:\ERP KTG\16-11-2017\ACC\unFrmLaporanAcc.pas
-Module4=D:\ERP KTG\16-11-2017\ACC\unFrmPI.pas
-Module5=D:\ERP KTG\16-11-2017\KTG\unFrmPurchaseOrderKTG.pas
-Module6=D:\ERP KTG\16-11-2017\unFrmPilihPO.pas
-Module7=D:\ERP KTG\16-11-2017\unFrmLogin.pas
-Module8=D:\ERP KTG\16-11-2017\unDm.pas
-Module9=D:\ERP KTG\16-11-2017\unFrmPB.pas
-Module10=D:\ERP KTG\16-11-2017\ACC\unFrmInvoice.pas
-Module11=D:\ERP KTG\16-11-2017\unFrmMO.pas
+Module0=D:\ERP KTG\16-11-2017\ACC\unFrmPI.pas
+Module1=D:\ERP KTG\16-11-2017\unFrmMstBrg_KTG.pas
+Module2=D:\ERP KTG\16-11-2017\unFrmKartuStock.pas
+Module3=D:\ERP KTG\16-11-2017\unFrmUtama.pas
+Module4=D:\ERP KTG\16-11-2017\unFrmMO.pas
+Module5=D:\ERP KTG\16-11-2017\unFrmPilihPO.pas
+Module6=D:\ERP KTG\16-11-2017\unFrmPB.pas
+Module7=D:\ERP KTG\16-11-2017\unDm.pas
+Module8=D:\ERP KTG\16-11-2017\unFrmInputLHP.pas
+Module9=D:\ERP KTG\16-11-2017\unTools.pas
+Module10=D:\ERP KTG\16-11-2017\unFrmSalesMobile.pas
+Module11=D:\ERP KTG\16-11-2017\KTG\unFrmST_PB.pas
 Module12=D:\ERP KTG\16-11-2017\KTG.dpr
 Count=13
 EditWindowCount=1
 
-[D:\ERP KTG\16-11-2017\unFrmUtama.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\ERP KTG\16-11-2017\unFrmLHP.pas]
+[D:\ERP KTG\16-11-2017\ACC\unFrmPI.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -42,32 +37,22 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\ERP KTG\16-11-2017\ACC\unFrmLaporanAcc.pas]
+[D:\ERP KTG\16-11-2017\unFrmKartuStock.pas]
 ModuleType=SourceModule
-FormState=1
+FormState=0
 FormOnTop=0
 
-[D:\ERP KTG\16-11-2017\ACC\unFrmPI.pas]
+[D:\ERP KTG\16-11-2017\unFrmUtama.pas]
 ModuleType=SourceModule
-FormState=1
+FormState=0
 FormOnTop=0
 
-[D:\ERP KTG\16-11-2017\KTG\unFrmPurchaseOrderKTG.pas]
+[D:\ERP KTG\16-11-2017\unFrmMO.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
 [D:\ERP KTG\16-11-2017\unFrmPilihPO.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\ERP KTG\16-11-2017\unFrmLogin.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[D:\ERP KTG\16-11-2017\unDm.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -77,12 +62,27 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\ERP KTG\16-11-2017\ACC\unFrmInvoice.pas]
+[D:\ERP KTG\16-11-2017\unDm.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\ERP KTG\16-11-2017\unFrmMO.pas]
+[D:\ERP KTG\16-11-2017\unFrmInputLHP.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\unTools.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\unFrmSalesMobile.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[D:\ERP KTG\16-11-2017\KTG\unFrmST_PB.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -110,7 +110,7 @@ FormOnTop=0
 
 [EditWindow0]
 ViewCount=13
-CurrentView=11
+CurrentView=7
 View0=0
 View1=1
 View2=2
@@ -143,97 +143,97 @@ LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000
 RightPanelSize=0
 BottomPanelSize=85
 BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=00000400000000005305000000000000025500000000000000010000000000000000000000000100000000060500000000000001000000000605000000000000010000000044040000000000000100000000440400000000000001000000004404000000000000010000000044040000000000000100000000440400000000000001000000004404000000000000010000000053050000000000000100000000530500000000000001000000005305000000000000010000000053050000000000000100000000530500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=0000040000000000530500000000000002550000000000000001000000000000000000000000010000000006050000000000000100000000060500000000000001000000004404000000000000010000000044040000000000000100000000440400000000000001000000004404000000000000010000000044040000000000000100000000440400000000000001000000005305000000000000010000000053050000000000000100000000530500000000000001000000005305000000000000010000000053050000000000000100000000530500000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
 Module=D:\ERP KTG\16-11-2017\KTG.dpr
-CursorX=5
-CursorY=337
-TopLine=31
+CursorX=1
+CursorY=339
+TopLine=27
 LeftCol=1
 
 [View1]
 Module=D:\ERP KTG\16-11-2017\unFrmMstBrg_KTG.pas
-CursorX=116
-CursorY=941
-TopLine=4063
+CursorX=1
+CursorY=837
+TopLine=839
 LeftCol=1
 
 [View2]
-Module=D:\ERP KTG\16-11-2017\unFrmLHP.pas
+Module=D:\ERP KTG\16-11-2017\KTG\unFrmST_PB.pas
 CursorX=1
-CursorY=1
-TopLine=1
+CursorY=410
+TopLine=391
 LeftCol=1
 
 [View3]
-Module=D:\ERP KTG\16-11-2017\unDm.pas
-CursorX=7
-CursorY=216
-TopLine=186
+Module=D:\ERP KTG\16-11-2017\unFrmSalesMobile.pas
+CursorX=32
+CursorY=329
+TopLine=308
 LeftCol=1
 
 [View4]
-Module=D:\ERP KTG\16-11-2017\unFrmLogin.pas
-CursorX=28
-CursorY=66
-TopLine=56
+Module=D:\ERP KTG\16-11-2017\unTools.pas
+CursorX=21
+CursorY=623
+TopLine=596
 LeftCol=1
 
 [View5]
-Module=D:\ERP KTG\16-11-2017\KTG\unFrmPurchaseOrderKTG.pas
-CursorX=81
-CursorY=1758
-TopLine=1748
+Module=D:\ERP KTG\16-11-2017\unFrmInputLHP.pas
+CursorX=1
+CursorY=468
+TopLine=625
 LeftCol=1
 
 [View6]
-Module=D:\ERP KTG\16-11-2017\ACC\unFrmLaporanAcc.pas
-CursorX=1
-CursorY=1
-TopLine=1
+Module=D:\ERP KTG\16-11-2017\unDm.pas
+CursorX=32
+CursorY=188
+TopLine=186
 LeftCol=1
 
 [View7]
 Module=D:\ERP KTG\16-11-2017\ACC\unFrmPI.pas
-CursorX=125
-CursorY=425
-TopLine=333
+CursorX=66
+CursorY=815
+TopLine=810
 LeftCol=1
 
 [View8]
 Module=D:\ERP KTG\16-11-2017\unFrmPB.pas
-CursorX=13
-CursorY=549
-TopLine=557
+CursorX=71
+CursorY=293
+TopLine=274
 LeftCol=1
 
 [View9]
 Module=D:\ERP KTG\16-11-2017\unFrmPilihPO.pas
-CursorX=15
-CursorY=107
-TopLine=80
+CursorX=25
+CursorY=144
+TopLine=131
 LeftCol=1
 
 [View10]
 Module=D:\ERP KTG\16-11-2017\unFrmMO.pas
-CursorX=35
+CursorX=5
 CursorY=236
-TopLine=276
+TopLine=447
 LeftCol=1
 
 [View11]
 Module=D:\ERP KTG\16-11-2017\unFrmUtama.pas
-CursorX=20
-CursorY=4250
-TopLine=4253
+CursorX=4
+CursorY=3957
+TopLine=3956
 LeftCol=1
 
 [View12]
-Module=D:\ERP KTG\16-11-2017\ACC\unFrmInvoice.pas
-CursorX=125
-CursorY=1
-TopLine=177
+Module=D:\ERP KTG\16-11-2017\unFrmKartuStock.pas
+CursorX=18
+CursorY=95
+TopLine=84
 LeftCol=1
 
 [Watches]
@@ -258,7 +258,8 @@ LRDockWidth=426
 Dockable=1
 
 [Breakpoints]
-Count=0
+Count=1
+Breakpoint0='D:\ERP KTG\16-11-2017\ACC\unFrmPI.pas',812,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -342,23 +343,23 @@ ClientHeight=60
 
 [PropertyInspector]
 Create=1
-Visible=1
+Visible=0
 State=0
 Left=-6
 Top=390
-Width=274
+Width=282
 Height=652
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=258
+ClientWidth=266
 ClientHeight=613
 TBDockHeight=732
 LRDockWidth=272
 Dockable=1
 SplitPos=156
 ArrangeBy=Name
-SelectedItem=Visible
-ExpandedItems=Anchors,BorderIcons,Buttons,Buttons.Append,DataBinding,DataController,Font,Font.Style,Header,NavigatorButtons.Insert,NavigatorButtons.Post,Options,OptionsData,OptionsView,Properties,Properties.ValueChecked,Properties.ValueGrayed,Properties.ValueUnchecked,RootLevelStyles,Style,Styles
+SelectedItem=Caption
+ExpandedItems=Anchors,BorderIcons,Buttons,Buttons.Append,DataBinding,DataController,FilterRow,Font,Font.Style,Header,NavigatorButtons.Insert,NavigatorButtons.Post,Options,OptionsData,OptionsView,Position,Properties,Properties.Alignment,Properties.ValueChecked,Properties.ValueGrayed,Properties.ValueUnchecked,RootLevelStyles,Style
 HiddenCategories=
 
 [CallStackWindow]
@@ -379,7 +380,7 @@ Dockable=1
 
 [ObjectTree]
 Create=1
-Visible=1
+Visible=0
 State=0
 Left=3
 Top=111

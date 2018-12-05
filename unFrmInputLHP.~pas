@@ -12,13 +12,15 @@ uses
   dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
   dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
   dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
-  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
-  dxSkinSummer2008, dxSkinsDefaultPainters, dxSkinValentine,
-  dxSkinXmas2008Blue, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxCalendar,
-  StdCtrls, ExtCtrls,DB, ZAbstractRODataset, ZDataset, dxSkinscxPCPainter,
-  cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxSpinEdit,
-  cxDBLookupComboBox, cxGridLevel, cxGridCustomTableView, cxGridTableView, cxCheckBox,
-  cxClasses, cxGridCustomView, cxGrid, cxPC, cxLookupEdit, cxDBLookupEdit;
+  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,DateUtils,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter, cxStyles, cxCustomData,
+  cxFilter, cxData, cxDataStorage, cxSpinEdit, cxDBLookupComboBox,
+  cxCalendar, cxTextEdit, cxDropDownEdit, cxCheckBox, DB,
+  ZAbstractRODataset, ZDataset, cxLookupEdit, cxDBLookupEdit, cxGridLevel,
+  cxGridCustomTableView, cxGridTableView, cxClasses, cxGridCustomView,
+  cxGrid, cxPC, cxMaskEdit, StdCtrls, ExtCtrls,
+  dxSkinSummer2008, dxSkinValentine,
+  dxSkinXmas2008Blue;
 
 type
   TfrmInputLHP = class(TfrmTransBaru)
@@ -157,6 +159,8 @@ type
     Label18: TLabel;
     Label19: TLabel;
     cxsAfval: TcxSpinEdit;
+    Label20: TLabel;
+    cxtLOT: TcxTextEdit;
     procedure btnCariBrgClick(Sender: TObject);
     procedure cxdTglPrdPropertiesEditValueChanged(Sender: TObject);
     procedure cxdStartPropertiesEditValueChanged(Sender: TObject);
@@ -188,6 +192,7 @@ type
       AItemIndex: Integer);
     procedure cxTblDTDataControllerAfterPost(
       ADataController: TcxCustomDataController);
+    procedure cxlMesinPropertiesChange(Sender: TObject);
   private
     mNoLHP: string;
     //mnTotal : Double ;
@@ -200,7 +205,7 @@ var
 
 implementation
 
-uses unDm, unAplikasi, unTools, unFrmCari, DateUtils;
+uses unDm, unAplikasi, unTools, unFrmCari;
 
 {$R *.dfm}
 
@@ -356,13 +361,32 @@ end;
 
 procedure TfrmInputLHP.cxdTglPrdPropertiesEditValueChanged(
   Sender: TObject);
+  var
+  tanggal : TDate ;
+  tgl,bln : ShortInt ;
+  thn : Integer;
 begin
   inherited;
   cxdStart.EditValue := cxdTglPrd.EditValue ;
   cxdFinish.EditValue := cxdTglPrd.EditValue ;
+
+    if  cxTblHP.DataController.Summary.FooterSummaryValues[1]> 0 then begin
+
+     tanggal := cxdTglPrd.Date ;
+
+      tgl := DayOf(tanggal);
+      bln := MonthOf(tanggal);
+      thn := YearOf(tanggal);
+
+      cxtLOT.Text := IntToStr(thn) +''+  IntToStr(bln) +''+  IntToStr(tgl) +''+ cxtShift.Text +''+ StringReplace(cxlMesin.Text,'-','',[rfReplaceAll, rfIgnoreCase]);
+  end;
 end;
 
 procedure TfrmInputLHP.cxdStartPropertiesEditValueChanged(Sender: TObject);
+var
+  tanggal : TDate ;
+  tgl,bln : ShortInt ;
+  thn : Integer;
 begin
   inherited;
   try
@@ -375,6 +399,17 @@ begin
     else
       cxtShift.Text:=IntToStr(3) ;
   except
+  end;
+
+    if  cxTblHP.DataController.Summary.FooterSummaryValues[1]> 0 then begin
+
+     tanggal := cxdTglPrd.Date ;
+
+      tgl := DayOf(tanggal);
+      bln := MonthOf(tanggal);
+      thn := YearOf(tanggal);
+
+      cxtLOT.Text := IntToStr(thn) +''+  IntToStr(bln) +''+  IntToStr(tgl) +''+ cxtShift.Text +''+ StringReplace(cxlMesin.Text,'-','',[rfReplaceAll, rfIgnoreCase]);
   end;
 end;
 
@@ -847,6 +882,7 @@ begin
       q.FieldByName('cogs_upah').AsFloat := biayaupah;
       q.FieldByName('cogs_listrik').AsFloat := biayalistrik;
       q.FieldByName('cogs_mat').AsFloat := cxTblPakaiBBDet.DataController.Summary.FooterSummaryValues[1] ;
+      q.FieldByName('lot').AsString := cxtLOT.Text;
       if cxChkPosting.Checked then
          q.FieldByName('f_posted').AsInteger := 1
       else
@@ -1062,7 +1098,7 @@ begin
         with cxTblPakaiBBDet.DataController do begin
           for j := 0 to RecordCount -1 do begin
             z := OpenRS('SELECT * FROM tbl_pemakaian_bahan where no_bukti =''%s''',[sNoTrs]) ;
-            if  Values[j,cxGridColumn31.Index]<>0 then begin
+            if  Values[j,cxGridColumn31.Index]>0 then begin
               z.Insert;
               z.FieldByName('no_spk').AsString := txtSPK.Text;
               z.FieldByName('no_bukti').AsString := sNoTrs;
@@ -1140,12 +1176,28 @@ end;
 procedure TfrmInputLHP.cxTblHPDataControllerRecordChanged(
   ADataController: TcxCustomDataController; ARecordIndex,
   AItemIndex: Integer);
+var
+  tanggal : TDate ;
+  tgl,bln : ShortInt ;
+  thn : Integer;
 begin
   inherited;
    {if AItemIndex = cxColNoTblHPSat1.Index then begin
      cxTblHP.DataController.Summary.FooterSummaryValues[2]:=  ADataController.Values[ARecordIndex, cxColNoTblHPSat1.Index];
    end;   }
+    if AItemIndex = cxColNoTblHPQty1.Index then begin
+
+      tanggal := cxdTglPrd.Date ;
+
+      tgl := DayOf(tanggal);
+      bln := MonthOf(tanggal);
+      thn := YearOf(tanggal);
+
+      cxtLOT.Text := IntToStr(thn) +''+  IntToStr(bln) +''+  IntToStr(tgl) +''+ cxtShift.Text +''+ StringReplace(cxlMesin.Text,'-','',[rfReplaceAll, rfIgnoreCase]);
+    end else
    if AItemIndex = cxColNoTblHPQty2.Index then begin
+
+
      cxsBB.EditValue :=   cxTblHP.DataController.Summary.FooterSummaryValues[1] ;
 
      if VarIsNull(cxTblPakaiBBDet.DataController.Summary.FooterSummaryValues[11]) then
@@ -1443,6 +1495,7 @@ begin
     cxdStart.EditValue    := b.FieldBYName('jam1').AsDateTime;
     cxdFinish.EditValue   := b.FieldBYName('jam2').AsDateTime;
     cxlMesin.EditValue    := b.FieldBYName('mesin').AsString;
+    cxtLOT.Text           := b.FieldBYName('lot').AsString;
     cxsOperator.EditValue := b.FieldByName('jml_operator').AsFloat;
     cxsReject.EditValue   := b.FieldByName('qty_reject').AsFloat ;
     cxsJamOpr.EditValue   := b.FieldByName('jam_operator').AsFloat ;
@@ -1675,6 +1728,26 @@ begin
   end;
   cxsAfval.Value := mTotal;
   cxsDT.Value := mTotal1;
+end;
+
+procedure TfrmInputLHP.cxlMesinPropertiesChange(Sender: TObject);
+var
+  tanggal : TDate ;
+  tgl,bln : ShortInt ;
+  thn : Integer;
+begin
+  inherited;
+  if  cxTblHP.DataController.Summary.FooterSummaryValues[1]> 0 then begin
+
+     tanggal := cxdTglPrd.Date ;
+
+      tgl := DayOf(tanggal);
+      bln := MonthOf(tanggal);
+      thn := YearOf(tanggal);
+
+      cxtLOT.Text := IntToStr(thn) +''+  IntToStr(bln) +''+  IntToStr(tgl) +''+ cxtShift.Text +''+ StringReplace(cxlMesin.Text,'-','',[rfReplaceAll, rfIgnoreCase]);
+  end;
+
 end;
 
 end.

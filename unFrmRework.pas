@@ -120,6 +120,7 @@ type
     cxsDurasi: TcxSpinEdit;
     cxsQtySpk: TcxSpinEdit;
     cxtUnitSPK: TcxTextEdit;
+    cxtLOT: TcxTextEdit;
     procedure FormShow(Sender: TObject);
     procedure cxdTglPrdPropertiesEditValueChanged(Sender: TObject);
     procedure cxdStartPropertiesEditValueChanged(Sender: TObject);
@@ -129,6 +130,10 @@ type
       ADataController: TcxCustomDataController; ARecordIndex,
       AItemIndex: Integer);
     procedure cxTblDTDataControllerRecordChanged(
+      ADataController: TcxCustomDataController; ARecordIndex,
+      AItemIndex: Integer);
+    procedure cxlMesinPropertiesChange(Sender: TObject);
+    procedure cxTblHPDataControllerRecordChanged(
       ADataController: TcxCustomDataController; ARecordIndex,
       AItemIndex: Integer);
   private
@@ -258,14 +263,33 @@ begin
 end;
 
 procedure TfrmRework.cxdTglPrdPropertiesEditValueChanged(Sender: TObject);
+ var
+  tanggal : TDate ;
+  tgl,bln : ShortInt ;
+  thn : Integer;
 begin
   inherited;
   cxdStart.EditValue := cxdTglPrd.EditValue ;
   cxdFinish.EditValue := cxdTglPrd.EditValue ;
   cxtNoBukti.Text := GetLastFak('rework',cxdTglPrd.Date);
+
+    if  cxTblHP.DataController.Summary.FooterSummaryValues[1]> 0 then begin
+
+     tanggal := cxdTglPrd.Date ;
+
+      tgl := DayOf(tanggal);
+      bln := MonthOf(tanggal);
+      thn := YearOf(tanggal);
+
+      cxtLOT.Text := IntToStr(thn) +''+  IntToStr(bln) +''+  IntToStr(tgl) +''+ cxtShift.Text +''+ StringReplace(cxlMesin.Text,'-','',[rfReplaceAll, rfIgnoreCase]);
+  end;
 end;
 
 procedure TfrmRework.cxdStartPropertiesEditValueChanged(Sender: TObject);
+ var
+  tanggal : TDate ;
+  tgl,bln : ShortInt ;
+  thn : Integer;
 begin
   inherited;
    try
@@ -278,6 +302,17 @@ begin
     else
       cxtShift.Text:=IntToStr(3) ;
   except
+  end;
+
+    if  cxTblHP.DataController.Summary.FooterSummaryValues[1]> 0 then begin
+
+     tanggal := cxdTglPrd.Date ;
+
+      tgl := DayOf(tanggal);
+      bln := MonthOf(tanggal);
+      thn := YearOf(tanggal);
+
+      cxtLOT.Text := IntToStr(thn) +''+  IntToStr(bln) +''+  IntToStr(tgl) +''+ cxtShift.Text +''+ StringReplace(cxlMesin.Text,'-','',[rfReplaceAll, rfIgnoreCase]);
   end;
 end;
 
@@ -745,6 +780,7 @@ begin
     q.FieldByName('cogs_upah').AsFloat := biayaupah;
     q.FieldByName('cogs_listrik').AsFloat := biayalistrik;
     q.FieldByName('cogs_mat').AsFloat := cxTblPakaiBBDet.DataController.Summary.FooterSummaryValues[1] ;
+    q.FieldByName('lot').AsString := cxtLOT.Text;
 
     if (cxsReject.EditValue<>0) then
       tcogs :=( q.FieldByName('cogs_mat').AsFloat / (cxTblHP.DataController.Summary.FooterSummaryValues[1] + cxsReject.EditValue))*cxsReject.EditValue;
@@ -1036,6 +1072,46 @@ begin
     end;
   end;
 
+end;
+
+procedure TfrmRework.cxlMesinPropertiesChange(Sender: TObject);
+var
+  tanggal : TDate ;
+  tgl,bln : ShortInt ;
+  thn : Integer;
+begin
+  inherited;
+   if  cxTblHP.DataController.Summary.FooterSummaryValues[1]> 0 then begin
+
+     tanggal := cxdTglPrd.Date ;
+
+      tgl := DayOf(tanggal);
+      bln := MonthOf(tanggal);
+      thn := YearOf(tanggal);
+
+      cxtLOT.Text := IntToStr(thn) +''+  IntToStr(bln) +''+  IntToStr(tgl) +''+ cxtShift.Text +''+ StringReplace(cxlMesin.Text,'-','',[rfReplaceAll, rfIgnoreCase]);
+  end;
+end;
+
+procedure TfrmRework.cxTblHPDataControllerRecordChanged(
+  ADataController: TcxCustomDataController; ARecordIndex,
+  AItemIndex: Integer);
+  var
+  tanggal : TDate ;
+  tgl,bln : ShortInt ;
+  thn : Integer;
+begin
+  inherited;
+   if AItemIndex = cxColNoTblHPQty1.Index then begin
+
+      tanggal := cxdTglPrd.Date ;
+
+      tgl := DayOf(tanggal);
+      bln := MonthOf(tanggal);
+      thn := YearOf(tanggal);
+
+      cxtLOT.Text := IntToStr(thn) +''+  IntToStr(bln) +''+  IntToStr(tgl) +''+ cxtShift.Text +''+ StringReplace(cxlMesin.Text,'-','',[rfReplaceAll, rfIgnoreCase]);
+    end;
 end;
 
 end.

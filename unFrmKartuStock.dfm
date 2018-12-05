@@ -8,11 +8,12 @@ inherited frmKartuStock: TfrmKartuStock
   Caption = 'Kartu Stock'
   ClientHeight = 665
   ClientWidth = 1117
+  OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlAtas: TPanel
     Width = 1117
-    Height = 161
+    Height = 181
     inherited lblJudul: TLabel
       Left = 10
       Top = 11
@@ -21,7 +22,7 @@ inherited frmKartuStock: TfrmKartuStock
     end
     object Shape7: TShape
       Left = 421
-      Top = 125
+      Top = 150
       Width = 21
       Height = 21
       Brush.Color = clRed
@@ -30,7 +31,7 @@ inherited frmKartuStock: TfrmKartuStock
       Left = 10
       Top = 40
       Width = 396
-      Height = 111
+      Height = 136
       Caption = 'Filter'
       TabOrder = 0
       object cxLabel1: TcxLabel
@@ -57,7 +58,7 @@ inherited frmKartuStock: TfrmKartuStock
       end
       object btnProses: TButton
         Left = 92
-        Top = 79
+        Top = 104
         Width = 75
         Height = 25
         Caption = 'Proses'
@@ -71,7 +72,8 @@ inherited frmKartuStock: TfrmKartuStock
       end
       object cxlGudang: TcxLookupComboBox
         Left = 95
-        Top = 50
+        Top = 75
+        Enabled = False
         Properties.KeyFieldNames = 'kode'
         Properties.ListColumns = <
           item
@@ -81,23 +83,32 @@ inherited frmKartuStock: TfrmKartuStock
         TabOrder = 6
         Width = 216
       end
+      object cxChkPosting: TcxCheckBox
+        Left = 95
+        Top = 52
+        Caption = 'Semua Gudang'
+        Properties.OnEditValueChanged = cxChkPostingPropertiesEditValueChanged
+        State = cbsChecked
+        TabOrder = 7
+        Width = 121
+      end
     end
     object cxLabel14: TcxLabel
       Left = 448
-      Top = 129
+      Top = 154
       Caption = 'Stock <= Minimum Stock / Buffer Stock'
     end
   end
   inherited pnlTengah: TPanel
-    Top = 161
+    Top = 181
     Width = 1117
-    Height = 428
+    Height = 408
     Align = alClient
     object cxGrid1: TcxGrid
       Left = 1
       Top = 1
       Width = 1115
-      Height = 426
+      Height = 406
       Align = alClient
       TabOrder = 0
       object cxTblKS: TcxGridDBTableView
@@ -217,10 +228,12 @@ inherited frmKartuStock: TfrmKartuStock
     inherited btnBaru: TButton
       Left = 95
       Caption = '&History Value'
+      Enabled = False
       Visible = True
     end
     inherited btnSimpan: TButton
       Caption = 'History'
+      Enabled = False
     end
   end
   object zGudang: TZQuery

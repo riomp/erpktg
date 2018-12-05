@@ -1,6 +1,6 @@
 inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
-  Left = 257
-  Top = 107
+  Left = 415
+  Top = 171
   VertScrollBar.Range = 0
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
@@ -58,8 +58,8 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
     Width = 1174
     Height = 523
     object Label1: TLabel
-      Left = 410
-      Top = 195
+      Left = 850
+      Top = 20
       Width = 32
       Height = 13
       Caption = 'Label1'
@@ -136,7 +136,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Width = 75
       Height = 25
       Caption = '&Tambah'
-      TabOrder = 23
+      TabOrder = 22
       Visible = False
       OnClick = btnTambahClick
     end
@@ -167,7 +167,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Properties.ListOptions.SyncMode = True
       Properties.ListSource = dsSupp
       Properties.OnEditValueChanged = cxLUSuppPropertiesEditValueChanged
-      TabOrder = 12
+      TabOrder = 11
       Width = 472
     end
     object cxLabel10: TcxLabel
@@ -179,7 +179,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Left = 102
       Top = 182
       Properties.ReadOnly = False
-      TabOrder = 21
+      TabOrder = 20
       Width = 121
     end
     object cxLabel13: TcxLabel
@@ -192,7 +192,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Top = 131
       Properties.CharCase = ecUpperCase
       Style.Color = clSkyBlue
-      TabOrder = 16
+      TabOrder = 15
       Width = 389
     end
     object cxmTemplate: TcxMemo
@@ -351,7 +351,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Width = 20
       Height = 21
       Caption = '...'
-      TabOrder = 13
+      TabOrder = 12
       OnClick = btnCariSuppClick
     end
     object pnlMemo: TPanel
@@ -408,7 +408,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Width = 20
       Height = 21
       Caption = '...'
-      TabOrder = 24
+      TabOrder = 23
       Visible = False
       OnClick = btnCariBrgClick
     end
@@ -438,7 +438,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
         end>
       Properties.ListOptions.SyncMode = True
       Properties.ListSource = dsAlmKirim
-      TabOrder = 19
+      TabOrder = 18
       Width = 472
     end
     object btnCariAlamatKirim: TButton
@@ -447,7 +447,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Width = 20
       Height = 21
       Caption = '...'
-      TabOrder = 18
+      TabOrder = 17
       OnClick = btnCariAlamatKirimClick
     end
     object cxtNoFOBJ: TcxTextEdit
@@ -456,6 +456,7 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Top = 81
       Properties.ReadOnly = True
       TabOrder = 9
+      Visible = False
       Width = 121
     end
     object cxLabel4: TcxLabel
@@ -647,8 +648,8 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       end
     end
     object cxSpinEdit1: TcxSpinEdit
-      Left = 410
-      Top = 210
+      Left = 850
+      Top = 40
       Properties.DisplayFormat = '#,#0.00'
       Properties.EditFormat = '#,#0.00'
       Properties.ReadOnly = True
@@ -662,16 +663,46 @@ inherited frmPurchaseOrderKTG: TfrmPurchaseOrderKTG
       Top = 105
       Caption = 'Keterangan'
       Properties.Items = <>
-      TabOrder = 11
+      TabOrder = 10
       Height = 121
       Width = 371
     end
     object cxtCritical: TcxMemo
       Left = 635
       Top = 120
-      TabOrder = 15
+      TabOrder = 14
       Height = 96
       Width = 351
+    end
+    object cxLabel2: TcxLabel
+      Left = 335
+      Top = 207
+      Caption = 'Currency'
+    end
+    object cxCurr: TcxComboBox
+      Left = 385
+      Top = 205
+      Properties.Items.Strings = (
+        'IDR'
+        'USD'
+        'EUR')
+      TabOrder = 32
+      Text = 'IDR'
+      Width = 56
+    end
+    object cxLabel5: TcxLabel
+      Left = 445
+      Top = 207
+      Caption = 'Rate'
+    end
+    object cxsRate: TcxSpinEdit
+      Left = 480
+      Top = 204
+      Properties.Alignment.Horz = taRightJustify
+      Properties.DisplayFormat = '#,##0.00'
+      Properties.ValueType = vtFloat
+      TabOrder = 34
+      Width = 91
     end
   end
   inherited pnlBawah: TPanel
